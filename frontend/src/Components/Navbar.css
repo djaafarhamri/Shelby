@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lily+Script+One&display=swap");
+
+.navbar {
+  background: #061701;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav {
+  display: flex;
+}
+.nav a {
+  font-family: "Montserrat", sans-serif;
+  text-decoration: none;
+  color: white;
+  padding-left: 20px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+}
+.logo img {
+  width: 91px;
+  height: 57px;
+}
+.logo p {
+  color: white;
+  font-family: "Lily Script One", cursive;
+  font-size: 24px;
+}
+.navact {
+  display: flex;
+  align-items: center;
+}
+.navact input {
+  background: #242020;
+  border: 0;
+  border-radius: 30px;
+  height: 40px;
+  width: 180px;
+  margin-right: 18px;
+}
+.navact img {
+  height: 30px;
+  width: 30px;
+  margin-right: 18px;
+}
