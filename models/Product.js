@@ -46,6 +46,10 @@ const productSchema = mongoose.Schema(
     dateSold: {
       type: Date,
     },
+    state: {
+      type: String,
+      default: "avaible"
+    }
   },
   { collection: "products" }
 );
