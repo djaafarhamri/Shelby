@@ -3,7 +3,7 @@
 
 .navbar {
   background: #061701;
-  height: 80px;
+  height: 68px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -16,14 +16,15 @@
   text-decoration: none;
   color: white;
   padding-left: 20px;
+  font-size: 90%;
 }
 .logo {
   display: flex;
   align-items: center;
 }
 .logo img {
-  width: 91px;
-  height: 57px;
+  width: 73px;
+  height: 46px;
 }
 .logo p {
   color: white;
@@ -38,12 +39,12 @@
   background: #242020;
   border: 0;
   border-radius: 30px;
-  height: 40px;
+  height: 32px;
   width: 180px;
   margin-right: 18px;
 }
 .navact img {
-  height: 30px;
-  width: 30px;
+  height: 24px;
+  width: 24px;
   margin-right: 18px;
 }

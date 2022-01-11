@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lily+Script+One&display=swap");
+
+.footer{
+    background-color: #061701;
+    color: white;
+    height: 276px;
+    width: auto;
+    font-size: 20px;
+    font-weight: 400;
+    display: flex;
+    align-self: space-between;
+
+}
+.about{
+    font-family: 'Montserrat', sans-serif;
+    margin: 50px 50px;
+
+}
+.about p{
+  margin-top: 10px;
+  font-size: 18px;
+  
+  font-weight: 300;
+}
+
+.logo {
+  font-family: 'Montserrat', sans-serif;
+ 
+  }
+  .logo img {
+    width: 73px;
+    height: 46px;
+  }
+
+  .devs {
+    font-family: 'Yellowtail', cursive;
+    align-self: end;
+    margin-bottom: 20px;
+  }
+.devs span {
+  font-family: 'Lily Script One',cursive;
+}

@@ -19,7 +19,7 @@ const Navbar = () => {
         <p>Boutique</p>
       </div>
       <div className="navact">
-        <input type="text" />
+        <input type="text"  />
         <img src={panier} alt="" />
         <img src={userImg} alt="" />
       </div>
