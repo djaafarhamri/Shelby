@@ -89,31 +89,5 @@
     color: white;
     border-radius: 15px;
 }
-.items h2{
-    font-family: 'Montserrat', sans-serif;
-    height: 86px;
-    width: 283px;
-    font-weight: 700;
-
-}
-.items{
-    grid-area: items;
-    display: grid;
-    justify-items: center;
-    
-}
-.new{
-      
- 
-  
-}
-.trending{
- 
 
 
-}
-.accessories{
-    
-
-
-}
