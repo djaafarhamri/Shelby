@@ -2,6 +2,7 @@ const Product = require("../models/Product");
 
 module.exports.addProduct = async (req, res) => {
   const {
+    codeBar,
     title,
     description,
     category,
@@ -11,9 +12,12 @@ module.exports.addProduct = async (req, res) => {
     taille,
     price,
     dateAdded,
+    dateSold,
+    state,
   } = req.body;
   try {
     const product = await Product.create({
+      codeBar,
       title,
       description,
       category,
@@ -23,6 +27,8 @@ module.exports.addProduct = async (req, res) => {
       taille,
       price,
       dateAdded,
+      dateSold,
+      state,
     });
     res.status(200).json(product);
   } catch (e) {
@@ -33,6 +39,7 @@ module.exports.addProduct = async (req, res) => {
 
 module.exports.updateProduct = async (req, res) => {
   const {
+    codeBar,
     title,
     description,
     category,
@@ -42,6 +49,8 @@ module.exports.updateProduct = async (req, res) => {
     taille,
     price,
     dateAdded,
+    dateSold,
+    state,
   } = req.body;
   const id = req.params.id;
   try {
@@ -49,6 +58,7 @@ module.exports.updateProduct = async (req, res) => {
       { _id: id },
       {
         $set: {
+          codeBar,
           title,
           description,
           category,
@@ -58,6 +68,8 @@ module.exports.updateProduct = async (req, res) => {
           taille,
           price,
           dateAdded,
+          dateSold,
+          state,
         },
       }
     );
@@ -115,6 +127,17 @@ module.exports.getProductByTitle = async (req, res) => {
   const title = req.params.title;
   try {
     const product = await Product.findOne({ title });
+    res.status(200).json(product);
+  } catch (e) {
+    console.log(e);
+    res.status(404).json("no products found");
+  }
+};
+
+module.exports.getAllProductsByCode = async (req, res) => {
+  const codeBar = req.params.codeBar;
+  try {
+    const product = await Product.findOne({ codeBar });
     res.status(200).json(product);
   } catch (e) {
     console.log(e);

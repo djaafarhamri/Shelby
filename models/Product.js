@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const productSchema = mongoose.Schema(
   {
-    codebar: {
+    codeBar: {
       type: Number,
       required: true,
       uniique: true

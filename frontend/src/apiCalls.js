@@ -1,4 +1,4 @@
-import axios from "áxios";
+import axios from "axios";
 const ENDPOINT = "http://localhost:4000";
 
 export const signup = async (data) => {
