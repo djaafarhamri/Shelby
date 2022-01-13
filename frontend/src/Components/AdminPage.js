@@ -3,6 +3,7 @@ import dashboard from "../assets/dashboard.png";
 import warehouse from "../assets/warehouse.png";
 import "./AdminPage.css";
 import { useState } from "react";
+import Stock from "./Stock";
 
 const AdminPage = () => {
   const [selected, setSelected] = useState("d");
@@ -42,6 +43,9 @@ const AdminPage = () => {
           </div>
         
         }
+      </div>
+      <div className="admin-content">
+          <Stock />
       </div>
     </div>
   );
