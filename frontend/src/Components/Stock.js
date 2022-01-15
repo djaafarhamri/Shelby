@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Atable from "./Atable";
 import "./Stock.css";
 
 //! d -> Delivered
@@ -8,7 +9,7 @@ import "./Stock.css";
 //! r -> Returened
 
 const Stock = () => {
-  const [selected, setSelected] = useState("d");
+  const [selected, setSelected] = useState("a");
 
   return (
     <div className="stock">
@@ -18,15 +19,15 @@ const Stock = () => {
       <div className="options">
         <button
           onClick={() => {
-            setSelected("d");
+            setSelected("a");
           }}
           style={
-            selected === "d"
+            selected === "a"
               ? { backgroundColor: "rgba(247, 233, 142, 1)" }
               : { backgroundColor: "white" }
           }
         >
-          Delivered
+          All Products
         </button>
         <button
           onClick={() => {
@@ -78,11 +79,16 @@ const Stock = () => {
         </button>
       </div>
       <div className="table">
-        {selected === 'd' && <h2>Delivered</h2>}
-        {selected === 'p' && <h2>Pending</h2>}
-        {selected === 'o' && <h2>On Deleviry</h2>}
-        {selected === 'i' && <h2>In Progress</h2>}
-        {selected === 'r' && <h2>Returned</h2>}
+        {selected === "a" && (
+          <>
+            <h2>All Products</h2>
+            <Atable />
+          </>
+        )}
+        {selected === "p" && <h2>Pending</h2>}
+        {selected === "o" && <h2>On Deleviry</h2>}
+        {selected === "i" && <h2>In Progress</h2>}
+        {selected === "r" && <h2>Returned</h2>}
       </div>
     </div>
   );
