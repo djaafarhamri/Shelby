@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Atable from "./Atable";
+import Ptable from "./Ptable";
 import "./Stock.css";
 
 //! d -> Delivered
@@ -85,7 +86,12 @@ const Stock = () => {
             <Atable />
           </>
         )}
-        {selected === "p" && <h2>Pending</h2>}
+        {selected === "p" && (
+          <>
+            <h2>Pending</h2>
+            <Ptable />
+          </>
+        )}
         {selected === "o" && <h2>On Deleviry</h2>}
         {selected === "i" && <h2>In Progress</h2>}
         {selected === "r" && <h2>Returned</h2>}

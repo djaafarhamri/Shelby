@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Dongle&display=swap");
 
-.atable {
+.ptable {
   background: white;
   padding-left: 20px;
   border-radius: 15px;
@@ -8,7 +8,7 @@
   display: grid;
   grid-template-columns: 400px 200px 100px 200px 200px;
 }
-.atable h3 {
+.ptable h3 {
   font-family: Dongle;
   font-size: 45px;
   font-style: normal;
@@ -17,29 +17,29 @@
   letter-spacing: 0em;
   text-align: left;
 }
-.atable-name {
+.ptable-name {
   grid-column: 1/2;
 }
 
-.atable-code {
+.ptable-code {
   grid-column: 2/3;
 }
 
-.atable-taille {
+.ptable-taille {
   grid-column: 3/4;
 }
 
-.atable-prix {
+.ptable-prix {
   grid-column: 4/5;
 }
 
-.atable-status {
+.ptable-status {
   grid-column: 5/6;
 }
-.all-products-admin {
+.pending-admin {
   display: contents;
 }
-.all-products-admin p {
+.pending-admin p {
   font-family: Dongle;
   font-size: 35px;
   font-style: normal;

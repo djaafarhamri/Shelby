@@ -144,3 +144,33 @@ module.exports.getAllProductsByCode = async (req, res) => {
     res.status(404).json("no products found");
   }
 };
+
+module.exports.getAllPendingProducts = async (req, res) => {
+  try {
+    const product = await Product.find({ state: 'pending' });
+    res.status(200).json(product);
+  } catch (e) {
+    console.log(e);
+    res.status(404).json("no products found");
+  }
+};
+
+module.exports.getAllOnDeliveryProducts = async (req, res) => {
+  try {
+    const product = await Product.find({ state: 'on delivery' });
+    res.status(200).json(product);
+  } catch (e) {
+    console.log(e);
+    res.status(404).json("no products found");
+  }
+};
+
+module.exports.getAllInProgressProducts = async (req, res) => {
+  try {
+    const product = await Product.find({ state: 'in progress' });
+    res.status(200).json(product);
+  } catch (e) {
+    console.log(e);
+    res.status(404).json("no products found");
+  }
+};

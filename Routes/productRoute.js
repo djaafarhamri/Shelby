@@ -11,5 +11,8 @@ router.get("/api/getAllProductsByCode/:codeBar", productController.getAllProduct
 router.get("/api/getAllProductsByCategory/:category", productController.getAllProductsByCategory);
 router.get("/api/getAllProductsBySubCategory/:subCategory", productController.getAllProductsBySubCategory);
 router.get("/api/getProductByTitle/:title", productController.getProductByTitle);
+router.get("/api/getAllPendingProducts", productController.getAllPendingProducts);
+router.get("/api/getAllOnDeliveryProducts", productController.getAllOnDeliveryProducts);
+router.get("/api/getAllInProgressProducts", productController.getAllInProgressProducts);
 
 module.exports = router;
