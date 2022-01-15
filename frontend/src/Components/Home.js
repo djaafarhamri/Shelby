@@ -1,7 +1,9 @@
-import "./Home.css";
+
 
 const Home = () => {
-  return <div className="home"></div>;
+  return  <h1 className="text-1xl font-bold underline">
+  Hello world!
+</h1>
 };
 
 export default Home;
