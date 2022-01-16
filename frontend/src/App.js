@@ -8,13 +8,13 @@ import AdminPage from "./Components/AdminPage";
 function App() {
   return (
     <div className="App">
-      {/* <Navbar /> */}
+      { <Navbar /> }
       <Routes>
         <Route exact path="/" element={<Home />}></Route>
         <Route exact path="/products" element={<Products />}></Route>
         <Route exact path="/admin" element={<AdminPage />}></Route>
       </Routes>
-      {/* <Footer /> */}
+      { /*<Footer /> */}
     </div>
   );
 }
