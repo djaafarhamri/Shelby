@@ -8,7 +8,6 @@ import AdminPage from "./Components/AdminPage";
 function App() {
   return (
     <div className="App">
-      { <Navbar /> }
       <Routes>
         <Route exact path="/" element={<Home />}></Route>
         <Route exact path="/products" element={<Products />}></Route>

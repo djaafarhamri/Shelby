@@ -2,6 +2,7 @@ import Product from "./Product";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./Products.css";
+import Navbar from "./Navbar";
 const ENDPOINT = "http://localhost:4000";
 
 const Products = () => {
@@ -16,6 +17,8 @@ const Products = () => {
   }, []);
   return (
     <div className="products-page">
+      <Navbar />
+
       <h1>Products</h1>
       <div className="products">
         {products &&

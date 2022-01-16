@@ -9,7 +9,16 @@ const Ptable = () => {
 
   useEffect(() => {
     axios
-      .get(`${ENDPOINT}/api/getAllPendingProducts`)
+      .get(`${ENDPOINT}/api/getPending`)
+      .then((res) => {
+        setProducts(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`${ENDPOINT}/api/getProductByref`)
       .then((res) => {
         setProducts(res.data);
       })
@@ -18,18 +27,16 @@ const Ptable = () => {
   return (
     <div className="ptable">
       <h3 className="ptable-name">Name</h3>
-      <h3 className="ptable-code">Code</h3>
-      <h3 className="ptable-taille">Taille</h3>
-      <h3 className="ptable-prix">Prix Reste</h3>
-      <h3 className="ptable-status">Status</h3>
+      <h3 className="ptable-code">ref</h3>
+      <h3 className="ptable-taille">phone</h3>
+      <h3 className="ptable-prix">adress</h3>
       {products &&
         products.map((product, index) => (
           <div key={index} className="pending-admin">
-              <p className="ptable-name">{product.title}</p>
-              <p className="ptable-code">{product.codeBar}</p>
-              <p className="ptable-taille">{product.taille}</p>
-              <p className="ptable-prix">{product.price}</p>
-              <p className="ptable-status">{product.state}</p>
+              <p className="ptable-name">{product.username}</p>
+              <p className="ptable-code">{product.ref}</p>
+              <p className="ptable-taille">{product.phone}</p>
+              <p className="ptable-prix">{product.adress}</p>
           </div>
         ))}
     </div>

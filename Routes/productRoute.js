@@ -14,5 +14,6 @@ router.get("/api/getProductByTitle/:title", productController.getProductByTitle)
 router.get("/api/getAllPendingProducts", productController.getAllPendingProducts);
 router.get("/api/getAllOnDeliveryProducts", productController.getAllOnDeliveryProducts);
 router.get("/api/getAllInProgressProducts", productController.getAllInProgressProducts);
+router.get("/api/getProductByref/:ref", productController.getProductByref);
 
 module.exports = router;

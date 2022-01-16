@@ -7,6 +7,11 @@ const productSchema = mongoose.Schema(
       required: true,
       uniique: true
     },
+    ref: {
+      type: Number,
+      required: true,
+      uniique: true
+    },
     title: {
       type: String,
       required: true,

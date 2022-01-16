@@ -174,3 +174,14 @@ module.exports.getAllInProgressProducts = async (req, res) => {
     res.status(404).json("no products found");
   }
 };
+
+module.exports.getProductByref = async (req, res) => {
+  const ref = req.params.ref
+  try {
+    const product = await Product.findOne({ ref });
+    res.status(200).json(product);
+  } catch (e) {
+    console.log(e);
+    res.status(404).json("no products found");
+  }
+};

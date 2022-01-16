@@ -7,7 +7,6 @@ import "./Stock.css";
 //! p -> Pending
 //! o -> On Delivery
 //! i -> In Progress
-//! r -> Returened
 
 const Stock = () => {
   const [selected, setSelected] = useState("a");
@@ -66,18 +65,7 @@ const Stock = () => {
         >
           In Progress
         </button>
-        <button
-          onClick={() => {
-            setSelected("r");
-          }}
-          style={
-            selected === "r"
-              ? { backgroundColor: "rgba(247, 233, 142, 1)" }
-              : { backgroundColor: "white" }
-          }
-        >
-          Returened
-        </button>
+       
       </div>
       <div className="table">
         {selected === "a" && (
@@ -94,7 +82,6 @@ const Stock = () => {
         )}
         {selected === "o" && <h2>On Deleviry</h2>}
         {selected === "i" && <h2>In Progress</h2>}
-        {selected === "r" && <h2>Returned</h2>}
       </div>
     </div>
   );
