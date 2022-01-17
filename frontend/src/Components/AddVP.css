@@ -1,0 +1,13 @@
+.addvp {
+  position: absolute;
+  height: 400px;
+  width: 400px;
+  background: #000;
+  color: white;
+  right: 25vw;
+  top: 25vh;
+}
+.addvp button {
+  margin: 20px;
+  padding: 10px;
+}

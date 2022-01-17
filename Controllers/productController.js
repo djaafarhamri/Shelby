@@ -207,3 +207,26 @@ module.exports.return = async (req, res) => {
     res.status(404).json("error");
   }
 };
+
+module.exports.takeProduct = async (req, res) => {
+  const { code, taille } = req.body
+  try {
+    const product1 = await Product.findOne({ codeBar: code });
+    if (product1) {
+      if (taille in product1.taille) {
+        for (let product in product1.taille) {
+          if (product === taille && product.quantity !== 0) {
+            product.quantity -= 1
+            res.json({product1})
+          }
+        }
+      }
+      else {
+        res.json('taille non exist')
+      }
+    }
+  } catch (e) {
+    console.log(e);
+    res.status(404).json("error");
+  }
+};

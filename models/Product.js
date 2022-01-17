@@ -44,6 +44,10 @@ const productSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
+    prixPay: {
+      type: Number,
+      default: 0,
+    },
     dateAdded: {
       type: Date,
       default: Date.now

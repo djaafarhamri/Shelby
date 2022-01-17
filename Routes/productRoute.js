@@ -13,5 +13,6 @@ router.get("/api/getAllProductsBySubCategory/:subCategory", productController.ge
 router.get("/api/getProductByTitle/:title", productController.getProductByTitle);
 router.get("/api/getProductByref/:ref", productController.getProductByref);
 router.post("/api/return", productController.return);
+router.post("/api/takeProduct", productController.takeProduct);
 
 module.exports = router;
