@@ -5,12 +5,10 @@ const productSchema = mongoose.Schema(
     codeBar: {
       type: Number,
       required: true,
-      uniique: true
     },
     ref: {
       type: Number,
       required: true,
-      uniique: true
     },
     title: {
       type: String,
@@ -33,12 +31,12 @@ const productSchema = mongoose.Schema(
       required: true,
     },
     taille: {
-        type: Array,
-        quantity: {
-          type:Number,
-          default: 1
-        },
-        required: true
+      type: String,
+      required: true,
+    },
+    quantity: {
+      type: Number,
+      default: 1,
     },
     price: {
       type: Number,
@@ -50,15 +48,15 @@ const productSchema = mongoose.Schema(
     },
     dateAdded: {
       type: Date,
-      default: Date.now
+      default: Date.now,
     },
     dateSold: {
       type: Date,
     },
     state: {
       type: String,
-      default: "avaible"
-    }
+      default: "avaible",
+    },
   },
   { collection: "products" }
 );

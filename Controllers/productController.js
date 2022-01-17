@@ -3,37 +3,46 @@ const Product = require("../models/Product");
 module.exports.addProduct = async (req, res) => {
   const {
     codeBar,
+    ref,
     title,
     description,
     category,
     marque,
     subCategory,
-    quantity,
     taille,
+    quantity,
     price,
     dateAdded,
     dateSold,
     state,
   } = req.body;
-  try {
-    const product = await Product.create({
-      codeBar,
-      title,
-      description,
-      category,
-      marque,
-      subCategory,
-      quantity,
-      taille,
-      price,
-      dateAdded,
-      dateSold,
-      state,
-    });
-    res.status(200).json(product);
-  } catch (e) {
-    console.log(e);
-    res.status(400).json("error occured while adding the product");
+  const refExist = await Product.find({ ref });
+  const codeExist = await Product.find({ codeBar });
+  if (refExist.length) {
+    res.json("duplicate ref");
+  } else if (codeExist.length) {
+    res.json("duplicate codeBar");
+  } else {
+    try {
+      const product = await Product.create({
+        codeBar,
+        title,
+        description,
+        category,
+        marque,
+        subCategory,
+        quantity,
+        taille,
+        price,
+        dateAdded,
+        dateSold,
+        state,
+      });
+      res.status(200).json(product);
+    } catch (e) {
+      console.log(e);
+      res.status(400).json("error occured while adding the product");
+    }
   }
 };
 
@@ -147,7 +156,7 @@ module.exports.getAllProductsByCode = async (req, res) => {
 
 module.exports.getAllPendingProducts = async (req, res) => {
   try {
-    const product = await Product.find({ state: 'pending' });
+    const product = await Product.find({ state: "pending" });
     res.status(200).json(product);
   } catch (e) {
     console.log(e);
@@ -157,7 +166,7 @@ module.exports.getAllPendingProducts = async (req, res) => {
 
 module.exports.getAllOnDeliveryProducts = async (req, res) => {
   try {
-    const product = await Product.find({ state: 'on delivery' });
+    const product = await Product.find({ state: "on delivery" });
     res.status(200).json(product);
   } catch (e) {
     console.log(e);
@@ -167,7 +176,7 @@ module.exports.getAllOnDeliveryProducts = async (req, res) => {
 
 module.exports.getAllInProgressProducts = async (req, res) => {
   try {
-    const product = await Product.find({ state: 'in progress' });
+    const product = await Product.find({ state: "in progress" });
     res.status(200).json(product);
   } catch (e) {
     console.log(e);
@@ -176,9 +185,9 @@ module.exports.getAllInProgressProducts = async (req, res) => {
 };
 
 module.exports.getProductByref = async (req, res) => {
-  const ref = req.params.ref
+  const ref = req.params.ref;
   try {
-    const product = await Product.findOne({ ref });
+    const product = await Product.find({ ref });
     res.status(200).json(product);
   } catch (e) {
     console.log(e);
@@ -187,20 +196,33 @@ module.exports.getProductByref = async (req, res) => {
 };
 
 module.exports.return = async (req, res) => {
-  const { ref, taille } = req.body
+  const { productReturn } = req.body;
   try {
-    const product1 = await Product.findOne({ ref });
-    if (product1) {
-      if (taille in product1.taille) {
-        for (let product in product1.taille) {
-          if (product === taille) {
-            product.quantity += 1
-          }
-        }
-      }
-      else {
-        await Product.findOneAndUpdate({ ref }, {$push: {taille}})
-      }
+    const product = await Product.findOne({
+      ref: productReturn.ref,
+      taille: productReturn.taille,
+    });
+    if (product.length) {
+      await Product.findOneAndUpdate(
+        { ref: productReturn.ref, taille: productReturn.taille },
+        { $set: { quantity: (product.quantity += 1) } }
+      );
+    } else {
+      await Product.create({
+        codeBar: productReturn.codeBar,
+        ref: productReturn.ref,
+        title: productReturn.title,
+        description: productReturn.description,
+        category: productReturn.category,
+        marque: productReturn.marque,
+        subCategory: productReturn.subCategory,
+        taille: productReturn.taille,
+        quantity: productReturn.quantity,
+        price: productReturn.price,
+        dateAdded: productReturn.dateAdded,
+        dateSold: productReturn.dateSold,
+        state: productReturn.state,
+      });
     }
   } catch (e) {
     console.log(e);
@@ -209,22 +231,19 @@ module.exports.return = async (req, res) => {
 };
 
 module.exports.takeProduct = async (req, res) => {
-  const { code, taille } = req.body
+  const { id } = req.body;
   try {
-    const product1 = await Product.findOne({ codeBar: code });
-    if (product1) {
-      if (taille in product1.taille) {
-        for (let product in product1.taille) {
-          if (product === taille && product.quantity !== 0) {
-            product.quantity -= 1
-            res.json({product1})
-          }
-        }
+    const product = await Product.findOne({
+      id,
+    });
+    await Product.findOneAndUpdate(
+      { id },
+      { $set: { quantity: product.quantity - 1 } }
+      );
+      res.json({ product });
+      if (product.quantity === 0) {
+        await Product.findOneAndDelete({ id })
       }
-      else {
-        res.json('taille non exist')
-      }
-    }
   } catch (e) {
     console.log(e);
     res.status(404).json("error");

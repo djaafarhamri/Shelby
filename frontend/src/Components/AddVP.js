@@ -1,6 +1,5 @@
 import BarcodeReader from "react-barcode-reader";
 import axios from "axios";
-import { useEffect, useState } from "react";
 import "./AddVP.css";
 
 const ENDPOINT = "http://localhost:4000";
@@ -12,8 +11,6 @@ const AddVP = ({
   setProduct,
   setProducts,
   product,
-  taille,
-  setTaille,
   setPrixPay,
 }) => {
   const ok = () => {
@@ -29,13 +26,14 @@ const AddVP = ({
     axios
       .post(`${ENDPOINT}/api/takeProduct`, {
         code,
-        taille,
       })
       .then((res) => {
         if (res.data !== "taille non exist") {
           setProducts((old) => [...old, res.data]);
-          setShowAdd(false);
-        } else {console.log(res.data)}
+          ok()
+        } else {
+          console.log(res.data);
+        }
       })
       .catch((err) => console.log(err));
   };
@@ -57,36 +55,29 @@ const AddVP = ({
         }}
       />
       <button onClick={ok}>ok</button>
-      {product && (
-        <>
-          <h2>{product.title}</h2>
-          <p>taille</p>
-          <input
-            style={{ color: "black" }}
-            type="text"
-            onChange={(e) => {
-              setProduct((old) => ({...old, taille: e.target.value}));
-            }}
-          />
-          <p>prix payer</p>
-          <input
-            style={{ color: "black" }}
-            type="text"
-            value={product.price}
-            onChange={(e) => {
-              setProduct((old) => ({...old, prixPay: e.target.value}));
-            }}
-          />
-        </>
-      )}
+      {product &&
+        product.map((prod, iprod) => (
+          <div key={iprod} className="prod">
+            <h3>{prod.title}</h3>
+            <p>prix payer</p>
+            <input
+              style={{ color: "black" }}
+              type="text"
+              value={product.price}
+              onChange={(e) => {
+                setProduct((old) => ({ ...old, prixPay: e.target.value }));
+              }}
+            />
+            <button onClick={add}>add</button>
+          </div>
+        ))}
       <button
         onClick={() => {
           setShowAdd(false);
         }}
       >
-        anuller
+        ok
       </button>
-      <button onClick={add}>add</button>
     </div>
   );
 };

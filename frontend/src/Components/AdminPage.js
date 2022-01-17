@@ -3,6 +3,7 @@ import dashboard from "../assets/dashboard.png";
 import warehouse from "../assets/warehouse.png";
 import "./AdminPage.css";
 import { useState } from "react";
+import Vendre from "./Vendre";
 import Stock from "./Stock";
 
 const AdminPage = () => {
@@ -15,6 +16,10 @@ const AdminPage = () => {
     setSelected("s");
   };
 
+  const selectV = () => {
+    setSelected("v");
+  };
+
   return (
     <div className="admin-page">
       <div className="admin-route">
@@ -23,7 +28,7 @@ const AdminPage = () => {
           <img src={logo} alt="" />
           <p>Boutique</p>
         </div>
-        {selected === "d" ? (
+        {selected === "d" && (
           <div className="dashboard-buttons">
             <button className="dashboard-btn-s" onClick={selectD}>
               <img src={dashboard} alt="" /> Dashboard
@@ -31,8 +36,11 @@ const AdminPage = () => {
             <button className="dashboard-btn-n" onClick={selectS}>
               <img src={warehouse} alt="" /> Stock
             </button>
+            <button className="dashboard-btn-n" onClick={selectV}>
+              <img src={warehouse} alt="" /> Vendre
+            </button>
           </div>
-        ):
+        )}{ selected === "s" && (
           <div className="dashboard-buttons">
             <button className="dashboard-btn-n" onClick={selectD}>
               <img src={dashboard} alt="" /> Dashboard
@@ -40,13 +48,40 @@ const AdminPage = () => {
             <button className="dashboard-btn-s" onClick={selectS}>
               <img src={warehouse} alt="" /> Stock
             </button>
+            <button className="dashboard-btn-n" onClick={selectV}>
+              <img src={warehouse} alt="" /> Vendre
+            </button>
           </div>
-        
-        }
+        )}
+        { selected === "v" && (
+          <div className="dashboard-buttons">
+            <button className="dashboard-btn-n" onClick={selectD}>
+              <img src={dashboard} alt="" /> Dashboard
+            </button>
+            <button className="dashboard-btn-n" onClick={selectS}>
+              <img src={warehouse} alt="" /> Stock
+            </button>
+            <button className="dashboard-btn-s" onClick={selectV}>
+              <img src={warehouse} alt="" /> Vendre
+            </button>
+          </div>
+        )}
       </div>
-      <div className="admin-content">
+      {selected === "d" && (
+        <div className="admin-content">
+          
+        </div>
+      )}
+      {selected === "s" && (
+        <div className="admin-content">
           <Stock />
-      </div>
+        </div>
+      )}
+      {selected === "v" && (
+        <div className="admin-content">
+          <Vendre />
+        </div>
+      )}
     </div>
   );
 };
