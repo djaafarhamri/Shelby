@@ -48,3 +48,13 @@
   letter-spacing: 0em;
   text-align: left;
 }
+.vendre-buttons {
+  grid-column: 4/6;
+}
+.vendre-buttons button {
+  background-color: rgba(247, 233, 142, 1);
+  margin: 20px;
+  height: 30px;
+  width: 100px;
+  font-weight: bold;
+}
