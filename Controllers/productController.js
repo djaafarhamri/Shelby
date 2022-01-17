@@ -185,3 +185,25 @@ module.exports.getProductByref = async (req, res) => {
     res.status(404).json("no products found");
   }
 };
+
+module.exports.return = async (req, res) => {
+  const { ref, taille } = req.body
+  try {
+    const product1 = await Product.findOne({ ref });
+    if (product1) {
+      if (taille in product1.taille) {
+        for (let product in product1.taille) {
+          if (product === taille) {
+            product.quantity += 1
+          }
+        }
+      }
+      else {
+        await Product.findOneAndUpdate({ ref }, {$push: {taille}})
+      }
+    }
+  } catch (e) {
+    console.log(e);
+    res.status(404).json("error");
+  }
+};

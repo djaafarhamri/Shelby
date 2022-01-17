@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Atable from "./Atable";
 import Ptable from "./Ptable";
+import Otable from "./Otable";
 import "./Stock.css";
 
 //! d -> Delivered
@@ -27,7 +28,7 @@ const Stock = () => {
               : { backgroundColor: "white" }
           }
         >
-          All Products
+          Vendre
         </button>
         <button
           onClick={() => {
@@ -65,12 +66,23 @@ const Stock = () => {
         >
           In Progress
         </button>
-       
+        <button
+          onClick={() => {
+            setSelected("24");
+          }}
+          style={
+            selected === "24"
+              ? { backgroundColor: "rgba(247, 233, 142, 1)" }
+              : { backgroundColor: "white" }
+          }
+        >
+          24 heurs
+        </button>
       </div>
       <div className="table">
         {selected === "a" && (
           <>
-            <h2>All Products</h2>
+            <h2>Vendre</h2>
             <Atable />
           </>
         )}
@@ -80,8 +92,14 @@ const Stock = () => {
             <Ptable />
           </>
         )}
-        {selected === "o" && <h2>On Deleviry</h2>}
+        {selected === "o" && (
+          <>
+            <h2>On Deleviry</h2>
+            <Otable />
+          </>
+        )}
         {selected === "i" && <h2>In Progress</h2>}
+        {selected === "24" && <h2>24 heurs</h2>}
       </div>
     </div>
   );

@@ -21,8 +21,13 @@ const customerSchema = mongoose.Schema(
       type: String,
       required: [true, "product required"],
     },
-    product: {
-      type: Product,
+    prix_reste: {
+      type: Number,
+      default: 0
+    },
+    taille: {
+      type: String,
+      required: true
     },
     status: {
       type: String,
