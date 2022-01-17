@@ -17,7 +17,7 @@ const Atable = () => {
         res.data && setProducts((old) => [...old, res.data]);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [code]);
   return (
     <div className="atable">
       <BarcodeReader
