@@ -219,8 +219,8 @@ module.exports.takeProduct = async (req, res) => {
       { $set: { quantity: product.quantity - 1 } }
     );
     res.json({ product });
-    if (product.quantity === 0) {
-      await Product.findOneAndDelete({ id });
+    if (product.quantity === 1) {
+      await Product.findOneAndDelete({ _id });
     }
   } catch (e) {
     console.log(e);
