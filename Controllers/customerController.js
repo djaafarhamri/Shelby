@@ -13,7 +13,34 @@ module.exports.getCustomerByid = async (req, res) => {
 
 module.exports.getPending = async (req, res) => {
   try {
-    const client = await Customer.find({ status: pending });
+    const client = await Customer.find({ status: 'pending' });
+    res.status(200).json(client);
+  } catch (e) {
+    console.log(e);
+    res.status(400).json("no client");
+  }
+};
+module.exports.get24 = async (req, res) => {
+  try {
+    const client = await Customer.find({ status: '24' });
+    res.status(200).json(client);
+  } catch (e) {
+    console.log(e);
+    res.status(400).json("no client");
+  }
+};
+module.exports.getProgress = async (req, res) => {
+  try {
+    const client = await Customer.find({ status: 'progerss' });
+    res.status(200).json(client);
+  } catch (e) {
+    console.log(e);
+    res.status(400).json("no client");
+  }
+};
+module.exports.getDelivery = async (req, res) => {
+  try {
+    const client = await Customer.find({ status: 'delivery' });
     res.status(200).json(client);
   } catch (e) {
     console.log(e);

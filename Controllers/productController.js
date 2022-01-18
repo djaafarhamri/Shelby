@@ -178,12 +178,11 @@ module.exports.return = async (req, res) => {
   const { productReturn } = req.body;
   try {
     const product = await Product.findOne({
-      ref: productReturn.ref,
-      taille: productReturn.taille,
+      _id: productReturn.id,
     });
     if (product.length) {
       await Product.findOneAndUpdate(
-        { ref: productReturn.ref, taille: productReturn.taille },
+        { _id: productReturn.id },
         { $set: { quantity: (product.quantity += 1) } }
       );
     } else {
@@ -191,12 +190,13 @@ module.exports.return = async (req, res) => {
         ref: productReturn.ref,
         title: productReturn.title,
         description: productReturn.description,
-        category: productReturn.category,
         marque: productReturn.marque,
-        subCategory: productReturn.subCategory,
+        genre: productReturn.genre,
+        category: productReturn.category,
+        prixAch: productReturn.prixAch,
+        price: productReturn.price,
         taille: productReturn.taille,
         quantity: productReturn.quantity,
-        price: productReturn.price,
         dateAdded: productReturn.dateAdded,
         dateSold: productReturn.dateSold,
         state: productReturn.state,
