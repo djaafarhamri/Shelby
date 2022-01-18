@@ -2,15 +2,9 @@ const mongoose = require("mongoose");
 
 const productSchema = mongoose.Schema(
   {
-    codeBar: {
-      type: Number,
-      required: true,
-      uniique: true
-    },
     ref: {
-      type: Number,
+      type: String,
       required: true,
-      uniique: true
     },
     title: {
       type: String,
@@ -20,25 +14,21 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    category: {
-      type: String,
-      required: true,
-    },
     marque: {
       type: String,
       required: true,
     },
-    subCategory: {
+    genre: {
       type: String,
       required: true,
     },
-    taille: {
-        type: Array,
-        quantity: {
-          type:Number,
-          default: 1
-        },
-        required: true
+    category: {
+      type: String,
+      required: true,
+    },
+    prixAch: {
+      type: Number,
+      required: true,
     },
     price: {
       type: Number,
@@ -48,17 +38,25 @@ const productSchema = mongoose.Schema(
       type: Number,
       default: 0,
     },
+    taille: {
+      type: String,
+      required: true,
+    },
+    quantity: {
+      type: Number,
+      default: 1,
+    },
     dateAdded: {
       type: Date,
-      default: Date.now
+      default: Date.now,
     },
     dateSold: {
       type: Date,
     },
     state: {
       type: String,
-      default: "avaible"
-    }
+      default: "avaible",
+    },
   },
   { collection: "products" }
 );

@@ -25,18 +25,17 @@ const Otable = () => {
       .catch((err) => console.log(err));
   };
 
-  const returne = (ref, taille) => {
+  const returne = (product) => {
     axios
       .post(`${ENDPOINT}/api/return`, {
-          ref,
-          taille
+          product
       })
       .then((res) => {
         return res.data;
       })
       .catch((err) => console.log(err));
     axios
-      .delete(`${ENDPOINT}/api/deleteCustomer/${ref}`)
+      .delete(`${ENDPOINT}/api/deleteCustomer/${product._id}`)
       .then((res) => {
         return res.data;
       })
@@ -66,7 +65,7 @@ const Otable = () => {
               </button>
               <button
                 onClick={() => {
-                  returne(product.ref, product.taille);
+                  returne(product);
                 }}
               >
                 return

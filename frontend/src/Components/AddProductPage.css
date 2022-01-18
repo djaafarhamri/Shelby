@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Dongle&display=swap");
+
+.add-up {
+  display: flex;
+  justify-content: center;
+}
+.add-up button {
+  margin-right: auto;
+}
+
+.add-up h2 {
+  margin-right: auto;
+  margin-left: auto;
+  font-family: Dongle;
+  font-size: 51px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 74px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.add-form {
+  margin-left: 80px;
+}
+
+.add-form p {
+    font-family: Montserrat;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 37px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+.add-form input {
+    height: 67px;
+    width: 700px;
+    border: 10px;
+    border-color: black;
+    border-radius: 10px;
+}
+.add-form select {
+    height: 67px;
+    width: 700px;
+    border: 10px;
+    border-color: black;
+    border-radius: 10px;
+}

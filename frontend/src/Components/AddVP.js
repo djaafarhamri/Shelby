@@ -1,6 +1,5 @@
 import BarcodeReader from "react-barcode-reader";
 import axios from "axios";
-import { useEffect, useState } from "react";
 import "./AddVP.css";
 
 const ENDPOINT = "http://localhost:4000";
@@ -12,30 +11,30 @@ const AddVP = ({
   setProduct,
   setProducts,
   product,
-  taille,
-  setTaille,
   setPrixPay,
 }) => {
   const ok = () => {
     axios
-      .get(`${ENDPOINT}/api/getProductByCode/${code}`)
+      .get(`${ENDPOINT}/api/getProductByref/${code}`)
       .then((res) => {
         setProduct(res.data);
       })
       .catch((err) => console.log(err));
   };
 
-  const add = () => {
+  const add = (prod) => {
     axios
       .post(`${ENDPOINT}/api/takeProduct`, {
-        code,
-        taille,
+       _id:prod._id,
       })
       .then((res) => {
         if (res.data !== "taille non exist") {
-          setProducts((old) => [...old, res.data]);
-          setShowAdd(false);
-        } else {console.log(res.data)}
+          setProducts((old) => [...old, res.data.product]);
+          console.log(res.data)
+          ok()
+        } else {
+          console.log(res.data);
+        }
       })
       .catch((err) => console.log(err));
   };
@@ -57,36 +56,31 @@ const AddVP = ({
         }}
       />
       <button onClick={ok}>ok</button>
-      {product && (
-        <>
-          <h2>{product.title}</h2>
-          <p>taille</p>
-          <input
-            style={{ color: "black" }}
-            type="text"
-            onChange={(e) => {
-              setProduct((old) => ({...old, taille: e.target.value}));
-            }}
-          />
-          <p>prix payer</p>
-          <input
-            style={{ color: "black" }}
-            type="text"
-            value={product.price}
-            onChange={(e) => {
-              setProduct((old) => ({...old, prixPay: e.target.value}));
-            }}
-          />
-        </>
-      )}
+      {product &&
+        product.map((prod, iprod) => (
+          <div key={iprod} className="prod">
+            <p>{prod.title}</p>
+            <p>{prod.taille}</p>
+            <p>{prod.quantity}</p>
+            <p>prix payer</p>
+            <input
+              style={{ color: "black" }}
+              type="text"
+              value={product.price}
+              onChange={(e) => {
+                setProduct((old) => ({ ...old, prixPay: e.target.value }));
+              }}
+            />
+            <button onClick={() => {add(prod)}}>add</button>
+          </div>
+        ))}
       <button
         onClick={() => {
           setShowAdd(false);
         }}
       >
-        anuller
+        done
       </button>
-      <button onClick={add}>add</button>
     </div>
   );
 };

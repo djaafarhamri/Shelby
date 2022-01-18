@@ -10,20 +10,19 @@ const Atable = () => {
   const [product, setProduct] = useState();
   const [code, setCode] = useState("");
   const [prixPay, setPrixPay] = useState([]);
-  const [taille, setTaille] = useState([]);
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState("24");
   const [showAdd, setShowAdd] = useState(false);
 
   const valider = () => {
-    for (let product in products) {
+    for (let product of products) {
       axios
         .post(`${ENDPOINT}/api/addCustomer`, {
+          id: product._id,
           username: "client",
           phone: 1000000000,
           adress: "vide",
           ref: product.ref,
           prix_reste: product.prix - prixPay,
-          taille,
           status,
         })
         .then((res) => {
@@ -54,8 +53,6 @@ const Atable = () => {
           setProduct={setProduct}
           setProducts={setProducts}
           product={product}
-          taille={taille}
-          setTaille={setTaille}
           setPrixPay={setPrixPay}
         />
       )}
@@ -69,8 +66,8 @@ const Atable = () => {
           <div key={index} className="all-products-admin">
             <p className="atable-name">{product.title}</p>
             <p className="atable-code">{product.ref}</p>
-            <p className="atable-taille">{taille}</p>
-            <p className="atable-prix">prix</p>
+            <p className="atable-taille">{product.taille}</p>
+            <p className="atable-prix">{product.price}</p>
             <button className="atable-status" onClick={() => {}}>
               del
             </button>

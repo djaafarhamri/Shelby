@@ -3,6 +3,11 @@ const Product = require('../models/Product')
 
 const customerSchema = mongoose.Schema(
   {
+    id: {
+      type: Object,
+      required: true,
+      unique: true
+    },
     username: {
       type: String,
     },
@@ -20,10 +25,6 @@ const customerSchema = mongoose.Schema(
     prix_reste: {
       type: Number,
       default: 0
-    },
-    taille: {
-      type: String,
-      required: true
     },
     status: {
       type: String,
