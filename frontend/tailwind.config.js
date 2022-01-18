@@ -7,6 +7,7 @@ module.exports = {
      'royal':'#061701' ,
      'palete':' rgb(248 250 252)', 
      'black':'rgb(0 0 0)' ,
+     'gray':'#E9E9E9',
     },
     fontFamily: {
      'montserrat':['Montserrat', 'sans-serif'],

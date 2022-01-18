@@ -3,14 +3,16 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./Components/Home";
 import Navbar from "./Components/Navbar";
 import Products from "./Components/Products";
+import Login from "./Components/Login";
 import AdminPage from "./Components/AdminPage";
 
 function App() {
   return (
     <div className="App">
-      <Routes>
+      <Routes>        
         <Route exact path="/" element={<Home />}></Route>
         <Route exact path="/products" element={<Products />}></Route>
+        <Route exact path="/Login" element={<Login />}></Route>
         <Route exact path="/admin" element={<AdminPage />}></Route>
       </Routes>
       { /*<Footer /> */}
