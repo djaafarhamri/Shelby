@@ -15,21 +15,22 @@ const AddVP = ({
 }) => {
   const ok = () => {
     axios
-      .get(`${ENDPOINT}/api/getProductByCode/${code}`)
+      .get(`${ENDPOINT}/api/getProductByref/${code}`)
       .then((res) => {
         setProduct(res.data);
       })
       .catch((err) => console.log(err));
   };
 
-  const add = () => {
+  const add = (prod) => {
     axios
       .post(`${ENDPOINT}/api/takeProduct`, {
-        code,
+       _id:prod._id,
       })
       .then((res) => {
         if (res.data !== "taille non exist") {
-          setProducts((old) => [...old, res.data]);
+          setProducts((old) => [...old, res.data.product]);
+          console.log(res.data)
           ok()
         } else {
           console.log(res.data);
@@ -58,7 +59,9 @@ const AddVP = ({
       {product &&
         product.map((prod, iprod) => (
           <div key={iprod} className="prod">
-            <h3>{prod.title}</h3>
+            <p>{prod.title}</p>
+            <p>{prod.taille}</p>
+            <p>{prod.quantity}</p>
             <p>prix payer</p>
             <input
               style={{ color: "black" }}
@@ -68,7 +71,7 @@ const AddVP = ({
                 setProduct((old) => ({ ...old, prixPay: e.target.value }));
               }}
             />
-            <button onClick={add}>add</button>
+            <button onClick={() => {add(prod)}}>add</button>
           </div>
         ))}
       <button
@@ -76,7 +79,7 @@ const AddVP = ({
           setShowAdd(false);
         }}
       >
-        ok
+        done
       </button>
     </div>
   );

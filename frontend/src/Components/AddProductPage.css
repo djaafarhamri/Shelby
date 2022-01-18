@@ -40,3 +40,10 @@
     border-color: black;
     border-radius: 10px;
 }
+.add-form select {
+    height: 67px;
+    width: 700px;
+    border: 10px;
+    border-color: black;
+    border-radius: 10px;
+}

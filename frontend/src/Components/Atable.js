@@ -10,11 +10,11 @@ const Atable = () => {
   const [product, setProduct] = useState();
   const [code, setCode] = useState("");
   const [prixPay, setPrixPay] = useState([]);
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState("24");
   const [showAdd, setShowAdd] = useState(false);
 
   const valider = () => {
-    for (let product in products) {
+    for (let product of products) {
       axios
         .post(`${ENDPOINT}/api/addCustomer`, {
           id: product._id,

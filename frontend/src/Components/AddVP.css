@@ -2,12 +2,14 @@
   position: absolute;
   height: 400px;
   width: 400px;
-  background: #000;
-  color: white;
+  background: #fff;
   right: 25vw;
   top: 25vh;
 }
 .addvp button {
   margin: 20px;
   padding: 10px;
+}
+.addvp input {
+  border: 2px;
 }

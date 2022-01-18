@@ -41,7 +41,7 @@ const Stock = () => {
               {products &&
                 products.map((product, index) => (
                   <div key={index} className="stock-admin">
-                    <p className="stock-name">{product.username}</p>
+                    <p className="stock-name">{product.title}</p>
                     <p className="stock-ref">{product.ref}</p>
                     <p className="stock-taille">{product.taille}</p>
                     <p className="stock-quantity">{product.quantity}</p>

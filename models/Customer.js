@@ -4,7 +4,7 @@ const Product = require('../models/Product')
 const customerSchema = mongoose.Schema(
   {
     id: {
-      type: String,
+      type: Object,
       required: true,
       unique: true
     },

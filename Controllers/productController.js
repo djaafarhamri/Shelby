@@ -2,41 +2,33 @@ const Product = require("../models/Product");
 
 module.exports.addProduct = async (req, res) => {
   const {
-    codeBar,
     ref,
     title,
     description,
-    category,
     marque,
-    subCategory,
+    genre,
+    category,
+    prixAch,
+    price,
     taille,
     quantity,
-    price,
-    dateAdded,
-    dateSold,
-    state,
   } = req.body;
   const refExist = await Product.find({ ref });
-  const codeExist = await Product.find({ codeBar });
   if (refExist.length) {
     res.json("duplicate ref");
-  } else if (codeExist.length) {
-    res.json("duplicate codeBar");
   } else {
     try {
       const product = await Product.create({
-        codeBar,
+        ref,
         title,
         description,
-        category,
         marque,
-        subCategory,
-        quantity,
-        taille,
+        genre,
+        category,
+        prixAch,
         price,
-        dateAdded,
-        dateSold,
-        state,
+        taille,
+        quantity,
       });
       res.status(200).json(product);
     } catch (e) {
@@ -48,7 +40,6 @@ module.exports.addProduct = async (req, res) => {
 
 module.exports.updateProduct = async (req, res) => {
   const {
-    codeBar,
     title,
     description,
     category,
@@ -67,7 +58,6 @@ module.exports.updateProduct = async (req, res) => {
       { _id: id },
       {
         $set: {
-          codeBar,
           title,
           description,
           category,
@@ -143,17 +133,6 @@ module.exports.getProductByTitle = async (req, res) => {
   }
 };
 
-module.exports.getAllProductsByCode = async (req, res) => {
-  const codeBar = req.params.codeBar;
-  try {
-    const product = await Product.findOne({ codeBar });
-    res.status(200).json(product);
-  } catch (e) {
-    console.log(e);
-    res.status(404).json("no products found");
-  }
-};
-
 module.exports.getAllPendingProducts = async (req, res) => {
   try {
     const product = await Product.find({ state: "pending" });
@@ -209,7 +188,6 @@ module.exports.return = async (req, res) => {
       );
     } else {
       await Product.create({
-        codeBar: productReturn.codeBar,
         ref: productReturn.ref,
         title: productReturn.title,
         description: productReturn.description,
@@ -231,19 +209,19 @@ module.exports.return = async (req, res) => {
 };
 
 module.exports.takeProduct = async (req, res) => {
-  const { id } = req.body;
+  const { _id } = req.body;
   try {
     const product = await Product.findOne({
-      id,
+      _id,
     });
     await Product.findOneAndUpdate(
-      { id },
+      { _id },
       { $set: { quantity: product.quantity - 1 } }
-      );
-      res.json({ product });
-      if (product.quantity === 0) {
-        await Product.findOneAndDelete({ id })
-      }
+    );
+    res.json({ product });
+    if (product.quantity === 0) {
+      await Product.findOneAndDelete({ id });
+    }
   } catch (e) {
     console.log(e);
     res.status(404).json("error");

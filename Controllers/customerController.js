@@ -24,7 +24,7 @@ module.exports.getPending = async (req, res) => {
 module.exports.addCustomer = async (req, res) => {
   const { id, username, phone, adress, ref, prix_reste, status } = req.body;
   try {
-    await Customer.create({ username, phone, adress, ref, prix_reste, status });
+    await Customer.create({ id, username, phone, adress, ref, prix_reste, status });
     res.status(200).json("client created");
   } catch (e) {
     console.log(e);
