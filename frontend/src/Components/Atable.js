@@ -7,22 +7,27 @@ const ENDPOINT = "http://localhost:4000";
 
 const Atable = () => {
   const [products, setProducts] = useState([]);
+  const [clients, setClients] = useState([]);
   const [code, setCode] = useState("");
   const [prixPay, setPrixPay] = useState([]);
   const [showAdd, setShowAdd] = useState(false);
 
   useEffect(() => {
     axios.get(`${ENDPOINT}/api/getVendre`)
-      .then((res) => {setProducts(res.data)})
+      .then((res) => {
+        setProducts(res.data.products);
+        setClients(res.data.clients)
+      })
       .catch((err) => {console.log(err)})
     
   }, [])
 
   const valider = () => {
-    for (let product of products) {
+    for (let client of clients) {
       axios
         .post(`${ENDPOINT}/api/updateTo24`, {
-          id: product._id,
+          _id: client._id,
+          status: "24"
         })
         .then((res) => {
           console.log(res.data);
@@ -30,7 +35,7 @@ const Atable = () => {
         .catch((err) => console.log(err));
     }
   };
-  const returne = (product) => {
+  const returne = (product, client) => {
     axios
       .post(`${ENDPOINT}/api/return`, {
           product
@@ -40,7 +45,7 @@ const Atable = () => {
       })
       .catch((err) => console.log(err));
     axios
-      .delete(`${ENDPOINT}/api/deleteCustomer/${product._id}`)
+      .delete(`${ENDPOINT}/api/deleteCustomer/${client._id}`)
       .then((res) => {
         console.log(res.data);
       })
@@ -68,7 +73,7 @@ const Atable = () => {
             <p className="atable-code">{product.ref}</p>
             <p className="atable-taille">{product.taille}</p>
             <p className="atable-prix">{product.price}</p>
-            <button className="atable-status" onClick={() => {returne(product)}}>
+            <button className="atable-status" onClick={() => {returne(product, clients[index])}}>
               del
             </button>
           </div>

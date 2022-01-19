@@ -30,7 +30,7 @@ module.exports.getVendre = async (req, res) => {
       let product = await Product.findOne({_id: client.id})
       products.push(product)
     }
-    res.status(200).json(products);
+    res.status(200).json({products, clients});
   } catch (e) {
     console.log(e);
     res.status(400).json("no client");
@@ -109,10 +109,10 @@ module.exports.updateToDelivery = async (req, res) => {
 };
 
 module.exports.updateTo24 = async (req, res) => {
-  const id = req.params.id;
+  const { _id, status } = req.body;
   try {
-    await Customer.findOneAndUpdate({ _id: id }, {$set: {status: '24'}});
-    res.status(200).json("updated");
+    const client = await Customer.findOneAndUpdate({ _id }, {$set: {status}});
+    res.status(200).json(client);
   } catch (e) {
     console.log(e);
     res.status(400).json("error");
@@ -122,7 +122,7 @@ module.exports.updateTo24 = async (req, res) => {
 module.exports.deleteCustomer = async (req, res) => {
   const id = req.params.id;
   try {
-    await Customer.findOneAndDelete({ id });
+    await Customer.findOneAndDelete({ _id: id });
     res.status(200).json("deleted");
   } catch (e) {
     console.log(e);

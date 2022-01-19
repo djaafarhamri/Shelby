@@ -1,4 +1,5 @@
 const Product = require("../models/Product");
+const Customer = require("../models/Customer");
 
 module.exports.addProduct = async (req, res) => {
   const {
@@ -174,6 +175,17 @@ module.exports.getProductByref = async (req, res) => {
   }
 };
 
+module.exports.getProductByid = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const product = await Product.findOne({ _id: id });
+    res.status(200).json(product);
+  } catch (e) {
+    console.log(e);
+    res.status(404).json("no products found");
+  }
+};
+
 module.exports.return = async (req, res) => {
   const { product } = req.body;
   try {
@@ -185,6 +197,27 @@ module.exports.return = async (req, res) => {
         { _id: product._id },
         { $set: { quantity: (product1.quantity + 1) } }
       );
+    } 
+  } catch (e) {
+    console.log(e);
+    res.status(400).json("error");
+  }
+};
+
+module.exports.returne = async (req, res) => {
+  const { product } = req.body;
+  try {
+    const client = await Customer.find({ _id: product._id })
+    const product1 = await Product.findOne({
+      _id: client.id,
+    });
+    console.log(product1);
+    if (product1) {
+      await Product.findOneAndUpdate(
+        { _id: client.id },
+        { $set: { quantity: (product1.quantity + 1) } }
+        );
+      await Customer.findOneAndDelete({ _id: product._id })
     } 
   } catch (e) {
     console.log(e);
