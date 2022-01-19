@@ -1,5 +1,6 @@
 import "./AddProductPage.css";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { useReactToPrint } from "react-to-print";
 import TableData from "./TableData";
 import axios from "axios";
 const Barcode = require("react-barcode");
@@ -17,24 +18,28 @@ const AddProductPage = ({ setSelected }) => {
   const [ref, setRef] = useState("ref");
 
   const ajouter = () => {
-    for (let prod of tailleQte){
-      axios.post(`${ENDPOINT}/api/addProduct`, {
-        ref,
-        title: nom,
-        description: descr,
-        marque,
-        genre,
-        category: categorie,
-        prixAch,
-        price: prix,
-        taille: prod.taille,
-        quantity: prod.quantity,
-      })
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err))
+    for (let prod of tailleQte) {
+      axios
+        .post(`${ENDPOINT}/api/addProduct`, {
+          ref,
+          title: nom,
+          description: descr,
+          marque,
+          genre,
+          category: categorie,
+          prixAch,
+          price: prix,
+          taille: prod.taille,
+          quantity: prod.quantity,
+        })
+        .then((res) => console.log(res.data))
+        .catch((err) => console.log(err));
     }
   };
-
+  const componentRef = useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
   return (
     <div className="add-product-page">
       <div className="add-up">
@@ -116,8 +121,13 @@ const AddProductPage = ({ setSelected }) => {
             setRef(e.target.value);
           }}
         />
-        <Barcode value={ref} />
-        <button onClick={ajouter}>Ajouter produit</button>
+        <div ref={componentRef}>
+          <Barcode value={ref} />
+        </div>
+        <button onClick={handlePrint}>Print this out!</button>
+        <button className="ajouter-un-produit" onClick={ajouter}>
+          Ajouter produit
+        </button>
       </div>
     </div>
   );

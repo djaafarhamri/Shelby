@@ -7,23 +7,22 @@ const ENDPOINT = "http://localhost:4000";
 
 const Atable = () => {
   const [products, setProducts] = useState([]);
-  const [product, setProduct] = useState();
   const [code, setCode] = useState("");
   const [prixPay, setPrixPay] = useState([]);
-  const [status, setStatus] = useState("24");
   const [showAdd, setShowAdd] = useState(false);
+
+  useEffect(() => {
+    axios.get(`${ENDPOINT}/api/getVendre`)
+      .then((res) => {setProducts(res.data)})
+      .catch((err) => {console.log(err)})
+    
+  }, [])
 
   const valider = () => {
     for (let product of products) {
       axios
-        .post(`${ENDPOINT}/api/addCustomer`, {
+        .post(`${ENDPOINT}/api/updateTo24`, {
           id: product._id,
-          username: "client",
-          phone: 1000000000,
-          adress: "vide",
-          ref: product.ref,
-          prix_reste: product.prix - prixPay,
-          status,
         })
         .then((res) => {
           console.log(res.data);
@@ -31,29 +30,30 @@ const Atable = () => {
         .catch((err) => console.log(err));
     }
   };
-
- 
+  const returne = (product) => {
+    axios
+      .post(`${ENDPOINT}/api/return`, {
+          product
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+    axios
+      .delete(`${ENDPOINT}/api/deleteCustomer/${product._id}`)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="atable">
-
-      <button
-        onClick={() => {
-          setShowAdd(true);
-        }}
-        className="add-product"
-      >
-        add
-      </button>
       {showAdd && (
         <AddVP
           code={code}
           setCode={setCode}
           setShowAdd={setShowAdd}
-          setProduct={setProduct}
-          setProducts={setProducts}
-          product={product}
-          setPrixPay={setPrixPay}
         />
       )}
       <h3 className="atable-name">Name</h3>
@@ -68,13 +68,20 @@ const Atable = () => {
             <p className="atable-code">{product.ref}</p>
             <p className="atable-taille">{product.taille}</p>
             <p className="atable-prix">{product.price}</p>
-            <button className="atable-status" onClick={() => {}}>
+            <button className="atable-status" onClick={() => {returne(product)}}>
               del
             </button>
           </div>
         ))}
       <div className="vendre-buttons">
         <button onClick={valider}>valider</button>
+        <button
+          onClick={() => {
+            setShowAdd(true);
+          }}
+        >
+          add
+        </button>
       </div>
     </div>
   );

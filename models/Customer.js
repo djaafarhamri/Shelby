@@ -1,18 +1,16 @@
 const mongoose = require("mongoose");
-const Product = require('../models/Product')
 
 const customerSchema = mongoose.Schema(
   {
     id: {
       type: Object,
       required: true,
-      unique: true
     },
     username: {
       type: String,
     },
     phone: {
-      type: Number,
+      type: String,
       length: [10, "please enter a valid phone number"],
     },
     adress: {
@@ -24,16 +22,15 @@ const customerSchema = mongoose.Schema(
     },
     prix_reste: {
       type: Number,
-      default: 0
+      default: 0,
     },
     status: {
       type: String,
-      required: true
+      required: true,
     },
   },
-  { collection: "customers" }
+  { collection: "customers"  }
 );
-
 const model = mongoose.model("CustomerSchema", customerSchema);
 
 module.exports = model;

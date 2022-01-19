@@ -3,6 +3,7 @@ import Atable from "./Atable";
 import Ptable from "./Ptable";
 import Otable from "./Otable";
 import "./Vendre.css";
+import Htable from "./Htable";
 
 //! d -> Delivered
 //! p -> Pending
@@ -99,7 +100,12 @@ const Vendre = () => {
           </>
         )}
         {selected === "i" && <h2>In Progress</h2>}
-        {selected === "24" && <h2>24 heurs</h2>}
+        {selected === "24" && (
+          <>
+            <h2>24 heurs</h2>
+            <Htable />
+          </>
+        )}
       </div>
     </div>
   );

@@ -1,37 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Dongle&display=swap");
-.stock {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.stock-search input {
-  width: 430px;
-  height: 44px;
-  border: 2;
-  border-radius: 25px;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  margin: 5px;
-}
-.ajouter-btn {
-  position: absolute;
-  right: 5%;
-  bottom: 5%;
-  background-color: rgba(247, 233, 142, 1);
-  margin: 20px;
-  height: 30px;
-  width: 100px;
-  font-weight: bold;
-}
 
-.stock-table {
+.htable {
   background: white;
   padding-left: 20px;
   border-radius: 15px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   display: grid;
-  grid-template-columns: 400px 200px 100px 200px 200px;
+  grid-template-columns: 400px 200px 150px 150px 200px ;
 }
-.stock-table h3 {
+.htable h3 {
   font-family: Dongle;
   font-size: 45px;
   font-style: normal;
@@ -40,28 +17,31 @@
   letter-spacing: 0em;
   text-align: left;
 }
-.stock-name {
+.htable-name {
   grid-column: 1/2;
 }
 
-.stock-ref {
+.htable-code {
   grid-column: 2/3;
 }
 
-.stock-taille {
+.htable-prix_reste {
   grid-column: 3/4;
 }
-.stock-quantity {
+
+.htable-taille {
   grid-column: 4/5;
 }
-.stock-prix {
+
+.htable-prix {
   grid-column: 5/6;
 }
 
-.stock-admin {
+
+.h-admin {
   display: contents;
 }
-.stock-admin p {
+.h-admin p {
   font-family: Dongle;
   font-size: 35px;
   font-style: normal;

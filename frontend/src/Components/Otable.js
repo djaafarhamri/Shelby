@@ -16,9 +16,9 @@ const Otable = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  const valider = (ref) => {
+  const valider = (id) => {
     axios
-      .get(`${ENDPOINT}/api/updateTo24/${ref}`)
+      .get(`${ENDPOINT}/api/updateTo24/${id}`)
       .then((res) => {
         return res.data;
       })
@@ -58,7 +58,7 @@ const Otable = () => {
             <div className="otable-option">
               <button
                 onClick={() => {
-                  valider(product.ref);
+                  valider(product._id);
                 }}
               >
                 valider
