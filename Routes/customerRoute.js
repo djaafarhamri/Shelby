@@ -12,6 +12,7 @@ router.get("/api/getPending", customerController.getPending);
 router.get("/api/getProgress", customerController.getProgress);
 router.get("/api/getDelivery", customerController.getDelivery);
 router.get("/api/get24", customerController.get24);
+router.get("/api/getVendre", customerController.getVendre);
 router.get("/api/getCustomerByid/:id", customerController.getCustomerByid);
 
 module.exports = router;

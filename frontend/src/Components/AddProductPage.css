@@ -47,3 +47,10 @@
     border-color: black;
     border-radius: 10px;
 }
+.ajouter-un-produit {
+  background-color: rgba(247, 233, 142, 1);
+  margin: 20px;
+  height: 30px;
+  width: 200px;
+  font-weight: bold;
+}

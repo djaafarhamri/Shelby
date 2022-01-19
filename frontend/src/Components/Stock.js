@@ -24,6 +24,7 @@ const Stock = () => {
             <input type="text" placeholder="Search here" />
           </div>
           <button
+            className="ajouter-btn"
             onClick={() => {
               setSelected("a");
             }}

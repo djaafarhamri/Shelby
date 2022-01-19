@@ -175,36 +175,20 @@ module.exports.getProductByref = async (req, res) => {
 };
 
 module.exports.return = async (req, res) => {
-  const { productReturn } = req.body;
+  const { product } = req.body;
   try {
-    const product = await Product.findOne({
-      _id: productReturn.id,
+    const product1 = await Product.findOne({
+      _id: product._id,
     });
-    if (product.length) {
+    if (product1) {
       await Product.findOneAndUpdate(
-        { _id: productReturn.id },
-        { $set: { quantity: (product.quantity += 1) } }
+        { _id: product._id },
+        { $set: { quantity: (product1.quantity + 1) } }
       );
-    } else {
-      await Product.create({
-        ref: productReturn.ref,
-        title: productReturn.title,
-        description: productReturn.description,
-        marque: productReturn.marque,
-        genre: productReturn.genre,
-        category: productReturn.category,
-        prixAch: productReturn.prixAch,
-        price: productReturn.price,
-        taille: productReturn.taille,
-        quantity: productReturn.quantity,
-        dateAdded: productReturn.dateAdded,
-        dateSold: productReturn.dateSold,
-        state: productReturn.state,
-      });
-    }
+    } 
   } catch (e) {
     console.log(e);
-    res.status(404).json("error");
+    res.status(400).json("error");
   }
 };
 
@@ -219,9 +203,6 @@ module.exports.takeProduct = async (req, res) => {
       { $set: { quantity: product.quantity - 1 } }
     );
     res.json({ product });
-    if (product.quantity === 1) {
-      await Product.findOneAndDelete({ _id });
-    }
   } catch (e) {
     console.log(e);
     res.status(404).json("error");

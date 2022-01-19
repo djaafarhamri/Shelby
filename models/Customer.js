@@ -5,13 +5,12 @@ const customerSchema = mongoose.Schema(
     id: {
       type: Object,
       required: true,
-      unique: true,
     },
     username: {
       type: String,
     },
     phone: {
-      type: Number,
+      type: String,
       length: [10, "please enter a valid phone number"],
     },
     adress: {

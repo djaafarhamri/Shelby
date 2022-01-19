@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import BarcodeReader from "react-barcode-reader";
 import axios from "axios";
 import "./AddVP.css";
@@ -8,14 +9,12 @@ const AddVP = ({
   code,
   setCode,
   setShowAdd,
-  setProduct,
-  setProducts,
-  product,
-  setPrixPay,
 }) => {
-  const ok = () => {
+  const [product, setProduct] = useState([]);
+
+  const ok = (ref) => {
     axios
-      .get(`${ENDPOINT}/api/getProductByref/${code}`)
+      .get(`${ENDPOINT}/api/getProductByref/${ref}`)
       .then((res) => {
         setProduct(res.data);
       })
@@ -25,16 +24,27 @@ const AddVP = ({
   const add = (prod) => {
     axios
       .post(`${ENDPOINT}/api/takeProduct`, {
-       _id:prod._id,
+        _id: prod._id,
       })
       .then((res) => {
         if (res.data !== "taille non exist") {
-          setProducts((old) => [...old, res.data.product]);
-          console.log(res.data)
-          ok()
+          ok(code);
         } else {
           console.log(res.data);
         }
+      })
+      .catch((err) => console.log(err));
+    axios
+      .post(`${ENDPOINT}/api/addCustomer`, {
+        id: prod._id,
+        username: "client",
+        phone: 1000000000,
+        adress: "vide",
+        ref: prod.ref,
+        status: 'vendre',
+      })
+      .then((res) => {
+        console.log(res.data);
       })
       .catch((err) => console.log(err));
   };
@@ -53,25 +63,31 @@ const AddVP = ({
         type="text"
         onChange={(e) => {
           setCode(e.target.value);
+          ok(e.target.value);
         }}
       />
-      <button onClick={ok}>ok</button>
+      <div className="prod">
+        <h4 className="prod-title">title</h4>
+        <h4 className="prod-taille">taille</h4>
+        <h4 className="prod-quantity">quantity</h4>
+        <h4 className="prod-price">price</h4>
+        <h4 className="prod-add">add</h4>
+      </div>
       {product &&
         product.map((prod, iprod) => (
           <div key={iprod} className="prod">
-            <p>{prod.title}</p>
-            <p>{prod.taille}</p>
-            <p>{prod.quantity}</p>
-            <p>prix payer</p>
-            <input
-              style={{ color: "black" }}
-              type="text"
-              value={product.price}
-              onChange={(e) => {
-                setProduct((old) => ({ ...old, prixPay: e.target.value }));
+            <p className="prod-title">{prod.title}</p>
+            <p className="prod-taille">{prod.taille}</p>
+            <p className="prod-quantity">{prod.quantity}</p>
+            <p className="prod-price">{prod.price}</p>
+            <button
+              className="prod-add-btn"
+              onClick={() => {
+                add(prod);
               }}
-            />
-            <button onClick={() => {add(prod)}}>add</button>
+            >
+              add
+            </button>
           </div>
         ))}
       <button
