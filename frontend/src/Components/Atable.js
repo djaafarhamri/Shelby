@@ -14,32 +14,42 @@ const Atable = () => {
   const [showAdd, setShowAdd] = useState(false);
 
   useEffect(() => {
-    axios.get(`${ENDPOINT}/api/getVendre`)
+    axios
+      .get(`${ENDPOINT}/api/getVendre`)
       .then((res) => {
         setProducts(res.data.products);
-        setClients(res.data.clients)
+        setClients(res.data.clients);
       })
-      .catch((err) => {console.log(err)})
-    
-  }, [])
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const valider = () => {
     for (let client of clients) {
       axios
         .post(`${ENDPOINT}/api/updateTo24`, {
           _id: client._id,
-          status: "24"
+          status: "24",
         })
         .then((res) => {
           console.log(res.data);
         })
         .catch((err) => console.log(err));
+      axios
+        .post(`${ENDPOINT}/api/addSold`, {
+          customer_id: client._id,
+        })
+        .then((res) => console.log(res.data))
+        .catch((err) => {
+          console.log(err);
+        });
     }
   };
   const returne = (product, client) => {
     axios
       .post(`${ENDPOINT}/api/return`, {
-          product
+        product,
       })
       .then((res) => {
         console.log(res.data);
@@ -51,16 +61,18 @@ const Atable = () => {
         console.log(res.data);
       })
       .catch((err) => console.log(err));
+    axios
+      .delete(`${ENDPOINT}/api/deleteSold/${client._id}`)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
     <div className="atable">
       {showAdd && (
-        <AddVP
-          code={code}
-          setCode={setCode}
-          setShowAdd={setShowAdd}
-        />
+        <AddVP code={code} setCode={setCode} setShowAdd={setShowAdd} />
       )}
       {showDeliver && (
         <Ddata setShowDeliver={setShowDeliver} clients={clients} />
@@ -77,14 +89,25 @@ const Atable = () => {
             <p className="atable-code">{product.ref}</p>
             <p className="atable-taille">{product.taille}</p>
             <p className="atable-prix">{product.price}</p>
-            <button className="atable-status" onClick={() => {returne(product, clients[index])}}>
+            <button
+              className="atable-status"
+              onClick={() => {
+                returne(product, clients[index]);
+              }}
+            >
               del
             </button>
           </div>
         ))}
       <div className="vendre-buttons">
         <button onClick={valider}>valider</button>
-        <button onClick={() => {setShowDeliver(true)}}>deliver</button>
+        <button
+          onClick={() => {
+            setShowDeliver(true);
+          }}
+        >
+          deliver
+        </button>
         <button onClick={valider}>pending</button>
         <button
           onClick={() => {

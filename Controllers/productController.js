@@ -206,12 +206,9 @@ module.exports.return = async (req, res) => {
 
 module.exports.returne = async (req, res) => {
   const { product } = req.body;
-  console.log(product);
   try {
     const client = await Customer.findOne({ _id: product._id });
-    console.log(client);
     const product1 = await Product.findById(client.id);
-    console.log(product1);
     await Product.findOneAndUpdate(
       { _id: client.id },
       { $set: { quantity: product1.quantity + 1 } }

@@ -30,6 +30,12 @@ const Htable = () => {
         console.log(res.data);
       })
       .catch((err) => console.log(err));
+      axios
+      .delete(`${ENDPOINT}/api/deleteSold/${product._id}`)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
   };
   return (
     <div className="htable">
