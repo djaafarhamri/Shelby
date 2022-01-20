@@ -1,5 +1,6 @@
 const Customer = require("../models/Customer");
 const Product = require("../models/Product");
+ObjectId = require('mongodb').ObjectID;
 
 module.exports.getCustomerByid = async (req, res) => {
   const id = req.params.id;
@@ -67,7 +68,7 @@ module.exports.getDelivery = async (req, res) => {
 module.exports.addCustomer = async (req, res) => {
   const { id, username, phone, adress, ref, status } = req.body;
   try {
-    await Customer.create({ id, username, phone, adress, ref, status });
+    await Customer.create({ id: ObjectId(id), username, phone, adress, ref, status });
     res.status(200).json("client created");
   } catch (e) {
     console.log(e);

@@ -195,9 +195,9 @@ module.exports.return = async (req, res) => {
     if (product1) {
       await Product.findOneAndUpdate(
         { _id: product._id },
-        { $set: { quantity: (product1.quantity + 1) } }
+        { $set: { quantity: product1.quantity + 1 } }
       );
-    } 
+    }
   } catch (e) {
     console.log(e);
     res.status(400).json("error");
@@ -206,19 +206,17 @@ module.exports.return = async (req, res) => {
 
 module.exports.returne = async (req, res) => {
   const { product } = req.body;
+  console.log(product);
   try {
-    const client = await Customer.find({ _id: product._id })
-    const product1 = await Product.findOne({
-      _id: client.id,
-    });
+    const client = await Customer.findOne({ _id: product._id });
+    console.log(client);
+    const product1 = await Product.findById(client.id);
     console.log(product1);
-    if (product1) {
-      await Product.findOneAndUpdate(
-        { _id: client.id },
-        { $set: { quantity: (product1.quantity + 1) } }
-        );
-      await Customer.findOneAndDelete({ _id: product._id })
-    } 
+    await Product.findOneAndUpdate(
+      { _id: client.id },
+      { $set: { quantity: product1.quantity + 1 } }
+    );
+    await Customer.findOneAndDelete({ _id: product._id });
   } catch (e) {
     console.log(e);
     res.status(400).json("error");
