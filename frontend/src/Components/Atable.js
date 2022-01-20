@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "./Atable.css";
 import AddVP from "./AddVP";
+import Ddata from "./Ddata";
 
 const ENDPOINT = "http://localhost:4000";
 
@@ -9,7 +10,7 @@ const Atable = () => {
   const [products, setProducts] = useState([]);
   const [clients, setClients] = useState([]);
   const [code, setCode] = useState("");
-  const [prixPay, setPrixPay] = useState([]);
+  const [showDeliver, setShowDeliver] = useState(false);
   const [showAdd, setShowAdd] = useState(false);
 
   useEffect(() => {
@@ -61,6 +62,9 @@ const Atable = () => {
           setShowAdd={setShowAdd}
         />
       )}
+      {showDeliver && (
+        <Ddata setShowDeliver={setShowDeliver} clients={clients} />
+      )}
       <h3 className="atable-name">Name</h3>
       <h3 className="atable-code">Ref</h3>
       <h3 className="atable-taille">Taille</h3>
@@ -80,6 +84,8 @@ const Atable = () => {
         ))}
       <div className="vendre-buttons">
         <button onClick={valider}>valider</button>
+        <button onClick={() => {setShowDeliver(true)}}>deliver</button>
+        <button onClick={valider}>pending</button>
         <button
           onClick={() => {
             setShowAdd(true);

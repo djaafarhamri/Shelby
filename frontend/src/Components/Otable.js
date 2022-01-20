@@ -9,7 +9,7 @@ const Otable = () => {
 
   useEffect(() => {
     axios
-      .get(`${ENDPOINT}/api/getPending`)
+      .get(`${ENDPOINT}/api/getDelivery`)
       .then((res) => {
         setProducts(res.data);
       })

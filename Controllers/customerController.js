@@ -99,9 +99,9 @@ module.exports.updateToPending = async (req, res) => {
 };
 
 module.exports.updateToDelivery = async (req, res) => {
-  const id = req.params.id;
+  const { _id, nom, adress, phone, status } = req.body;
   try {
-    await Customer.findOneAndUpdate({ id }, {$set: {status: 'delivery'}});
+    await Customer.findOneAndUpdate({ _id }, {$set: {status, username: nom, phone, adress}});
     res.status(200).json("updated");
   } catch (e) {
     console.log(e);
