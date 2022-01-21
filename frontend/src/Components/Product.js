@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import image from "../assets/pro.jfif";
-import "./Product.css";
+import Navbar from "./Navbar";
+
 const ENDPOINT = "http://localhost:4000";
 
-const Product = ({ title, marque }) => {
+const Product = () => {
   return (
-    <div className="product">
-      <img src={image} alt="" />
-      <h2>{marque}</h2>
-      <h3>{title}</h3>
+    <div className="">
+     <Navbar />
+       
+      
     </div>
   );
 };
