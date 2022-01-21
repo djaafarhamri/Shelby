@@ -5,5 +5,6 @@ const router = Router();
 router.post("/api/addSold", soldController.addSold);
 router.delete("/api/deleteSold/:_id", soldController.deleteSold);
 router.get("/api/getAllSold", soldController.getAllSold);
+router.post("/api/getProfitByDate", soldController.getProfitByDate);
 
 module.exports = router;
