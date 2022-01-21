@@ -9,7 +9,7 @@ const Otable = () => {
 
   useEffect(() => {
     axios
-      .get(`${ENDPOINT}/api/getPending`)
+      .get(`${ENDPOINT}/api/getDelivery`)
       .then((res) => {
         setProducts(res.data);
       })
@@ -23,12 +23,20 @@ const Otable = () => {
         return res.data;
       })
       .catch((err) => console.log(err));
+    axios
+      .post(`${ENDPOINT}/api/addSold`, {
+        customer_id: id,
+      })
+      .then((res) => console.log(res.data))
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const returne = (product) => {
     axios
       .post(`${ENDPOINT}/api/return`, {
-          product
+        product,
       })
       .then((res) => {
         return res.data;
@@ -36,6 +44,12 @@ const Otable = () => {
       .catch((err) => console.log(err));
     axios
       .delete(`${ENDPOINT}/api/deleteCustomer/${product._id}`)
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => console.log(err));
+    axios
+      .delete(`${ENDPOINT}/api/deleteSold/${product._id}`)
       .then((res) => {
         return res.data;
       })

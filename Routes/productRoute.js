@@ -11,7 +11,9 @@ router.get("/api/getAllProductsByCategory/:category", productController.getAllPr
 router.get("/api/getAllProductsBySubCategory/:subCategory", productController.getAllProductsBySubCategory);
 router.get("/api/getProductByTitle/:title", productController.getProductByTitle);
 router.get("/api/getProductByref/:ref", productController.getProductByref);
+router.get("/api/getProductByid/:id", productController.getProductByid);
 router.post("/api/return", productController.return);
+router.post("/api/returne", productController.returne);
 router.post("/api/takeProduct", productController.takeProduct);
 
 module.exports = router;

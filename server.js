@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 4000;
 const authRoute = require('./Routes/authRoute')
 const productRoute = require('./Routes/productRoute')
 const customerRoute = require('./Routes/customerRoute')
+const soldRoute = require('./Routes/soldRoute')
 
 //? data base connection
 mongoose
@@ -53,6 +54,7 @@ app.use(express.json());
 app.use(authRoute);
 app.use(productRoute);
 app.use(customerRoute);
+app.use(soldRoute);
 
 server.listen(PORT, () => {
     console.log("listening on PORT : ", PORT);

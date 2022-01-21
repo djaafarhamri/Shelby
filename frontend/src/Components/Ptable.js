@@ -16,22 +16,24 @@ const Ptable = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  const getByref = (ref) => {
+  const valider = (_id) => {
     axios
-      .get(`${ENDPOINT}/api/getProductByref/${ref}`)
+      .post(`${ENDPOINT}/api/updateTo24`, {
+        _id,
+        status: "24",
+      })
       .then((res) => {
         return res.data;
       })
       .catch((err) => console.log(err));
-  };
-
-  const valider = (ref) => {
     axios
-      .get(`${ENDPOINT}/api/updateTo24/${ref}`)
-      .then((res) => {
-        return res.data;
+      .post(`${ENDPOINT}/api/addSold`, {
+        customer_id: _id,
       })
-      .catch((err) => console.log(err));
+      .then((res) => console.log(res.data))
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <div className="ptable">
@@ -49,9 +51,14 @@ const Ptable = () => {
             <p className="ptable-prix_reste">{product.prix_reste}</p>
             <p className="ptable-taille">{product.phone}</p>
             <p className="ptable-prix">{product.adress}</p>
-            <button className="ptable-option" onClick={() => {
-              valider(product.ref)
-            }}>valider</button>
+            <button
+              className="ptable-option"
+              onClick={() => {
+                valider(product._id);
+              }}
+            >
+              valider
+            </button>
           </div>
         ))}
     </div>

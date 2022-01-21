@@ -1,0 +1,28 @@
+.d-data {
+    display: flex;
+    flex-direction: column;
+  position: absolute;
+  height: 400px;
+  background: #fff;
+  right: 25vw;
+  top: 25vh;
+  border: 3px solid;
+  padding: 30px;
+}
+.d-data input {
+  border: 2px solid;
+}
+.d-data-deliver {
+    background-color: rgba(247, 233, 142, 1);
+    margin: 20px;
+    height: 30px;
+    width: 100px;
+    font-weight: bold;
+}
+.d-data-annuler {
+    background-color: rgb(248, 116, 116);
+    margin: 20px;
+    height: 30px;
+    width: 100px;
+    font-weight: bold;
+}

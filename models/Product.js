@@ -50,9 +50,6 @@ const productSchema = mongoose.Schema(
       type: Date,
       default: Date.now,
     },
-    dateSold: {
-      type: Date,
-    },
     state: {
       type: String,
       default: "avaible",

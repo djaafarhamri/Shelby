@@ -5,6 +5,7 @@ import "./AdminPage.css";
 import { useState } from "react";
 import Vendre from "./Vendre";
 import Stock from "./Stock";
+import Dashboard from "./Dashboard";
 
 const AdminPage = () => {
   const [selected, setSelected] = useState("d");
@@ -69,7 +70,7 @@ const AdminPage = () => {
       </div>
       {selected === "d" && (
         <div className="admin-content">
-          
+          <Dashboard />
         </div>
       )}
       {selected === "s" && (

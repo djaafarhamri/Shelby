@@ -1,5 +1,6 @@
 const Customer = require("../models/Customer");
 const Product = require("../models/Product");
+ObjectId = require('mongodb').ObjectID;
 
 module.exports.getCustomerByid = async (req, res) => {
   const id = req.params.id;
@@ -30,7 +31,7 @@ module.exports.getVendre = async (req, res) => {
       let product = await Product.findOne({_id: client.id})
       products.push(product)
     }
-    res.status(200).json(products);
+    res.status(200).json({products, clients});
   } catch (e) {
     console.log(e);
     res.status(400).json("no client");
@@ -67,7 +68,7 @@ module.exports.getDelivery = async (req, res) => {
 module.exports.addCustomer = async (req, res) => {
   const { id, username, phone, adress, ref, status } = req.body;
   try {
-    await Customer.create({ id, username, phone, adress, ref, status });
+    await Customer.create({ id: ObjectId(id), username, phone, adress, ref, status });
     res.status(200).json("client created");
   } catch (e) {
     console.log(e);
@@ -98,9 +99,9 @@ module.exports.updateToPending = async (req, res) => {
 };
 
 module.exports.updateToDelivery = async (req, res) => {
-  const id = req.params.id;
+  const { _id, nom, adress, phone, status } = req.body;
   try {
-    await Customer.findOneAndUpdate({ id }, {$set: {status: 'delivery'}});
+    await Customer.findOneAndUpdate({ _id }, {$set: {status, username: nom, phone, adress}});
     res.status(200).json("updated");
   } catch (e) {
     console.log(e);
@@ -109,10 +110,10 @@ module.exports.updateToDelivery = async (req, res) => {
 };
 
 module.exports.updateTo24 = async (req, res) => {
-  const id = req.params.id;
+  const { _id, status } = req.body;
   try {
-    await Customer.findOneAndUpdate({ _id: id }, {$set: {status: '24'}});
-    res.status(200).json("updated");
+    const client = await Customer.findOneAndUpdate({ _id }, {$set: {status}});
+    res.status(200).json(client);
   } catch (e) {
     console.log(e);
     res.status(400).json("error");
@@ -122,7 +123,7 @@ module.exports.updateTo24 = async (req, res) => {
 module.exports.deleteCustomer = async (req, res) => {
   const id = req.params.id;
   try {
-    await Customer.findOneAndDelete({ id });
+    await Customer.findOneAndDelete({ _id: id });
     res.status(200).json("deleted");
   } catch (e) {
     console.log(e);
