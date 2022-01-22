@@ -16,7 +16,7 @@ const Home = () => {
     <svg className="w-9 h-11 animate-bounce" fill="none" stroke="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13l-3 3m0 0l-3-3m3 3V8m0 13a9 9 0 110-18 9 9 0 010 18z"></path></svg>
     </div>
   </div>
-  <div className=' grid grid-cols-1 auto-cols-auto  sm:grid-cols-2  text-palete font-montserrat'>
+  <div className=' grid  grid-cols-1 auto-cols-auto  sm:grid-cols-2  text-palete font-montserrat'>
     <div className='relative hover:-translate-y-1 hover:scale-110 hover:z-10 sm:col-span-2'>
     <img className='' src={classic} alt="" />
     <p className='absolute -top-0 mt-40 ml-40'>Classic</p>

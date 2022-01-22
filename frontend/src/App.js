@@ -6,7 +6,7 @@ import Products from "./Components/Products";
 import Login from "./Components/Login";
 import AdminPage from "./Components/AdminPage";
 import AddProductPage from "./Components/AddProductPage";
-
+import Checkout from "./Components/Checkout";
 function App() {
   return (
     <div className="App">
@@ -16,6 +16,7 @@ function App() {
         <Route exact path="/Login" element={<Login />}></Route>
         <Route exact path="/admin" element={<AdminPage />}></Route>
         <Route exact path="/admin/addProduct" element={<AddProductPage />}></Route>
+        <Route exact path="/Checkout" element={<Checkout />}></Route>
       </Routes>
       { /*<Footer /> */}
     </div>
