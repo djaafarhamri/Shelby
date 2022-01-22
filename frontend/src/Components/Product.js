@@ -9,7 +9,9 @@ const Product = () => {
   return (
     <div className="">
      <Navbar />
-       
+       <div className="grid grid-cols-4 ">
+
+       </div>
       
     </div>
   );
