@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Dongle&display=swap");
 
+.add-product-page {
+  overflow-y: scroll;
+  height: 100vh;
+}
 .add-up {
   display: flex;
   justify-content: center;

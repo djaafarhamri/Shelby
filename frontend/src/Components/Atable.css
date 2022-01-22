@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Dongle&display=swap");
 
 .atable {
+  overflow-y: scroll;
+  max-height: 60vh;
   background: white;
   padding-left: 20px;
   border-radius: 15px;
@@ -16,7 +18,9 @@
   line-height: 65px;
   letter-spacing: 0em;
   text-align: left;
+  border-bottom: 1px solid;
 }
+
 .atable-name {
   grid-column: 1/2;
 }
@@ -39,6 +43,10 @@
 .all-products-admin {
   display: contents;
 }
+.all-products-admin button {
+  margin: 0;
+  padding: 0;
+}
 .all-products-admin p {
   font-family: Dongle;
   font-size: 35px;
@@ -49,7 +57,7 @@
   text-align: left;
 }
 .vendre-buttons {
-  grid-column: 4/6;
+  margin-left: 600px;
 }
 .vendre-buttons button {
   background-color: rgba(247, 233, 142, 1);

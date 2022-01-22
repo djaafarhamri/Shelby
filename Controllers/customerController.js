@@ -38,27 +38,72 @@ module.exports.getVendre = async (req, res) => {
   }
 };
 module.exports.get24 = async (req, res) => {
+  const response = []
   try {
-    const client = await Customer.find({ status: '24' });
-    res.status(200).json(client);
+    const clients = await Customer.find({ status: '24' });
+    for (let client of clients){
+      const product = await Product.findOne({_id: client.id});
+      response.push({
+        product_id: product._id,
+        client_id: client._id,
+        name: product.title,
+        ref: product.ref,
+        taille: product.taille,
+        client: client.username,
+        phone: client.phone,
+        adress: client.adress,
+        price: product.price
+      })
+    }
+    res.status(200).json(response);
   } catch (e) {
     console.log(e);
     res.status(400).json("no client");
   }
 };
 module.exports.getProgress = async (req, res) => {
+  const response = []
   try {
-    const client = await Customer.find({ status: 'progerss' });
-    res.status(200).json(client);
+    const clients = await Customer.find({ status: 'progress' });
+    for (let client of clients){
+      const product = await Product.findOne({_id: client.id});
+      response.push({
+        product_id: product._id,
+        client_id: client._id,
+        name: product.title,
+        ref: product.ref,
+        taille: product.taille,
+        client: client.username,
+        phone: client.phone,
+        adress: client.adress,
+        price: product.price
+      })
+    }
+    res.status(200).json(response);
   } catch (e) {
     console.log(e);
     res.status(400).json("no client");
   }
 };
 module.exports.getDelivery = async (req, res) => {
+  const response = []
   try {
-    const client = await Customer.find({ status: 'delivery' });
-    res.status(200).json(client);
+    const clients = await Customer.find({ status: 'delivery' });
+    for (let client of clients){
+      const product = await Product.findOne({_id: client.id});
+      response.push({
+        product_id: product._id,
+        client_id: client._id,
+        name: product.title,
+        ref: product.ref,
+        taille: product.taille,
+        client: client.username,
+        phone: client.phone,
+        adress: client.adress,
+        price: product.price
+      })
+    }
+    res.status(200).json(response);
   } catch (e) {
     console.log(e);
     res.status(400).json("no client");

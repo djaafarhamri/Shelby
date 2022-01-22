@@ -12,8 +12,8 @@ const AddProductPage = ({ setSelected }) => {
   const [prixAch, setPrixAch] = useState(0);
   const [prix, setPrix] = useState(0);
   const [marque, setMarque] = useState("");
-  const [genre, setGenre] = useState("");
-  const [categorie, setCategorie] = useState("");
+  const [genre, setGenre] = useState("Classic");
+  const [categorie, setCategorie] = useState("Clothes");
   const [tailleQte, setTailleQte] = useState([]);
   const [ref, setRef] = useState("ref");
 

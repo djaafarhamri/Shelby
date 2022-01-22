@@ -82,29 +82,29 @@ const Vendre = () => {
       </div>
       <div className="table">
         {selected === "a" && (
-          <>
+          <div className="scroll">
             <h2>Vendre</h2>
             <Atable />
-          </>
+          </div>
         )}
         {selected === "p" && (
-          <>
+          <div className="scroll">
             <h2>Pending</h2>
             <Ptable />
-          </>
+          </div>
         )}
         {selected === "o" && (
-          <>
+          <div className="scroll">
             <h2>On Deleviry</h2>
             <Otable />
-          </>
+          </div>
         )}
         {selected === "i" && <h2>In Progress</h2>}
         {selected === "24" && (
-          <>
+          <div className="scroll">
             <h2>24 heurs</h2>
             <Htable />
-          </>
+          </div>
         )}
       </div>
     </div>

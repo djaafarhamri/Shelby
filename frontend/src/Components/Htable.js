@@ -25,13 +25,13 @@ const Htable = () => {
       })
       .catch((err) => console.log(err));
       axios
-      .delete(`${ENDPOINT}/api/deleteCustomer/${product._id}`)
+      .delete(`${ENDPOINT}/api/deleteCustomer/${product.client_id}`)
       .then((res) => {
         console.log(res.data);
       })
       .catch((err) => console.log(err));
       axios
-      .delete(`${ENDPOINT}/api/deleteSold/${product._id}`)
+      .delete(`${ENDPOINT}/api/deleteSold/${product.client_id}`)
       .then((res) => {
         console.log(res.data);
       })
@@ -47,10 +47,10 @@ const Htable = () => {
       {products &&
         products.map((product, index) => (
           <div key={index} className="h-admin">
-            <p className="htable-name">{product.username}</p>
+            <p className="htable-name">{product.name}</p>
             <p className="htable-code">{product.ref}</p>
-            <p className="htable-taille">{product.phone}</p>
-            <p className="htable-prix">{product.adress}</p>
+            <p className="htable-taille">{product.taille}</p>
+            <p className="htable-prix">{product.price}</p>
             <button className="htable-prix_reste" onClick={() => {
               returne(product)
             }}>returne</button>

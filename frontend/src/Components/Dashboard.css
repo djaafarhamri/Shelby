@@ -1,0 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=Dongle&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+.dashboard-options {
+  display: flex;
+}
+.revenue {
+  margin: 30px;
+  height: 103px;
+  width: 226px;
+  left: 289px;
+  top: 85px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.revenue h3 {
+  padding: 10px;
+  font-family: Roboto;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 21px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.date-picker {
+  position: absolute;
+  height: 300px;
+  width: 300px;
+  background: #fff;
+  right: 25vw;
+  top: 25vh;
+  border: 3px solid;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+.date-picker h1 {
+  font-family: Roboto;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 21px;
+  letter-spacing: 0em;
+  text-align: left;
+  padding: 10px;
+}
+
+.date-picker p {
+  font-family: Roboto;
+  padding: 10px;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 21px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+.date-picker input {
+  padding: 10px;
+}
+.date-picker button {
+  background-color: rgba(247, 233, 142, 1);
+  margin: auto;
+  height: 30px;
+  width: 100px;
+  font-weight: bold;
+}
+.show-date-btn {
+  text-decoration: underline;
+}
+.date-picker img {
+  height: 30px;
+  width: 30px;
+  align-self: flex-end;
+  cursor: pointer;
+}
+h2 {
+  font-family: Dongle;
+  font-size: 51px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 74px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-left: 17px;
+}
