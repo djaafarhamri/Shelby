@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Dongle&display=swap");
 
 .recent {
+  overflow-y: scroll;
+  height: 60vh;
   background: white;
   padding-left: 20px;
   border-radius: 15px;

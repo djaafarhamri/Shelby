@@ -41,7 +41,6 @@ const Ptable = () => {
       <h3 className="ptable-code">ref</h3>
       <h3 className="ptable-prix_reste">prix reste</h3>
       <h3 className="ptable-taille">phone</h3>
-      <h3 className="ptable-prix">adress</h3>
       <h3 className="ptable-option">option</h3>
       {products &&
         products.map((product, index) => (
@@ -50,7 +49,6 @@ const Ptable = () => {
             <p className="ptable-code">{product.ref}</p>
             <p className="ptable-prix_reste">{product.prix_reste}</p>
             <p className="ptable-taille">{product.phone}</p>
-            <p className="ptable-prix">{product.adress}</p>
             <button
               className="ptable-option"
               onClick={() => {

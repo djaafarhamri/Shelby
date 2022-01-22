@@ -190,7 +190,7 @@ module.exports.return = async (req, res) => {
   const { product } = req.body;
   try {
     const product1 = await Product.findOne({
-      _id: product._id,
+      _id: product.product_id,
     });
     if (product1) {
       await Product.findOneAndUpdate(
@@ -206,14 +206,15 @@ module.exports.return = async (req, res) => {
 
 module.exports.returne = async (req, res) => {
   const { product } = req.body;
+  console.log('product : ',product);
   try {
-    const client = await Customer.findOne({ _id: product._id });
+    const client = await Customer.findOne({ _id: product.client_id });
     const product1 = await Product.findById(client.id);
     await Product.findOneAndUpdate(
       { _id: client.id },
       { $set: { quantity: product1.quantity + 1 } }
     );
-    await Customer.findOneAndDelete({ _id: product._id });
+    await Customer.findOneAndDelete({ _id: product.client_id });
   } catch (e) {
     console.log(e);
     res.status(400).json("error");

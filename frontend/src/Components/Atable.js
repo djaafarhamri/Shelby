@@ -73,44 +73,46 @@ const Atable = () => {
   };
 
   return (
-    <div className="atable">
-      {showBon && (
-        <Bon
-          products={products}
-          setShowBon={setShowBon}
-          adress={clients[0].adress}
-          phone={clients[0].phone}
-          name={clients[0].username}
-        />
-      )}
-      {showAdd && (
-        <AddVP code={code} setCode={setCode} setShowAdd={setShowAdd} />
-      )}
-      {showDeliver && (
-        <Ddata setShowDeliver={setShowDeliver} clients={clients} />
-      )}
-      <h3 className="atable-name">Name</h3>
-      <h3 className="atable-code">Ref</h3>
-      <h3 className="atable-taille">Taille</h3>
-      <h3 className="atable-prix">Prix</h3>
-      <h3 className="atable-status">del</h3>
-      {products &&
-        products.map((product, index) => (
-          <div key={index} className="all-products-admin">
-            <p className="atable-name">{product.title}</p>
-            <p className="atable-code">{product.ref}</p>
-            <p className="atable-taille">{product.taille}</p>
-            <p className="atable-prix">{product.price}</p>
-            <button
-              className="atable-status"
-              onClick={() => {
-                returne(product, clients[index]);
-              }}
-            >
-              del
-            </button>
-          </div>
-        ))}
+    <>
+      <div className="atable">
+        {showBon && (
+          <Bon
+            products={products}
+            setShowBon={setShowBon}
+            adress={clients[0].adress}
+            phone={clients[0].phone}
+            name={clients[0].username}
+          />
+        )}
+        {showAdd && (
+          <AddVP code={code} setCode={setCode} setShowAdd={setShowAdd} />
+        )}
+        {showDeliver && (
+          <Ddata setShowDeliver={setShowDeliver} clients={clients} />
+        )}
+        <h3 className="atable-name">Name</h3>
+        <h3 className="atable-code">Ref</h3>
+        <h3 className="atable-taille">Taille</h3>
+        <h3 className="atable-prix">Prix</h3>
+        <h3 className="atable-status">del</h3>
+        {products &&
+          products.map((product, index) => (
+            <div key={index} className="all-products-admin">
+              <p className="atable-name">{product.title}</p>
+              <p className="atable-code">{product.ref}</p>
+              <p className="atable-taille">{product.taille}</p>
+              <p className="atable-prix">{product.price}</p>
+              <button
+                className="atable-status"
+                onClick={() => {
+                  returne(product, clients[index]);
+                }}
+              >
+                <img style={{height: '40px', width: '40px'}} src="https://img.icons8.com/plasticine/100/000000/filled-trash.png" alt="remove"/>
+              </button>
+            </div>
+          ))}
+      </div>
       <div className="vendre-buttons">
         <button onClick={valider}>valider</button>
         <button
@@ -129,7 +131,7 @@ const Atable = () => {
           add
         </button>
       </div>
-    </div>
+    </>
   );
 };
 

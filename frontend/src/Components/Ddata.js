@@ -1,5 +1,5 @@
 import "./Ddata.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 const ENDPOINT = 'http://localhost:4000'
 const Ddata = ({ setShowDeliver, clients }) => {
