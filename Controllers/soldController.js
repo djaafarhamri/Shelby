@@ -8,13 +8,6 @@ module.exports.addSold = async (req, res) => {
   const client = await Customer.findOne({ _id: customer_id });
   const product = await Product.findOne({ _id: client.id });
   let profit = product.price - product.prixAch;
-  console.log({
-    prodect_id: ObjectId(client.id),
-    customer_id,
-    price: product.price,
-    profit,
-    ref: client.ref,
-  });
   try {
     await Sold.create({
       prodect_id: ObjectId(client.id),
@@ -49,22 +42,41 @@ module.exports.getAllSold = async (req, res) => {
   }
 };
 
+module.exports.getTodaysSolds = async (req, res) => {
+  var response = []
+  const today = new Date();
+  const td = today.getDate()-1;
+  const tm = today.getMonth();
+  const ty = today.getFullYear();
+  try {
+    const solds = await Sold.find({
+      dateSold: { $gte: new Date(Date.now() - (3600*1000*24)), $lte: new Date(Date.now()) },
+    });
+    for(let sold of solds) {
+      var product = await Product.findOne({_id: sold.prodect_id})
+      response.push({
+        name: product.title,
+        ref: product.ref,
+        taille: product.taille,
+        price: sold.price,
+        profit: sold.profit,
+      })
+    }
+    res.status(200).json(response);
+  } catch (err) {
+    res.status(400);
+  }
+};
+
 module.exports.getProfitByDate = async (req, res) => {
   const { dateStart, dateEnd } = req.body
   const dates = new Date(dateStart)
   const datee = new Date(dateEnd)
-  const ys = dates.getFullYear();
-  const ms = dates.getMonth();
-  const ds = dates.getDate();
-  const ye = datee.getFullYear();
-  const me = datee.getMonth();
-  const de = datee.getDate();
-  console.log(ys, ye);
   try {
     await Sold.aggregate([
       {
         $match: {
-          dateSold: { $gte: new Date(ys, ms, ds), $lte: new Date(ye, me, de) },
+          dateSold: { $gte: new Date(dates), $lte: new Date(datee) },
         },
       },
       {
@@ -75,8 +87,7 @@ module.exports.getProfitByDate = async (req, res) => {
       },
     ])
       .then((solds) => {
-        console.log('solds date: ', solds);
-        res.status(200).json(solds && solds[0].total);
+        res.status(200).json(solds.length && solds[0].total);
       })
       .catch((err) => {
         console.log(err);

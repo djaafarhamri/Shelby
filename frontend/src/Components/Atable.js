@@ -3,6 +3,7 @@ import axios from "axios";
 import "./Atable.css";
 import AddVP from "./AddVP";
 import Ddata from "./Ddata";
+import Bon from "./Bon";
 
 const ENDPOINT = "http://localhost:4000";
 
@@ -12,6 +13,7 @@ const Atable = () => {
   const [code, setCode] = useState("");
   const [showDeliver, setShowDeliver] = useState(false);
   const [showAdd, setShowAdd] = useState(false);
+  const [showBon, setShowBon] = useState(false);
 
   useEffect(() => {
     axios
@@ -45,6 +47,7 @@ const Atable = () => {
           console.log(err);
         });
     }
+    setShowBon(true);
   };
   const returne = (product, client) => {
     axios
@@ -71,6 +74,15 @@ const Atable = () => {
 
   return (
     <div className="atable">
+      {showBon && (
+        <Bon
+          products={products}
+          setShowBon={setShowBon}
+          adress={clients[0].adress}
+          phone={clients[0].phone}
+          name={clients[0].username}
+        />
+      )}
       {showAdd && (
         <AddVP code={code} setCode={setCode} setShowAdd={setShowAdd} />
       )}

@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Dongle&display=swap");
+
+.recent {
+  background: white;
+  padding-left: 20px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  display: grid;
+  grid-template-columns: 400px 200px 100px 200px 200px;
+}
+.recent h3 {
+  font-family: Dongle;
+  font-size: 45px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 65px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+.recent-name {
+  grid-column: 1/2;
+}
+
+.recent-ref {
+  grid-column: 2/3;
+}
+
+.recent-taille {
+  grid-column: 3/4;
+}
+
+.recent-price {
+  grid-column: 4/5;
+}
+
+.recent-profit {
+  grid-column: 5/6;
+}
+.recent-admin {
+  display: contents;
+}
+.recent-admin p {
+  font-family: Dongle;
+  font-size: 35px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 51px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+.vendre-buttons {
+  grid-column: 4/6;
+}
+.vendre-buttons button {
+  background-color: rgba(247, 233, 142, 1);
+  margin: 20px;
+  height: 30px;
+  width: 100px;
+  font-weight: bold;
+}
