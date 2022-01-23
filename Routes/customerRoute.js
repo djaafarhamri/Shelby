@@ -4,7 +4,7 @@ const router = Router();
 
 router.post("/api/addCustomer", customerController.addCustomer);
 router.delete("/api/deleteCustomer/:id", customerController.deleteCustomer);
-router.post("/api/updateToPending/:id", customerController.updateToPending);
+router.post("/api/updateToPending", customerController.updateToPending);
 router.post("/api/updateToDelivery", customerController.updateToDelivery);
 router.post("/api/updateToProgress/:id", customerController.updateToProgress);
 router.post("/api/updateTo24", customerController.updateTo24);

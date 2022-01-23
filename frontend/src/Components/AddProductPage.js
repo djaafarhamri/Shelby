@@ -16,24 +16,40 @@ const AddProductPage = ({ setSelected }) => {
   const [categorie, setCategorie] = useState("Clothes");
   const [tailleQte, setTailleQte] = useState([]);
   const [ref, setRef] = useState("ref");
+	const [selectedFile, setSelectedFile] = useState();
+	const [isSelected, setIsSelected] = useState(false);
+	const [imagePath, setImagePath] = useState('');
 
+	const changeHandler = (event) => {
+		setSelectedFile(event.target.files[0]);
+		setIsSelected(true);
+	};
   const ajouter = () => {
-    for (let prod of tailleQte) {
-      axios
-        .post(`${ENDPOINT}/api/addProduct`, {
-          ref,
-          title: nom,
-          description: descr,
-          marque,
-          genre,
-          category: categorie,
-          prixAch,
-          price: prix,
-          taille: prod.taille,
-          quantity: prod.quantity,
-        })
-        .then((res) => console.log(res.data))
-        .catch((err) => console.log(err));
+    const formData = new FormData();
+
+		formData.append('productMainImage', selectedFile);
+    axios.post(`${ENDPOINT}/api/uploadMainImage`, formData)
+    .then(res => setImagePath(res.data))
+    if (isSelected) {
+      console.log('test');
+      for (let prod of tailleQte) {
+        axios
+          .post(`${ENDPOINT}/api/addProduct`, {
+            ref,
+            title: nom,
+            description: descr,
+            marque,
+            genre,
+            category: categorie,
+            prixAch,
+            price: prix,
+            taille: prod.taille,
+            quantity: prod.quantity,
+            main_image: imagePath
+          })
+          .then((res) => console.log(res.data))
+          .catch((err) => console.log(err));
+      }
     }
   };
   const componentRef = useRef();
@@ -53,6 +69,11 @@ const AddProductPage = ({ setSelected }) => {
         <h2>Ajouter un Produit</h2>
       </div>
       <div className="add-form">
+        <p>Main image</p>
+        <input
+          type="file"
+          onChange={changeHandler}
+        />
         <p>Nom</p>
         <input
           type="text"

@@ -36,6 +36,14 @@
 }
 
 
+.pending-admin button {
+  background-color: rgba(247, 233, 142, 1);
+  margin: 20px;
+  height: 30px;
+  width: 100px;
+  font-weight: bold;
+}
+
 .pending-admin {
   display: contents;
 }

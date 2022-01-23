@@ -133,9 +133,12 @@ module.exports.updateToProgress = async (req, res) => {
 };
 
 module.exports.updateToPending = async (req, res) => {
-  const id = req.params.id;
+  const { _id, status, prixPay } = req.body;
+  const client = await Customer.findById(_id)
+  const product = await Product.findById(client.id)
+  const prix_reste = product.price - prixPay
   try {
-    await Customer.findOneAndUpdate({ id }, {$set: {status: 'pending'}});
+    await Customer.findOneAndUpdate({ _id }, {$set: {status, prix_reste}});
     res.status(200).json("updated");
   } catch (e) {
     console.log(e);

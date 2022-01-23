@@ -54,6 +54,10 @@ const productSchema = mongoose.Schema(
       type: String,
       default: "avaible",
     },
+    main_image: {
+      type: String,
+      required: true
+    }
   },
   { collection: "products" }
 );
