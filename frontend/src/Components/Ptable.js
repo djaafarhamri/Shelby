@@ -6,6 +6,7 @@ const ENDPOINT = "http://localhost:4000";
 
 const Ptable = () => {
   const [products, setProducts] = useState([]);
+  const [render, setRender] = useState(false);
 
   useEffect(() => {
     axios
@@ -34,6 +35,7 @@ const Ptable = () => {
       .catch((err) => {
         console.log(err);
       });
+      setRender(!render)
   };
   return (
     <div className="ptable">

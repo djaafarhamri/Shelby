@@ -1,6 +1,9 @@
 const Product = require("../models/Product");
 const Customer = require("../models/Customer");
 
+module.exports.uploadMainImage = async (req, res) => {
+  res.status(200).json(req.file.path)
+}
 module.exports.addProduct = async (req, res) => {
   const {
     ref,
@@ -13,6 +16,7 @@ module.exports.addProduct = async (req, res) => {
     price,
     taille,
     quantity,
+    main_image
   } = req.body;
   const refExist = await Product.find({ ref });
   if (refExist.length) {
@@ -30,6 +34,7 @@ module.exports.addProduct = async (req, res) => {
         price,
         taille,
         quantity,
+        main_image
       });
       res.status(200).json(product);
     } catch (e) {

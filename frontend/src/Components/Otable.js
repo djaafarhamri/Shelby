@@ -10,6 +10,7 @@ const Otable = () => {
   const [products, setProducts] = useState([]);
   const [showValid, setShowValid] = useState(false);
   const [client, setClient] = useState();
+  const [render, setRender] = useState(false);
 
   useEffect(() => {
     axios
@@ -18,7 +19,7 @@ const Otable = () => {
         setProducts(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [render]);
 
   const valider = (id) => {
     axios
@@ -61,6 +62,7 @@ const Otable = () => {
         return res.data;
       })
       .catch((err) => console.log(err));
+    setRender(!render)
   };
   return (
     <div className="otable">
@@ -73,6 +75,7 @@ const Otable = () => {
             className="d-data-deliver"
             onClick={() => {
               valider(client.client_id);
+              setRender(!render)
             }}
           >
             valider

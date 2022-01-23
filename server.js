@@ -43,6 +43,7 @@ app.use((req, res, next) => {
 app.use(cors())
 app.use(cookieParser());
 app.use(express.static("public"));
+app.use('/uploads', express.static("uploads/"));
 app.use(express.json());
 // const corsOptions = {
 //     origin: 'http://localhost:3000',

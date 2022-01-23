@@ -14,6 +14,9 @@ const Atable = () => {
   const [showDeliver, setShowDeliver] = useState(false);
   const [showAdd, setShowAdd] = useState(false);
   const [showBon, setShowBon] = useState(false);
+  const [showPending, setShowPending] = useState(false);
+  const [render, setRender] = useState(false);
+  const [prixPay, setPrixPay] = useState('');
 
   useEffect(() => {
     axios
@@ -25,7 +28,7 @@ const Atable = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [showAdd, render]);
 
   const valider = () => {
     for (let client of clients) {
@@ -49,6 +52,22 @@ const Atable = () => {
     }
     setShowBon(true);
   };
+  const pending = () => {
+    for (let client of clients) {
+      axios
+        .post(`${ENDPOINT}/api/updateToPending`, {
+          _id: client._id,
+          status: "pending",
+          prixPay,
+        })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+    setShowBon(true);
+    setRender(!render)
+  };
   const returne = (product, client) => {
     axios
       .post(`${ENDPOINT}/api/return`, {
@@ -70,6 +89,7 @@ const Atable = () => {
         console.log(res.data);
       })
       .catch((err) => console.log(err));
+    setRender(!render)
   };
 
   return (
@@ -84,6 +104,14 @@ const Atable = () => {
             name={clients[0].username}
           />
         )}
+        {showPending && 
+        <>
+          <h2>Prix paye</h2>
+          <input type="text" onChange={(e) => {setPrixPay(e.target.value)}} />
+          <button onClick={pending}>pending</button>
+          <button onClick={() => {setShowPending(false)}}>annuler</button>
+        </>
+        }
         {showAdd && (
           <AddVP code={code} setCode={setCode} setShowAdd={setShowAdd} />
         )}
@@ -122,7 +150,7 @@ const Atable = () => {
         >
           deliver
         </button>
-        <button onClick={valider}>pending</button>
+        <button onClick={() => {setShowPending(true)}}>pending</button>
         <button
           onClick={() => {
             setShowAdd(true);

@@ -6,6 +6,7 @@ const ENDPOINT = "http://localhost:4000";
 
 const Htable = () => {
   const [products, setProducts] = useState([]);
+  const [render, setRender] = useState(false);
 
   useEffect(() => {
     axios
@@ -14,7 +15,7 @@ const Htable = () => {
         setProducts(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [render]);
   const returne = (product) => {
     axios
       .post(`${ENDPOINT}/api/returne`, {
@@ -36,6 +37,7 @@ const Htable = () => {
         console.log(res.data);
       })
       .catch((err) => console.log(err));
+    setRender(!render)
   };
   return (
     <div className="htable">
