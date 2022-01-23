@@ -16,41 +16,62 @@ const AddProductPage = ({ setSelected }) => {
   const [categorie, setCategorie] = useState("Clothes");
   const [tailleQte, setTailleQte] = useState([]);
   const [ref, setRef] = useState("ref");
-	const [selectedFile, setSelectedFile] = useState();
-	const [isSelected, setIsSelected] = useState(false);
-	const [imagePath, setImagePath] = useState('');
+  const [selectedFile, setSelectedFile] = useState();
+  const [selectedFiles, setSelectedFiles] = useState([]);
 
-	const changeHandler = (event) => {
-		setSelectedFile(event.target.files[0]);
-		setIsSelected(true);
-	};
-  const ajouter = () => {
+  const changeHandler = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
+  const changeHandler2 = (event) => {
+    console.log("ssssssssssss: ", event.target.files);
+    setSelectedFiles(event.target.files);
+  };
+  const ajouter = async () => {
     const formData = new FormData();
+    const formData2 = new FormData();
+    formData.append("productMainImage", selectedFile);
 
-		formData.append('productMainImage', selectedFile);
-    axios.post(`${ENDPOINT}/api/uploadMainImage`, formData)
-    .then(res => setImagePath(res.data))
-    if (isSelected) {
-      console.log('test');
-      for (let prod of tailleQte) {
-        axios
-          .post(`${ENDPOINT}/api/addProduct`, {
-            ref,
-            title: nom,
-            description: descr,
-            marque,
-            genre,
-            category: categorie,
-            prixAch,
-            price: prix,
-            taille: prod.taille,
-            quantity: prod.quantity,
-            main_image: imagePath
-          })
-          .then((res) => console.log(res.data))
-          .catch((err) => console.log(err));
-      }
+    for (const key of Object.keys(selectedFiles)) {
+      formData2.append("productSecondImages", selectedFiles[key]);
     }
+
+    await axios
+      .post(`${ENDPOINT}/api/uploadMainImage`, formData)
+      .then((res) => {
+        let path = (res.data);
+        axios
+          .post(`${ENDPOINT}/api/uploadSecondImages`, formData2)
+          .then((res) => {
+            let paths = (res.data);
+            console.log("main: ", path);
+            console.log("second: ", paths);
+            for (let prod of tailleQte) {
+              axios
+                .post(`${ENDPOINT}/api/addProduct`, {
+                  ref,
+                  title: nom,
+                  description: descr,
+                  marque,
+                  genre,
+                  category: categorie,
+                  prixAch,
+                  price: prix,
+                  taille: prod.taille,
+                  quantity: prod.quantity,
+                  main_image: path,
+                  second_images: paths,
+                })
+                .then((res) => console.log(res.data))
+                .catch((err) => console.log(err));
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
@@ -70,10 +91,9 @@ const AddProductPage = ({ setSelected }) => {
       </div>
       <div className="add-form">
         <p>Main image</p>
-        <input
-          type="file"
-          onChange={changeHandler}
-        />
+        <input type="file" onChange={changeHandler} />
+        <p>secondary images</p>
+        <input type="file" multiple onChange={changeHandler2} />
         <p>Nom</p>
         <input
           type="text"

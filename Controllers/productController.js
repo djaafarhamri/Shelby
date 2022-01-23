@@ -2,11 +2,22 @@ const Product = require("../models/Product");
 const Customer = require("../models/Customer");
 
 module.exports.uploadMainImage = async (req, res) => {
+  console.log(req.file.path);
   res.status(200).json(req.file.path)
+}
+module.exports.uploadSecondImages = async (req, res) => {
+  console.log('req.files : ', req.files);
+  if(req.files) {
+    let path = ''
+    req.files.forEach((file, index, arr) => {
+      path = path + file.path + ','
+    });
+    res.status(200).json(path)
+  }
 }
 module.exports.addProduct = async (req, res) => {
   const {
-    ref,
+    ref,  
     title,
     description,
     marque,
@@ -16,13 +27,15 @@ module.exports.addProduct = async (req, res) => {
     price,
     taille,
     quantity,
-    main_image
+    main_image,
+    second_images
   } = req.body;
   const refExist = await Product.find({ ref });
   if (refExist.length) {
     res.json("duplicate ref");
   } else {
     try {
+      console.log('tssst');
       const product = await Product.create({
         ref,
         title,
@@ -34,7 +47,8 @@ module.exports.addProduct = async (req, res) => {
         price,
         taille,
         quantity,
-        main_image
+        main_image,
+        second_images
       });
       res.status(200).json(product);
     } catch (e) {

@@ -57,11 +57,13 @@ const productSchema = mongoose.Schema(
     main_image: {
       type: String,
       required: true
+    },
+    second_images: {
+      type: String
     }
   },
   { collection: "products" }
 );
 
 const model = mongoose.model("ProductSchema", productSchema);
-module.exports.ps = productSchema
 module.exports = model;
