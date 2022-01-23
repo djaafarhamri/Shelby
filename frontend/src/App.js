@@ -2,6 +2,7 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Home from "./Components/Home";
 import Products from "./Components/Products";
+import Product from "./Components/Product";
 import Login from "./Components/Login";
 import AdminPage from "./Components/AdminPage";
 import AddProductPage from "./Components/AddProductPage";
@@ -12,6 +13,7 @@ function App() {
       <Routes>        
         <Route exact path="/" element={<Home />}></Route>
         <Route exact path="/products" element={<Products />}></Route>
+        <Route exact path="/product" element={<Product />}></Route>
         <Route exact path="/Login" element={<Login />}></Route>
         <Route exact path="/admin" element={<AdminPage />}></Route>
         <Route exact path="/admin/addProduct" element={<AddProductPage />}></Route>
