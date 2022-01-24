@@ -29,11 +29,12 @@ router.post("/api/uploadSecondImages", upload.array('productSecondImages', 3), p
 router.post("/api/addProduct", productController.addProduct);
 router.post("/api/updateProduct/:id", requireAdmin, productController.updateProduct);
 router.delete("/api/deleteProduct/:id", requireAdmin, productController.deleteProduct);
-router.get("/api/getAllProducts", productController.getAllProducts);
+router.get("/api/getAllNoDuplProducts", productController.getAllNoDuplProducts);
 router.get("/api/getAllProductsByCategory/:category", productController.getAllProductsByCategory);
 router.get("/api/getAllProductsBySubCategory/:subCategory", productController.getAllProductsBySubCategory);
 router.get("/api/getProductByTitle/:title", productController.getProductByTitle);
 router.get("/api/getProductByref/:ref", productController.getProductByref);
+router.get("/api/getProductByrefF/:ref", productController.getProductByrefF);
 router.get("/api/getProductByid/:id", productController.getProductByid);
 router.post("/api/return", productController.return);
 router.post("/api/returne", productController.returne);
