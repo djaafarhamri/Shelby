@@ -13,13 +13,13 @@ const Checkout = () => {
             <div className=" ">
                 <div className="flex">
                 <button
-          className={toggle === 1 ? "border-2 border-solid active:bg-royal active:text-palete focus:bg-royal focus:text-palete " : "border-2 border-solid"}
+          className={toggle === 1 ? "border-2 border-solid bg-royal text-palete  " : "border-2 border-solid"}
           onClick={() => toggletab(1)}
         >
           Le panier
         </button>
         <button
-          className={toggle === 2 ? "border-2 border-solid active:bg-royal active:text-palete focus:bg-royal focus:text-palete " : "border-2 border-solid"}
+          className={toggle === 2 ? "border-2 border-solid bg-royal text-palete f " : "border-2 border-solid"}
           onClick={() => toggletab(2)}
         >
           Les information
