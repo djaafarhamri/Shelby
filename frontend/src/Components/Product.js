@@ -26,15 +26,13 @@ const Product = () => {
          <h1 className="text-2xl font-monteserrat font-normal sm:text-5xl" >High Light Smoke Grey</h1>
          <h3 className="text-2xl font-monteserrat font-normal sm:text-4xl">18000DA</h3>
          <p className="font-monteserrat font-normal text-xl sm:text-2xl mt-2">tenesa chaba ki zebi soma dik hiya khoya mat9acha7che la ma3ejbatekche yedek fih chabaghini ngolek</p>
-         <div className="flex flex-wrap mt-3 justify-around">
+         <div className="flex flex-wrap mt-3 h-auto">
            <h3 className="font-medium font-monteserrat text-lg sm:text-2xl">-les taille:</h3>
-           <div className="ring-1 ring-black w-11 px-2 py-1 text-2xl"> S</div>
-           <div className="ring-1 ring-black w-11  px-1 text-2xl ">M</div>
-           <div className="ring-1 ring-black w-11  px-1 text-2xl">L</div>
-           <div className="ring-1 ring-black w-11  px-1 text-2xl">XL</div>
-           <div className="ring-1 ring-black w-11  px-1 text-2xl">XXL</div>
-           <div className="ring-1 ring-black w-11  px-1 text-2xl">XXL</div>
-           <div className="ring-1 ring-black w-11  px-1 text-2xl">XXL</div>
+           <button type="button" className="ring-1 ring-black text-xl px-1 mx-3 active:bg-royal active:text-palete focus:bg-royal focus:text-palete">45</button>
+           <button type="button" className="ring-1 ring-black text-xl px-1 mx-3 active:bg-royal active:text-palete focus:bg-royal focus:text-palete">45</button>
+           <button type="button" className="ring-1 ring-black text-xl px-1 mx-3 active:bg-royal active:text-palete focus:bg-royal focus:text-palete">45</button>
+           <button type="button" className="ring-1 ring-black text-xl px-1 mx-3 active:bg-royal active:text-palete focus:bg-royal focus:text-palete">45</button>
+
          </div>
          <div className="flex justify-evenly my-6">
            <button className="bg-royal text-palete text-xl sm:text-2xl  rounded-lg py-2 px-3" >Acheter</button>
