@@ -4,7 +4,7 @@ const Checkout = () => {
     const[toggle,settoggle]=useState(1);
 
     const toggletab = (index) => {
-        setToggleState(index);
+        settoggle(index);
       };
 
     return (  
