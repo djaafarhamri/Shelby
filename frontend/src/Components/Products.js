@@ -23,31 +23,32 @@ const Products = () => {
       <Navbar />
 
       <div className='flex border-b-2 border-black justify-around'>
-         <div className=" relative">
+         <div className=" relative flex">
            <p onClick={()=>isopen1(!filter1)} className="font-monteserrat text-2xl" > Categorie</p>
            {filter1 && <ul className="absolute">
              <li>Classic</li>
              <li>Sport</li>
              <li></li>
            </ul>}
+           <svg className="w-6 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
          </div>
-         <div className=" relative">
+         <div className=" relative flex">
            <p onClick={()=>isopen2(!filter2)} className="font-monteserrat text-2xl"> Pointure</p>
            {filter2 && <ul className="absolute">
              <li>Classic</li>
              <li>Sport</li>
              <li></li>
            </ul>}
-
+           <svg className="w-6 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
          </div>
-         <div className=" relative">
+         <div className=" relative flex">
            <p onClick={()=>isopen3(!filter3)} className="font-monteserrat text-2xl"> Marque</p>
            {filter3 && <ul className="absolute">
              <li>Classic</li>
              <li>Sport</li>
              <li></li>
            </ul>}
-
+           <svg className="w-6 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
          </div>
        </div>
  
