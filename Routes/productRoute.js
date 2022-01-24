@@ -34,6 +34,7 @@ router.get("/api/getAllProductsByCategory/:category", productController.getAllPr
 router.get("/api/getAllProductsBySubCategory/:subCategory", productController.getAllProductsBySubCategory);
 router.get("/api/getProductByTitle/:title", productController.getProductByTitle);
 router.get("/api/getProductByref/:ref", productController.getProductByref);
+router.post("/api/getProductByrefAndTaille", productController.getProductByrefAndTaille);
 router.get("/api/getProductByrefF/:ref", productController.getProductByrefF);
 router.get("/api/getProductByid/:id", productController.getProductByid);
 router.post("/api/return", productController.return);

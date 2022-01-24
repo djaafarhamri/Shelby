@@ -195,6 +195,17 @@ module.exports.getProductByref = async (req, res) => {
   }
 };
 
+module.exports.getProductByrefAndTaille = async (req, res) => {
+  const { ref, taille } = req.body;
+  try {
+    const product = await Product.findOne({ ref, taille });
+    res.status(200).json(product);
+  } catch (e) {
+    console.log(e);
+    res.status(404).json("no products found");
+  }
+};
+
 module.exports.getProductByrefF = async (req, res) => {
   const ref = req.params.ref;
   try {
