@@ -12,7 +12,7 @@ const Checkout = () => {
     return (  
         <div>
             <Navbar />
-            <div className="grid justify-center ">
+            <div className="grid justify-center sm:hidden ">
                 <div className="flex tex-monteserrat text-2xl mb-3 ">
                 <button
           className={toggle === 1 ? "border-2 border-solid bg-royal text-palete  " : "border-2 border-solid"}
@@ -75,6 +75,70 @@ const Checkout = () => {
                 <button className="mt-6 bg-royal text-palete text-2xl px-1 py-2 rounded-lg ">Acheter</button>
                 </div>
             </div>
+            </div>
+            <div className=" hidden sm:grid sm:grid-cols-2 sm:gap-3">
+                <div className="font-monteserrat mt-6 ml-5">
+                    <div className="flex">
+                    <svg className="w-9 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                    <h1 className="text-4xl ml-4">Panier</h1>
+                    </div>
+                     <div className="grid grid-cols-2 gap-3">
+                       <div className="col-span-1">
+                    <label className=" text-xl mt-5">Nom:</label> 
+                    <input type="text" placeholder="Entrer votre nom" className="py-1 px-2 text-xl border-2 rounded-xl" /> 
+                       </div> 
+                       <div className="col-span-1">
+                    <label className=" text-xl mt-5 ">Prénom:</label> 
+                    <input type="text" placeholder="Entrer votre prénom" className="py-1 px-2 text-xl border-2 rounded-xl" /><br />
+                       </div>   
+                    <label className=" text-xl mt-5">Ville:</label> <br />
+                    <input type="text" placeholder="Entrer votre ville" className="py-1 px-2 text-xl border-2 rounded-xl" /> <br />
+                    <label className=" text-xl mt-5">Adresse:</label> <br />
+                    <input type="text" placeholder="Entrer votre Adresse" className="py-1 px-2 text-xl border-2 rounded-xl" /> <br />
+                    </div>
+                    <label className=" text-xl">Type de livraison:</label> <br />
+                    <div className="flex justify-around">
+                        <label className="text-xl">
+                    <input type="radio" className="h-3 w-3" checked={value ==="maison"} onChange={()=> setvalue("maison")} value="maison" className="" />
+                    a la maison (550DA)
+                        </label>
+                        <label className="text-xl">
+                    <input type="radio" checked={value === "bureau"} onChange={()=> setvalue("bureau")} className=" " />
+                    a le bureau (1000DA)
+                        </label>   
+                    </div>
+                    <div className="flex justify-center">
+                <button className="mt-6 bg-royal text-palete text-2xl px-1 py-2 rounded-lg ">Acheter</button>
+                </div>
+                </div>
+               <div className="font-monteserrat ml-3 ">
+
+                   <h1 className=" text-4xl mb-5">la commande</h1>
+                   <div className="ring-1 ring-gray rounded-xl">
+                   <div className=" rounded-xl divide-y divide-solid">
+                   <div className="grid grid-cols-2  mb-4">
+                   <img className="object-cover object-center w-full h-full overflow-hidden rounded-xl " src={jordan} alt="" />
+                    <div>
+                        <h1 className=" text-4xl mt-2 font-monteserrat" >Jordan Air max</h1>
+                        <p className="text-xl mt-2 font-monteserrat" >price:</p>
+                        <p className="text-xl mt-2 font-monteserrat">pointure:</p>
+                    </div>     
+                   </div>
+                   <div className="grid grid-cols-2  mb-4">
+                   <img className="object-cover object-center w-full h-full overflow-hidden rounded-xl " src={jordan} alt="" />
+                    <div>
+                        <h1 className=" text-4xl mt-2 font-monteserrat" >Jordan Air max</h1>
+                        <p className="text-xl mt-2 font-monteserrat" >price:</p>
+                        <p className="text-xl mt-2 font-monteserrat">pointure:</p>
+                    </div>
+                    </div>
+                    </div>
+                   </div>
+
+               </div>
+                    
+                
+
             </div>
         </div>
     );
