@@ -1,19 +1,4 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-
-const ENDPOINT = "http://localhost:4000";
-const TailleFilter = ({ tailles, setTailles }) => {
-  const [allTailles, setAllTailles] = useState([]);
-  useEffect(() => {
-    axios
-      .get(`${ENDPOINT}/api/getallTailles`)
-      .then((res) => {
-        setAllTailles(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
+const TailleFilter = ({ tailles, setTailles, allTailles }) => {
   return (
     <div className="genres border-b-2 border-black opacity-100 z-40 ">
       {allTailles &&
@@ -26,12 +11,13 @@ const TailleFilter = ({ tailles, setTailles }) => {
                   if (e.target.checked) {
                     setTailles([...tailles, taille]);
                   } else {
-                    var index = tailles.indexOf(taille);
-                    if (index !== -1) {
-                      let arr;
-                      arr = tailles.splice(index, 1);
-                      setTailles(arr);
+                    let arr = [];
+                    for (let t of tailles) {
+                      if (t !== tailles) {
+                        arr.push(t);
+                      }
                     }
+                    setTailles(arr);
                   }
                 }}
               />

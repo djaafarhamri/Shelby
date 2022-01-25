@@ -1,26 +1,13 @@
-import { useState, useEffect } from "react";
-
 const GenreFilter = ({ genres, setGenres }) => {
-  const [checkCount, setCheckCount] = useState(0);
-  useEffect(() => {
-    if (checkCount === 0) {
-      setGenres(["Classic", "Sport", "Semi-classic"]);
-    }
-  }, [checkCount, setGenres]);
   return (
     <div className="genres border-b-2 border-black opacity-100 z-40 ">
       <div className="flex mb-1">
         <input
-        className="mt-2"
+          className="mt-2"
           type="checkbox"
           onChange={(e) => {
             if (e.target.checked) {
-              if (checkCount === 0) {
-                setGenres(["Classic"]);
-              } else {
-                  setGenres([...genres, "Classic"]);
-              }
-              setCheckCount((o) => o + 1);
+              setGenres([...genres, "Classic"]);
             } else {
               let arr = [];
               for (let genre of genres) {
@@ -29,7 +16,6 @@ const GenreFilter = ({ genres, setGenres }) => {
                 }
               }
               setGenres(arr);
-              setCheckCount((o) => o - 1);
             }
           }}
         />
@@ -37,15 +23,11 @@ const GenreFilter = ({ genres, setGenres }) => {
       </div>
       <div className="flex mb-1">
         <input
-         className="mt-2"
+          className="mt-2"
           type="checkbox"
           onChange={(e) => {
             if (e.target.checked) {
-              if (checkCount === 0) {
-                setGenres(['Sport']);
-              } else {
-                  setGenres([...genres, "Sport"]);
-              }
+              setGenres([...genres, "Sport"]);
             } else {
               let arr = [];
               for (let genre of genres) {
@@ -61,7 +43,7 @@ const GenreFilter = ({ genres, setGenres }) => {
       </div>
       <div className="flex mb-1">
         <input
-         className="mt-2"
+          className="mt-2"
           type="checkbox"
           onChange={(e) => {
             if (e.target.checked) {
