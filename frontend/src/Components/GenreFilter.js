@@ -9,8 +9,9 @@ const GenreFilter = ({ genres, setGenres }) => {
   }, [checkCount, setGenres]);
   return (
     <div className="genres border-b-2 border-black opacity-100 z-40 ">
-      <div className="flex">
+      <div className="flex mb-1">
         <input
+        className="mt-2"
           type="checkbox"
           onChange={(e) => {
             if (e.target.checked) {
@@ -34,8 +35,9 @@ const GenreFilter = ({ genres, setGenres }) => {
         />
         <p>Classic</p>
       </div>
-      <div className="flex">
+      <div className="flex mb-1">
         <input
+         className="mt-2"
           type="checkbox"
           onChange={(e) => {
             if (e.target.checked) {
@@ -57,8 +59,9 @@ const GenreFilter = ({ genres, setGenres }) => {
         />
         <p>Sport</p>
       </div>
-      <div className="flex">
+      <div className="flex mb-1">
         <input
+         className="mt-2"
           type="checkbox"
           onChange={(e) => {
             if (e.target.checked) {

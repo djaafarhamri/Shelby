@@ -4,8 +4,9 @@ const CategorieFilter = ({ categories, setCategories }) => {
 
     return (
       <div className="categories border-b-2 border-black opacity-100 z-40 ">
-        <div className="flex">
+        <div className="flex mb-1">
           <input
+          className="mt-2"
             type="checkbox"
             onChange={(e) => {
               if (e.target.checked) {
@@ -22,8 +23,9 @@ const CategorieFilter = ({ categories, setCategories }) => {
           />
           <p>Shoes</p>
         </div>
-        <div className="flex">
+        <div className="flex mb-1">
           <input
+          className="mt-2"
             type="checkbox"
             onChange={(e) => {
               if (e.target.checked) {
@@ -40,8 +42,9 @@ const CategorieFilter = ({ categories, setCategories }) => {
           />
           <p>Clothes</p>
         </div>
-        <div className="flex">
+        <div className="flex mb-1">
           <input
+          className="mt-2"
             type="checkbox"
             onChange={(e) => {
               if (e.target.checked) {

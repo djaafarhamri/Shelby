@@ -7,6 +7,8 @@ import MarqueFilter from "./MarqueFilter";
 import TailleFilter from "./TailleFilter";
 import PointureFilter from "./PointureFilter";
 import CategorieFilter from "./CategorieFilter";
+import { slide as Menu } from 'react-burger-menu'
+import "./Products.css"
 const ENDPOINT = "http://localhost:4000";
 
 const Products = () => {
@@ -32,13 +34,40 @@ const Products = () => {
     console.log('pointures : ', pointures);
   }, [categories, genres, marques, pointures, tailles]);
   const [isopen,setopen]=useState(false);
+  const [isopen1,setopen1]=useState(false);
+  const [visible,setvisible]=useState(false);
+
   return (
     <div className="">
       <Navbar />
-      <div className=" grid grid-cols-1 sm:grid-cols-[1fr_3fr]">
-        <div className="products-page border-r-2 w-64 h-screen border-black justify-around">
-          <div className="relative">
-            <div className="flex">
+        <div className="relative w-1/4 " >
+          <div className=" flex border-2 rounded-xl sm:justify-between cursor-pointer" onClick={()=>{setopen(!isopen)}}>
+          <div className="flex  mx-2 my-1" >
+            <h1 className="text-xl" >Filter</h1>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
+          </div>
+          <svg
+                className="w-6 h-8"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                ></path>
+              </svg>
+          </div>
+        {isopen &&<div className="absolute bg-gray z-30 w-64 h-screen">
+ 
+           <div className="relative ">
+             <div className="flex justify-end">
+             <svg onClick={()=>{setopen(!isopen)}} className="w-6 h-6 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+             </div>
+            <div className="flex ">
               <p className="font-monteserrat text-2xl"> Genres</p>
               <svg
                 className="w-6 h-8"
@@ -56,7 +85,7 @@ const Products = () => {
               </svg>
             </div>
             <GenreFilter genres={genres} setGenres={setGenres} />
-          </div>
+          </div> 
           <div className="relative">
             <div className="flex">
               <p className="font-monteserrat text-2xl"> Categorie</p>
@@ -81,7 +110,7 @@ const Products = () => {
             />
           </div>
           <div className="relative">
-            <div className="flex">
+            <div className="flex ">
               <p className="font-monteserrat text-2xl"> Marques</p>
               <svg
                 className="w-6 h-8"
@@ -139,13 +168,17 @@ const Products = () => {
               </svg>
             </div>
             <PointureFilter pointures={pointures} setPointures={setPointures} />
-          </div>
-        </div>
+          </div> 
+          
+          </div>}
 
-        <div className="mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-3 gap-y-5">
+          
+          </div>
+
+        <div className="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-3 gap-y-5">
           {products &&
             products.map((product, index) => (
-              <div className="group relative rounded-md shadow-2xl ">
+              <div className="group relative rounded-md  cursor-pointer ">
                 <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 ">
                   <img
                     src={`${ENDPOINT}/${product.main_image}`}
@@ -166,7 +199,7 @@ const Products = () => {
               </div>
             ))}
         </div>
-      </div>
+      
     </div>
   );
 };

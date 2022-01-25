@@ -16,7 +16,7 @@ const Navbar = () => {
       <div className="flex-auto self-start   py-3">
       <svg onClick={()=>isopen(!open)} className="w-8 h-8 relative " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
       { open && <div className='flex flex-col absolute left-0 z-10 h-screen bg-royal w-48 mt-4 '>
-        <div className='flex '>
+        <div className='flex  '>
     
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
         <p className='py-1 pl-1 divide-y-2 divide-solid'>Home</p>
