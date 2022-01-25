@@ -31,7 +31,9 @@ router.post("/api/updateProduct/:id", requireAdmin, productController.updateProd
 router.delete("/api/deleteProduct/:id", requireAdmin, productController.deleteProduct);
 router.get("/api/getAllNoDuplProducts", productController.getAllNoDuplProducts);
 router.get("/api/getAllProductsByCategory/:category", productController.getAllProductsByCategory);
-router.get("/api/getAllProductsBySubCategory/:subCategory", productController.getAllProductsBySubCategory);
+router.get("/api/getAllMarques", productController.getAllMarques);
+router.get("/api/getallTailles", productController.getallTailles);
+router.get("/api/getallPointure", productController.getallPointure);
 router.get("/api/getProductByTitle/:title", productController.getProductByTitle);
 router.get("/api/getProductByref/:ref", productController.getProductByref);
 router.post("/api/getProductByrefAndTaille", productController.getProductByrefAndTaille);
