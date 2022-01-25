@@ -130,6 +130,22 @@ module.exports.getAllProducts = async (req, res) => {
     res.status(404).json("no products found");
   }
 };
+module.exports.getfilteredProducts = async (req, res) => {
+  const { categories, genres, pointures, marques } = req.body
+  try {
+    const products = await Product.find(
+      {
+        category: {$in: categories},
+        genre: {$in: genres},
+        taille: {$in: pointures},
+        marque: {$in: marques},
+      });
+    res.status(200).json(products);
+  } catch (e) {
+    console.log(e);
+    res.status(404).json("no products found");
+  }
+};
 
 module.exports.getAllProductsByCategory = async (req, res) => {
   const category = req.params.category;

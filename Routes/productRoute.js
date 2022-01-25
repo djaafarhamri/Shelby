@@ -32,6 +32,7 @@ router.delete("/api/deleteProduct/:id", requireAdmin, productController.deletePr
 router.get("/api/getAllNoDuplProducts", productController.getAllNoDuplProducts);
 router.get("/api/getAllProducts", productController.getAllProducts);
 router.get("/api/getAllProductsByCategory/:category", productController.getAllProductsByCategory);
+router.post("/api/getfilteredProducts", productController.getfilteredProducts);
 router.get("/api/getAllMarques", productController.getAllMarques);
 router.get("/api/getallTailles", productController.getallTailles);
 router.get("/api/getallPointure", productController.getallPointure);
