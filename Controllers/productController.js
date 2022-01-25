@@ -40,7 +40,7 @@ module.exports.addProduct = async (req, res) => {
         ref,
         title,
         description,
-        marque,
+        marque: marque.toUpperCase(),
         genre,
         category,
         prixAch,
@@ -133,12 +133,39 @@ module.exports.getAllProducts = async (req, res) => {
   }
 };
 module.exports.getfilteredProducts = async (req, res) => {
-  const { categories, genres, pointures, marques } = req.body;
+  var {
+    categories,
+    genres,
+    tailles,
+    pointures,
+    marques,
+    allMarques,
+    allPointure,
+    allTailles,
+  } = req.body;
+  let Rtailles = tailles.concat(pointures);
+  if (genres.length === 0) {
+    genres = ["Classic", "Sport", "Semi-classic"];
+  }
+  if (categories.length === 0) {
+    categories = ["Clothes", "Shoes", "Accessoires"];
+  }
+  if (Rtailles.length === 0) {
+    Rtailles = allTailles.concat(allPointure);
+  }
+  if (marques.length === 0) {
+    marques = allMarques;
+  }
+  console.log('ss');
+  console.log(genres);
+  console.log(categories);
+  console.log(marques);
+  console.log(Rtailles);
   try {
     const products = await Product.find({
       category: { $in: categories },
       genre: { $in: genres },
-      taille: { $in: pointures },
+      taille: { $in: Rtailles },
       marque: { $in: marques },
     });
     let product = products.filter(
