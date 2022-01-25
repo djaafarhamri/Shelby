@@ -1,16 +1,18 @@
 
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import logo from '../assets/logo.png'
 import panier from '../assets/panier.svg'
 import userImg from '../assets/user.svg'
 import tiktok from  '../assets/tiktok.svg';
 import facebook from  '../assets/facebook.svg';
 import instagram from  '../assets/instagram.svg';
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { CartContext } from '../contexts/panier';
 
 const Navbar = () => {
+  const [cart, setCart] = useContext(CartContext)
   const[open,isopen]=useState(false)
-
+  const nav = useNavigate()
   return (
     <div className="flex bg-royal  justify-around text-palete ">
       <div className="flex-auto self-start   py-3">
@@ -48,7 +50,14 @@ const Navbar = () => {
         <div className=''>
        
         </div>
-        <img src={panier} alt="" className="h-6 sm:h-8"/>
+        <img onClick={() => {
+          if (cart.length === 0) {
+            alert('there is nohing in the cart')
+          } else {
+            
+          }
+          nav('/checkout')
+        }} src={panier} alt="" className="h-6 sm:h-8"/>
         <img src={userImg} alt="" className="h-6 sm:h-8"/>
       </div>
     </div>

@@ -10,7 +10,7 @@ module.exports.addSold = async (req, res) => {
   let profit = product.price - product.prixAch;
   try {
     await Sold.create({
-      prodect_id: ObjectId(client.id),
+      prodect_id: client.id,
       customer_id,
       price: product.price,
       profit,
@@ -96,3 +96,5 @@ module.exports.getProfitByDate = async (req, res) => {
     res.status(400);
   }
 };
+
+

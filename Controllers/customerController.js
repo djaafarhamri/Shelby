@@ -1,6 +1,6 @@
 const Customer = require("../models/Customer");
 const Product = require("../models/Product");
-ObjectId = require('mongodb').ObjectID;
+ObjectId = require("mongodb").ObjectID;
 
 module.exports.getCustomerByid = async (req, res) => {
   const id = req.params.id;
@@ -15,7 +15,7 @@ module.exports.getCustomerByid = async (req, res) => {
 
 module.exports.getPending = async (req, res) => {
   try {
-    const client = await Customer.find({ status: 'pending' });
+    const client = await Customer.find({ status: "pending" });
     res.status(200).json(client);
   } catch (e) {
     console.log(e);
@@ -25,35 +25,37 @@ module.exports.getPending = async (req, res) => {
 
 module.exports.getVendre = async (req, res) => {
   try {
-    const clients = await Customer.find({ status: 'vendre' });
+    const clients = await Customer.find({ status: "vendre" });
     const products = [];
     for (let client of clients) {
-      let product = await Product.findOne({_id: client.id})
-      products.push(product)
+      let product = await Product.findOne({ _id: client.id });
+      products.push(product);
     }
-    res.status(200).json({products, clients});
+    res.status(200).json({ products, clients });
   } catch (e) {
     console.log(e);
     res.status(400).json("no client");
   }
 };
 module.exports.get24 = async (req, res) => {
-  const response = []
+  const response = [];
   try {
-    const clients = await Customer.find({ status: '24' });
-    for (let client of clients){
-      const product = await Product.findOne({_id: client.id});
-      response.push({
-        product_id: product._id,
-        client_id: client._id,
-        name: product.title,
-        ref: product.ref,
-        taille: product.taille,
-        client: client.username,
-        phone: client.phone,
-        adress: client.adress,
-        price: product.price
-      })
+    const clients = await Customer.find({ status: "24" });
+    for (let client of clients) {
+      const product = await Product.findOne({ _id: client.id });
+      if (product) {
+        response.push({
+          product_id: product._id,
+          client_id: client._id,
+          name: product.title,
+          ref: product.ref,
+          taille: product.taille,
+          client: client.username,
+          phone: client.phone,
+          adress: client.adress,
+          price: product.price,
+        });
+      }
     }
     res.status(200).json(response);
   } catch (e) {
@@ -62,11 +64,11 @@ module.exports.get24 = async (req, res) => {
   }
 };
 module.exports.getProgress = async (req, res) => {
-  const response = []
+  const response = [];
   try {
-    const clients = await Customer.find({ status: 'progress' });
-    for (let client of clients){
-      const product = await Product.findOne({_id: client.id});
+    const clients = await Customer.find({ status: "progress" });
+    for (let client of clients) {
+      const product = await Product.findOne({ _id: client.id });
       response.push({
         product_id: product._id,
         client_id: client._id,
@@ -76,8 +78,8 @@ module.exports.getProgress = async (req, res) => {
         client: client.username,
         phone: client.phone,
         adress: client.adress,
-        price: product.price
-      })
+        price: product.price,
+      });
     }
     res.status(200).json(response);
   } catch (e) {
@@ -86,11 +88,11 @@ module.exports.getProgress = async (req, res) => {
   }
 };
 module.exports.getDelivery = async (req, res) => {
-  const response = []
+  const response = [];
   try {
-    const clients = await Customer.find({ status: 'delivery' });
-    for (let client of clients){
-      const product = await Product.findOne({_id: client.id});
+    const clients = await Customer.find({ status: "delivery" });
+    for (let client of clients) {
+      const product = await Product.findOne({ _id: client.id });
       response.push({
         product_id: product._id,
         client_id: client._id,
@@ -100,8 +102,8 @@ module.exports.getDelivery = async (req, res) => {
         client: client.username,
         phone: client.phone,
         adress: client.adress,
-        price: product.price
-      })
+        price: product.price,
+      });
     }
     res.status(200).json(response);
   } catch (e) {
@@ -113,7 +115,7 @@ module.exports.getDelivery = async (req, res) => {
 module.exports.addCustomer = async (req, res) => {
   const { id, username, phone, adress, ref, status } = req.body;
   try {
-    await Customer.create({ id: ObjectId(id), username, phone, adress, ref, status });
+    await Customer.create({ id: id, username, phone, adress, ref, status });
     res.status(200).json("client created");
   } catch (e) {
     console.log(e);
@@ -124,7 +126,7 @@ module.exports.addCustomer = async (req, res) => {
 module.exports.updateToProgress = async (req, res) => {
   const id = req.params.id;
   try {
-    await Customer.findOneAndUpdate({ id }, {$set: {status: 'progress'}});
+    await Customer.findOneAndUpdate({ id }, { $set: { status: "progress" } });
     res.status(200).json("updated");
   } catch (e) {
     console.log(e);
@@ -134,11 +136,11 @@ module.exports.updateToProgress = async (req, res) => {
 
 module.exports.updateToPending = async (req, res) => {
   const { _id, status, prixPay } = req.body;
-  const client = await Customer.findById(_id)
-  const product = await Product.findById(client.id)
-  const prix_reste = product.price - prixPay
+  const client = await Customer.findById(_id);
+  const product = await Product.findById(client.id);
+  const prix_reste = product.price - prixPay;
   try {
-    await Customer.findOneAndUpdate({ _id }, {$set: {status, prix_reste}});
+    await Customer.findOneAndUpdate({ _id }, { $set: { status, prix_reste } });
     res.status(200).json("updated");
   } catch (e) {
     console.log(e);
@@ -149,7 +151,10 @@ module.exports.updateToPending = async (req, res) => {
 module.exports.updateToDelivery = async (req, res) => {
   const { _id, nom, adress, phone, status } = req.body;
   try {
-    await Customer.findOneAndUpdate({ _id }, {$set: {status, username: nom, phone, adress}});
+    await Customer.findOneAndUpdate(
+      { _id },
+      { $set: { status, username: nom, phone, adress } }
+    );
     res.status(200).json("updated");
   } catch (e) {
     console.log(e);
@@ -160,7 +165,10 @@ module.exports.updateToDelivery = async (req, res) => {
 module.exports.updateTo24 = async (req, res) => {
   const { _id, status } = req.body;
   try {
-    const client = await Customer.findOneAndUpdate({ _id }, {$set: {status}});
+    const client = await Customer.findOneAndUpdate(
+      { _id },
+      { $set: { status } }
+    );
     res.status(200).json(client);
   } catch (e) {
     console.log(e);

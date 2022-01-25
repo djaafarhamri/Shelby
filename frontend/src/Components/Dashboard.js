@@ -8,10 +8,25 @@ const ENDPOINT = "http://localhost:4000";
 const Dashboard = () => {
   const [dateStart, setDateStart] = useState();
   const [dateEnd, setDateEnd] = useState();
+  const [caisse, setCaisse] = useState(0);
+  const [montant, setMontant] = useState(0);
   const [yearlyProfit, setYearlyProfit] = useState(0);
   const [monthlyProfit, setMonthlyProfit] = useState(0);
   const [customProfit, setCustomProfit] = useState(0);
   const [showDate, setShowDate] = useState(false);
+  const take = () => {
+    axios
+      .post(`${ENDPOINT}/api/takeFromLaCaisse`, {
+        montant,
+      })
+      .then((res) => {
+        axios
+          .get(`${ENDPOINT}/api/getLacaisse`)
+          .then((res) => setCaisse(res.data.montant))
+          .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
+  };
   const getProfit = () => {
     axios
       .post(`${ENDPOINT}/api/getProfitByDate`, {
@@ -34,6 +49,12 @@ const Dashboard = () => {
       .then((res) => setYearlyProfit(res.data))
       .catch((err) => console.log(err));
   }, []);
+  useEffect(() => {
+    axios
+      .get(`${ENDPOINT}/api/getLacaisse`)
+      .then((res) => setCaisse(res.data.montant))
+      .catch((err) => console.log(err));
+  }, []);
 
   useEffect(() => {
     axios
@@ -53,7 +74,16 @@ const Dashboard = () => {
       <div className="dashboard-options">
         <div className="revenue">
           <h3>la caisse</h3>
-          <h3 style={{ color: "#27A041" }}>{0} DA</h3>
+          <h3 style={{ color: "#27A041" }}>{caisse} DA</h3>
+          <div>
+            <input
+              type="text"
+              onChange={(e) => {
+                setMontant(e.target.value);
+              }}
+            />
+            <button onClick={take}>take</button>
+          </div>
         </div>
         <div className="revenue">
           <h3>Earning(last month)</h3>

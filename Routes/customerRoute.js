@@ -15,4 +15,5 @@ router.get("/api/get24", customerController.get24);
 router.get("/api/getVendre", customerController.getVendre);
 router.get("/api/getCustomerByid/:id", customerController.getCustomerByid);
 
+
 module.exports = router;
