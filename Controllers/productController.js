@@ -113,7 +113,9 @@ module.exports.deleteProduct = async (req, res) => {
 module.exports.getAllNoDuplProducts = async (req, res) => {
   try {
     const products = await Product.find();
-    let product = products.filter((v,i,a)=>a.findIndex(t=>(t.ref===v.ref))===i)
+    let product = products.filter(
+      (v, i, a) => a.findIndex((t) => t.ref === v.ref) === i
+    );
     res.status(200).json(product);
   } catch (e) {
     console.log(e);
@@ -131,21 +133,53 @@ module.exports.getAllProducts = async (req, res) => {
   }
 };
 module.exports.getfilteredProducts = async (req, res) => {
-  const { categories, genres, pointures, marques } = req.body
+  const { categories, genres, pointures, marques } = req.body;
   try {
-    const products = await Product.find(
-      {
-        category: {$in: categories},
-        genre: {$in: genres},
-        taille: {$in: pointures},
-        marque: {$in: marques},
-      });
-    res.status(200).json(products);
+    const products = await Product.find({
+      category: { $in: categories },
+      genre: { $in: genres },
+      taille: { $in: pointures },
+      marque: { $in: marques },
+    });
+    let product = products.filter(
+      (v, i, a) => a.findIndex((t) => t.ref === v.ref) === i
+    );
+    res.status(200).json(product);
   } catch (e) {
     console.log(e);
     res.status(404).json("no products found");
   }
 };
+
+module.exports.searchForProducts = async (req, res) => {
+  if (req.query.search) {
+    const regex = new RegExp(escapeRegex(req.query.search), "gi");
+    try {
+      const products = await Product.find({ title: regex });
+      let product = products.filter(
+        (v, i, a) => a.findIndex((t) => t.ref === v.ref) === i
+      );
+      res.status(200).json(product);
+    } catch (e) {
+      console.log(e);
+      res.status(404).json("no products found");
+    }
+  } else {
+    try {
+      const products = await Product.find({});
+      let product = products.filter(
+        (v, i, a) => a.findIndex((t) => t.ref === v.ref) === i
+      );
+      res.status(200).json(product);
+    } catch (e) {
+      console.log(e);
+      res.status(404).json("no products found");
+    }
+  }
+};
+function escapeRegex(text) {
+  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+}
 
 module.exports.getAllProductsByCategory = async (req, res) => {
   const category = req.params.category;
@@ -161,16 +195,18 @@ module.exports.getAllProductsByCategory = async (req, res) => {
 module.exports.getAllMarques = async (req, res) => {
   try {
     const products = await Product.find();
-    let marques = []
-    for(let p of products){
-      let marque = p.marque.toUpperCase()
-      if(marque in marques) {
-        continue
+    let marques = [];
+    for (let p of products) {
+      let marque = p.marque.toUpperCase();
+      if (marque in marques) {
+        continue;
       } else {
-        marques.push(marque)
+        marques.push(marque);
       }
     }
-    let product = marques.filter((v,i,a)=>a.findIndex(t=>(t===v))===i)
+    let product = marques.filter(
+      (v, i, a) => a.findIndex((t) => t === v) === i
+    );
     res.status(200).json(product);
   } catch (e) {
     console.log(e);
@@ -180,17 +216,19 @@ module.exports.getAllMarques = async (req, res) => {
 
 module.exports.getallTailles = async (req, res) => {
   try {
-    const products = await Product.find({category: { $ne: 'Shoes' }});
-    let tailles = []
-    for(let p of products){
-      let taille = p.taille.toUpperCase()
-      if(taille in tailles) {
-        continue
+    const products = await Product.find({ category: { $ne: "Shoes" } });
+    let tailles = [];
+    for (let p of products) {
+      let taille = p.taille.toUpperCase();
+      if (taille in tailles) {
+        continue;
       } else {
-        tailles.push(taille)
+        tailles.push(taille);
       }
     }
-    let product = tailles.filter((v,i,a)=>a.findIndex(t=>(t===v))===i)
+    let product = tailles.filter(
+      (v, i, a) => a.findIndex((t) => t === v) === i
+    );
     res.status(200).json(product);
   } catch (e) {
     console.log(e);
@@ -200,17 +238,19 @@ module.exports.getallTailles = async (req, res) => {
 
 module.exports.getallPointure = async (req, res) => {
   try {
-    const products = await Product.find({ category: 'Shoes' });
-    let tailles = []
-    for(let p of products){
-      let taille = p.taille.toUpperCase()
-      if(taille in tailles) {
-        continue
+    const products = await Product.find({ category: "Shoes" });
+    let tailles = [];
+    for (let p of products) {
+      let taille = p.taille.toUpperCase();
+      if (taille in tailles) {
+        continue;
       } else {
-        tailles.push(taille)
+        tailles.push(taille);
       }
     }
-    let product = tailles.filter((v,i,a)=>a.findIndex(t=>(t===v))===i)
+    let product = tailles.filter(
+      (v, i, a) => a.findIndex((t) => t === v) === i
+    );
     res.status(200).json(product);
   } catch (e) {
     console.log(e);
@@ -295,7 +335,7 @@ module.exports.getProductByrefAndTaille = async (req, res) => {
 module.exports.getProductByrefF = async (req, res) => {
   const ref = req.params.ref;
   try {
-    console.log('trying');
+    console.log("trying");
     const products = await Product.find({ ref });
     let tailles = [];
     for (let p of products) {
@@ -304,7 +344,7 @@ module.exports.getProductByrefF = async (req, res) => {
     let product = products.filter(
       (v, i, a) => a.findIndex((t) => t.ref === v.ref) === i
     );
-    res.status(200).json({product, tailles});
+    res.status(200).json({ product, tailles });
   } catch (e) {
     console.log(e);
     res.status(404).json("no products found");
