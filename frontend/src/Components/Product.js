@@ -99,16 +99,18 @@ const Product = () => {
           </div>
           <br />
           <div className="flex justify-evenly my-6">
-            <button className="bg-royal text-palete text-xl sm:text-2xl  rounded-lg py-2 px-3">
+            <button 
+              onClick={() => {
+                ajouterPanier()
+                if (taille){
+                  nav('/checkout')
+                }
+              }}
+              className="bg-royal text-palete text-xl sm:text-2xl  rounded-lg py-2 px-3">
               Acheter
             </button>
             <button 
               onClick={() => {ajouterPanier()}}
-              className="bg-royal text-palete text-xl sm:text-2xl  rounded-lg py-2 px-3">
-              Ajouter au panier
-            </button>
-            <button 
-              onClick={() => {nav('/login')}}
               className="bg-royal text-palete text-xl sm:text-2xl  rounded-lg py-2 px-3">
               Ajouter au panier
             </button>
