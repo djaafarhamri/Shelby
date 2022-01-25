@@ -31,11 +31,12 @@ const Products = () => {
     console.log('tailles : ', tailles);
     console.log('pointures : ', pointures);
   }, [categories, genres, marques, pointures, tailles]);
+  const [isopen,setopen]=useState(false);
   return (
     <div className="">
       <Navbar />
-      <div className="products-page">
-        <div className="border-r-2 w-64 h-screen border-black justify-around">
+      <div className=" grid grid-cols-1 sm:grid-cols-[1fr_3fr]">
+        <div className="products-page border-r-2 w-64 h-screen border-black justify-around">
           <div className="relative">
             <div className="flex">
               <p className="font-monteserrat text-2xl"> Genres</p>
