@@ -132,6 +132,66 @@ module.exports.getAllProductsByCategory = async (req, res) => {
   }
 };
 
+module.exports.getAllMarques = async (req, res) => {
+  try {
+    const products = await Product.find();
+    let marques = []
+    for(let p of products){
+      let marque = p.marque.toUpperCase()
+      if(marque in marques) {
+        continue
+      } else {
+        marques.push(marque)
+      }
+    }
+    let product = marques.filter((v,i,a)=>a.findIndex(t=>(t===v))===i)
+    res.status(200).json(product);
+  } catch (e) {
+    console.log(e);
+    res.status(404).json("no products found");
+  }
+};
+
+module.exports.getallTailles = async (req, res) => {
+  try {
+    const products = await Product.find({category: { $ne: 'Shoes' }});
+    let tailles = []
+    for(let p of products){
+      let taille = p.taille.toUpperCase()
+      if(taille in tailles) {
+        continue
+      } else {
+        tailles.push(taille)
+      }
+    }
+    let product = tailles.filter((v,i,a)=>a.findIndex(t=>(t===v))===i)
+    res.status(200).json(product);
+  } catch (e) {
+    console.log(e);
+    res.status(404).json("no products found");
+  }
+};
+
+module.exports.getallPointure = async (req, res) => {
+  try {
+    const products = await Product.find({ category: 'Shoes' });
+    let tailles = []
+    for(let p of products){
+      let taille = p.taille.toUpperCase()
+      if(taille in tailles) {
+        continue
+      } else {
+        tailles.push(taille)
+      }
+    }
+    let product = tailles.filter((v,i,a)=>a.findIndex(t=>(t===v))===i)
+    res.status(200).json(product);
+  } catch (e) {
+    console.log(e);
+    res.status(404).json("no products found");
+  }
+};
+
 module.exports.getAllProductsBySubCategory = async (req, res) => {
   const subCategory = req.params.subCategory;
   try {

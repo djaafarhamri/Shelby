@@ -8,6 +8,7 @@ import AdminPage from "./Components/AdminPage";
 import AddProductPage from "./Components/AddProductPage";
 import Checkout from "./Components/Checkout";
 import { CartProvider } from "./contexts/panier";
+import Vendre from "./Components/Vendre";
 function App() {
   return (
     <div className="App">
@@ -18,6 +19,7 @@ function App() {
           <Route exact path="/product/:ref" element={<Product />}></Route>
           <Route exact path="/Login" element={<Login />}></Route>
           <Route exact path="/admin" element={<AdminPage />}></Route>
+          <Route exact path="/vendor" element={<Vendre />}></Route>
           <Route
             exact
             path="/admin/addProduct"

@@ -4,9 +4,7 @@ import vest from'../assets/vest.JPG';
 import sport from'../assets/sport.JPG';
 import classic from'../assets/classic.JPG';
 import Navbar from './Navbar';
-import { CartContext } from '../contexts/panier';
 const Home = () => {
-  const [cart, setCart] = useContext(CartContext)
   
   return ( 
    

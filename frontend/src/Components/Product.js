@@ -1,20 +1,19 @@
 import { useEffect, useState, useContext } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import axios from "axios";
 import Navbar from "./Navbar";
 import { CartContext } from "../contexts/panier";
 const ENDPOINT = "http://localhost:4000";
 
 const Product = () => {
+  const nav = useNavigate()
   const [cart, setCart] = useContext(CartContext)
   const [images, setImages] = useState([]);
   const [product, setProduct] = useState([]);
   const [tailles, setTailles] = useState([]);
   const [taille, setTaille] = useState('');
   const { ref } = useParams();
-  useEffect(() => {
-    console.log('cart: ', cart);
-  }, [cart])
+
   useEffect(() => {
     axios
       .get(`${ENDPOINT}/api/getProductByrefF/${ref}`)
@@ -105,6 +104,11 @@ const Product = () => {
             </button>
             <button 
               onClick={() => {ajouterPanier()}}
+              className="bg-royal text-palete text-xl sm:text-2xl  rounded-lg py-2 px-3">
+              Ajouter au panier
+            </button>
+            <button 
+              onClick={() => {nav('/login')}}
               className="bg-royal text-palete text-xl sm:text-2xl  rounded-lg py-2 px-3">
               Ajouter au panier
             </button>
