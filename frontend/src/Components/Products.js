@@ -120,6 +120,7 @@ const Products = () => {
         <div
           className="absolute bg-gray z-30 w-64 h-screen"
           style={isopen ? { display: "none" } : { display: "inline" }}
+          
         >
           <div className="relative ">
             <div className="flex justify-end">
