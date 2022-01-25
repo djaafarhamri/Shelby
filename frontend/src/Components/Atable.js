@@ -49,6 +49,16 @@ const Atable = () => {
         .catch((err) => {
           console.log(err);
         });
+      
+      axios
+        .post(`${ENDPOINT}/api/addToLaCaisse`, {
+          montant: products[clients.indexOf(client)].price,
+        })
+        .then((res) => console.log(res.data))
+        .catch((err) => {
+          console.log(err);
+        });
+      
     }
     setShowBon(true);
   };

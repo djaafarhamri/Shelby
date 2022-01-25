@@ -121,6 +121,16 @@ module.exports.getAllNoDuplProducts = async (req, res) => {
   }
 };
 
+module.exports.getAllProducts = async (req, res) => {
+  try {
+    const products = await Product.find();
+    res.status(200).json(products);
+  } catch (e) {
+    console.log(e);
+    res.status(404).json("no products found");
+  }
+};
+
 module.exports.getAllProductsByCategory = async (req, res) => {
   const category = req.params.category;
   try {
@@ -300,7 +310,7 @@ module.exports.return = async (req, res) => {
   const { product } = req.body;
   try {
     const product1 = await Product.findOne({
-      _id: product.product_id,
+      _id: product._id,
     });
     if (product1) {
       await Product.findOneAndUpdate(

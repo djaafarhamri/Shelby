@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 4000;
 const authRoute = require('./Routes/authRoute')
 const productRoute = require('./Routes/productRoute')
 const customerRoute = require('./Routes/customerRoute')
+const caisseRoute = require('./Routes/caisseRoute')
 const soldRoute = require('./Routes/soldRoute')
 
 //? data base connection
@@ -56,6 +57,7 @@ app.use(authRoute);
 app.use(productRoute);
 app.use(customerRoute);
 app.use(soldRoute);
+app.use(caisseRoute);
 
 server.listen(PORT, () => {
     console.log("listening on PORT : ", PORT);
