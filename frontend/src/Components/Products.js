@@ -73,7 +73,7 @@ const Products = () => {
     pointures,
     tailles,
   ]);
-  const [isopen, setopen] = useState(false);
+  const [isopen, setopen] = useState(true);
 
   return (
     <div className="">
