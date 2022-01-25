@@ -12,6 +12,7 @@ import { CartContext } from '../contexts/panier';
 const Navbar = () => {
   const [cart, setCart] = useContext(CartContext)
   const[open,isopen]=useState(false)
+  const[search,issearching]=useState(false)
   const nav = useNavigate()
   return (
     <div className="flex bg-royal  justify-around text-palete ">
@@ -40,17 +41,22 @@ const Navbar = () => {
           <p className='py-1 pl-1'>Instagram</p>
         </div>
        </div> }
+      
       </div>
+      
       <div className="flex-auto flex place-content-center ">
         <p className=" py-3 font-yellow-tail text-4xl hidden sm:block">Shelby</p>
         <img src={logo} alt="" />
         <p className='py-3 font-yellow-tail text-4xl hidden sm:block '>Boutique</p>
       </div>
       <div className="flex-auto flex justify-around py-3">
-        <div className=''>
-       
-        </div>
-        <img onClick={() => {
+      <svg onClick={()=>{issearching(!search)}} className="w-8 h-9 relative " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        {search && <div className='flex flex-col absolute top-0 mt-10'>
+          <input className='rounded-xl font-monteserrat text-black text-xl py-1 px-1 m-2 bg-black' type="text" placeholder='Recherche...' />
+        </div> }
+        <img 
+        className='px-3'
+        onClick={() => {
           if (cart.length === 0) {
             alert('there is nohing in the cart')
           } else {
@@ -58,7 +64,6 @@ const Navbar = () => {
           }
           nav('/checkout')
         }} src={panier} alt="" className="h-6 sm:h-8"/>
-        <img src={userImg} alt="" className="h-6 sm:h-8"/>
       </div>
     </div>
   );

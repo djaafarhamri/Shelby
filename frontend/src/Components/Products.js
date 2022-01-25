@@ -7,8 +7,6 @@ import MarqueFilter from "./MarqueFilter";
 import TailleFilter from "./TailleFilter";
 import PointureFilter from "./PointureFilter";
 import CategorieFilter from "./CategorieFilter";
-import { slide as Menu } from 'react-burger-menu'
-import "./Products.css"
 const ENDPOINT = "http://localhost:4000";
 
 const Products = () => {
@@ -40,7 +38,7 @@ const Products = () => {
   return (
     <div className="">
       <Navbar />
-        <div className="relative w-1/4 " >
+        <div className="relative w-1/4 mx-1 my-1" >
           <div className=" flex border-2 rounded-xl sm:justify-between cursor-pointer" onClick={()=>{setopen(!isopen)}}>
           <div className="flex  mx-2 my-1" >
             <h1 className="text-xl" >Filter</h1>
