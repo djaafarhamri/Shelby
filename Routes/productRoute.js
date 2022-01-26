@@ -24,9 +24,9 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({ storage })
 
-router.post("/api/uploadMainImage", upload.single('productMainImage'), productController.uploadMainImage);
-router.post("/api/uploadSecondImages", upload.array('productSecondImages', 3), productController.uploadSecondImages);
-router.post("/api/addProduct", productController.addProduct);
+router.post("/api/uploadMainImage", requireAdmin, upload.single('productMainImage'), productController.uploadMainImage);
+router.post("/api/uploadSecondImages", requireAdmin, upload.array('productSecondImages', 3), productController.uploadSecondImages);
+router.post("/api/addProduct", requireAdmin, productController.addProduct);
 router.post("/api/updateProduct/:id", requireAdmin, productController.updateProduct);
 router.delete("/api/deleteProduct/:id", requireAdmin, productController.deleteProduct);
 router.get("/api/getAllNoDuplProducts", productController.getAllNoDuplProducts);

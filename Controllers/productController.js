@@ -2,11 +2,9 @@ const Product = require("../models/Product");
 const Customer = require("../models/Customer");
 
 module.exports.uploadMainImage = async (req, res) => {
-  console.log(req.file.path);
   res.status(200).json(req.file.path);
 };
 module.exports.uploadSecondImages = async (req, res) => {
-  console.log("req.files : ", req.files);
   if (req.files) {
     let path = "";
     req.files.forEach((file, index, arr) => {
@@ -33,6 +31,7 @@ module.exports.addProduct = async (req, res) => {
   } = req.body;
   const refExist = await Product.find({ ref });
   if (refExist.length) {
+    console.log('dupl');
     res.json("duplicate ref");
   } else {
     try {
@@ -54,6 +53,7 @@ module.exports.addProduct = async (req, res) => {
       });
       res.status(200).json(product);
     } catch (e) {
+      console.log('eeeeeeeeeeee');
       console.log(e);
       res.status(400).json("error occured while adding the product");
     }

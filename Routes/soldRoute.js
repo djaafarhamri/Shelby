@@ -1,11 +1,12 @@
 const { Router } = require("express");
 const soldController = require("../Controllers/soldController.js");
+const { requireManager, requireAdmin } = require( "../midllewares/authMidlleware.js");
 const router = Router();
 
-router.post("/api/addSold", soldController.addSold);
-router.delete("/api/deleteSold/:_id", soldController.deleteSold);
-router.get("/api/getAllSold", soldController.getAllSold);
-router.post("/api/getProfitByDate", soldController.getProfitByDate);
-router.get("/api/getTodaysSolds", soldController.getTodaysSolds);
+router.post("/api/addSold", requireManager, soldController.addSold);
+router.delete("/api/deleteSold/:_id", requireManager, soldController.deleteSold);
+router.get("/api/getAllSold", requireAdmin, soldController.getAllSold);
+router.post("/api/getProfitByDate", requireAdmin, soldController.getProfitByDate);
+router.get("/api/getTodaysSolds", requireAdmin, soldController.getTodaysSolds);
 
 module.exports = router;

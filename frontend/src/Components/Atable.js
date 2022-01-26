@@ -150,7 +150,7 @@ const Atable = () => {
               <p className="atable-name">{product.title}</p>
               <p className="atable-code">{product.ref}</p>
               <p className="atable-taille">{product.taille}</p>
-              <p style={{ color: product.color }} className="atable-color"></p>
+              <p style={{ color: product.color, height: '40px', width: '40px', border: '2px solid' }} className="atable-color"></p>
               <p className="atable-prix">{product.price}</p>
               <button
                 className="atable-status"

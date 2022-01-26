@@ -36,13 +36,15 @@ const AddProductPage = ({ setSelected }) => {
     }
 
     await axios
-      .post(`${ENDPOINT}/api/uploadMainImage`, formData)
+      .post(`${ENDPOINT}/api/uploadMainImage`, formData, {withCredentials:true})
       .then((res) => {
-        let path = (res.data);
+        console.log("main");
+        let path = res.data;
         axios
-          .post(`${ENDPOINT}/api/uploadSecondImages`, formData2)
+          .post(`${ENDPOINT}/api/uploadSecondImages`, formData2, {withCredentials:true})
           .then((res) => {
-            let paths = (res.data);
+            console.log("second");
+            let paths = res.data;
             for (let prod of tailleQte) {
               axios
                 .post(`${ENDPOINT}/api/addProduct`, {
@@ -59,16 +61,20 @@ const AddProductPage = ({ setSelected }) => {
                   quantity: prod.quantity,
                   main_image: path,
                   second_images: paths,
+                }, {
+                  withCredentials: true
                 })
                 .then((res) => console.log(res.data))
                 .catch((err) => console.log(err));
             }
           })
           .catch((err) => {
+            console.log("second err");
             console.log(err);
           });
       })
       .catch((err) => {
+        console.log("main err");
         console.log(err);
       });
   };
