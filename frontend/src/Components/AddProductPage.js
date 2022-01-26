@@ -43,8 +43,6 @@ const AddProductPage = ({ setSelected }) => {
           .post(`${ENDPOINT}/api/uploadSecondImages`, formData2)
           .then((res) => {
             let paths = (res.data);
-            console.log("main: ", path);
-            console.log("second: ", paths);
             for (let prod of tailleQte) {
               axios
                 .post(`${ENDPOINT}/api/addProduct`, {
@@ -57,6 +55,7 @@ const AddProductPage = ({ setSelected }) => {
                   prixAch,
                   price: prix,
                   taille: prod.taille,
+                  color: prod.color,
                   quantity: prod.quantity,
                   main_image: path,
                   second_images: paths,
@@ -139,7 +138,7 @@ const AddProductPage = ({ setSelected }) => {
         >
           <option value="Classic">Classic</option>
           <option value="Sport">Sport</option>
-          <option value="Semi-Classic">Semi-Classic</option>
+          <option value="Semi-classic">Semi-Classic</option>
         </select>
         <p>Categorie</p>
         <select
@@ -151,7 +150,7 @@ const AddProductPage = ({ setSelected }) => {
         >
           <option value="Clothes">Clothes</option>
           <option value="Shoes">Shoes</option>
-          <option value="Accessoire">Accessoire</option>
+          <option value="Accessoires">Accessoire</option>
         </select>
         <p>Taille/Color/Quantity</p>
         <TableData setTailleQte={setTailleQte} tailleQte={tailleQte} />

@@ -1,5 +1,5 @@
-import Product from "./Product";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "./Navbar";
 import GenreFilter from "./GenreFilter";
@@ -22,6 +22,7 @@ const Products = () => {
   const [allPointure, setAllPointure] = useState([]);
   const [categories, setCategories] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+  const nav = useNavigate()
   let search = searchParams.get("s");
   useEffect(() => {
     axios
@@ -255,7 +256,9 @@ const Products = () => {
       <div className="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-3 gap-y-5">
         {products &&
           products.map((product, index) => (
-            <div className="group relative rounded-md  cursor-pointer ">
+            <div 
+            onClick={() => {nav(`/product/${product.ref}`)}}
+            className="group relative rounded-md  cursor-pointer ">
               <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 ">
                 <img
                   src={`${ENDPOINT}/${product.main_image}`}

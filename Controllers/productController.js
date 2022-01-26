@@ -26,6 +26,7 @@ module.exports.addProduct = async (req, res) => {
     prixAch,
     price,
     taille,
+    color,
     quantity,
     main_image,
     second_images,
@@ -46,6 +47,7 @@ module.exports.addProduct = async (req, res) => {
         prixAch,
         price,
         taille,
+        color,
         quantity,
         main_image,
         second_images,
@@ -67,6 +69,7 @@ module.exports.updateProduct = async (req, res) => {
     subCategory,
     quantity,
     taille,
+    color,
     price,
     dateAdded,
     dateSold,
@@ -85,6 +88,7 @@ module.exports.updateProduct = async (req, res) => {
           subCategory,
           quantity,
           taille,
+          color,
           price,
           dateAdded,
           dateSold,
@@ -180,7 +184,7 @@ module.exports.getfilteredProducts = async (req, res) => {
         taille: { $in: Rtailles },
         marque: { $in: marques },
       });
-
+      console.log(products);
       let product = products.filter(
         (v, i, a) => a.findIndex((t) => t.ref === v.ref) === i
       );
@@ -364,9 +368,9 @@ module.exports.getProductByref = async (req, res) => {
 };
 
 module.exports.getProductByrefAndTaille = async (req, res) => {
-  const { ref, taille } = req.body;
+  const { ref, taille, color } = req.body;
   try {
-    const product = await Product.findOne({ ref, taille });
+    const product = await Product.findOne({ ref, taille, color });
     res.status(200).json(product);
   } catch (e) {
     console.log(e);
@@ -386,7 +390,12 @@ module.exports.getProductByrefF = async (req, res) => {
     let product = products.filter(
       (v, i, a) => a.findIndex((t) => t.ref === v.ref) === i
     );
-    res.status(200).json({ product, tailles });
+    console.log('tailles: ', tailles);
+    let t = tailles.filter(
+      (v, i, a) => a.findIndex((t) => t.t === v.t) === i
+      );
+      console.log('t : ', t);
+    res.status(200).json({ product, t });
   } catch (e) {
     console.log(e);
     res.status(404).json("no products found");
@@ -401,6 +410,23 @@ module.exports.getProductByid = async (req, res) => {
   } catch (e) {
     console.log(e);
     res.status(404).json("no products found");
+  }
+};
+
+module.exports.getColor = async (req, res) => {
+  const { ref, taille } = req.body;
+  console.log("ref/taille : ", ref, taille);
+  try {
+    const product = await Product.find({ ref, taille });
+    let colors = [];
+    for (let p of product) {
+      colors.push(p.color);
+    }
+    console.log("colors : ", colors);
+    res.status(200).json(colors);
+  } catch (e) {
+    console.log(e);
+    res.status(404).json("no color found");
   }
 };
 
