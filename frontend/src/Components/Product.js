@@ -19,12 +19,11 @@ const Product = () => {
   const [chosenC, setChosenC] = useState('');
   const { ref } = useParams();
   useEffect(() => {
-    console.log('taille: ', taille);
     axios
       .post(`${ENDPOINT}/api/getColor`, {
         ref,
         taille,
-      })
+      }, {withCredentials:true})
       .then((res) => {
         setColors(res.data)
         setColor(res.data[0])
@@ -43,7 +42,7 @@ const Product = () => {
   // };
   useEffect(() => {
     axios
-      .get(`${ENDPOINT}/api/getProductByrefF/${ref}`)
+      .get(`${ENDPOINT}/api/getProductByrefF/${ref}`, {withCredentials:true})
       .then((res) => {
         console.log(res.data);
         setProduct(res.data.product[0]);
@@ -56,15 +55,13 @@ const Product = () => {
     // tRef.focus()
   }, [ref]);
   const ajouterPanier = () => {
-    console.log("ref: ", ref);
-    console.log("taille: ", taille);
     if (taille) {
       axios
         .post(`${ENDPOINT}/api/getProductByrefAndTaille`, {
           ref,
           taille,
           color
-        })
+        }, {withCredentials:true})
         .then((res) => {
           console.log(res.data);
           setCart([...cart, res.data]);

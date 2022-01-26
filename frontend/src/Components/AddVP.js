@@ -17,7 +17,7 @@ const AddVP = ({
   }, [])
   const ok = (ref) => {
     axios
-      .get(`${ENDPOINT}/api/getProductByref/${ref}`)
+      .get(`${ENDPOINT}/api/getProductByref/${ref}`, {withCredentials:true})
       .then((res) => {
         setProduct(res.data);
       })
@@ -28,12 +28,10 @@ const AddVP = ({
     axios
       .post(`${ENDPOINT}/api/takeProduct`, {
         _id: prod._id,
-      })
+      }, {withCredentials:true})
       .then((res) => {
         if (res.data !== "taille non exist") {
           ok(code);
-        } else {
-          console.log(res.data);
         }
       })
       .catch((err) => console.log(err));
@@ -45,7 +43,7 @@ const AddVP = ({
         adress: "vide",
         ref: prod.ref,
         status: 'vendre',
-      })
+      }, {withCredentials:true})
       .then((res) => {
         console.log(res.data);
       })

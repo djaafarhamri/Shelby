@@ -10,7 +10,7 @@ const Htable = () => {
 
   useEffect(() => {
     axios
-      .get(`${ENDPOINT}/api/get24`)
+      .get(`${ENDPOINT}/api/get24`, {withCredentials:true})
       .then((res) => {
         setProducts(res.data);
       })
@@ -20,22 +20,22 @@ const Htable = () => {
     axios
       .post(`${ENDPOINT}/api/returne`, {
           product
-      })
+      }, {withCredentials:true})
       .then((res) => {
         console.log(res.data);
       })
       .catch((err) => console.log(err));
       axios
-      .delete(`${ENDPOINT}/api/deleteCustomer/${product.client_id}`)
+      .delete(`${ENDPOINT}/api/deleteCustomer/${product.client_id}`, {withCredentials:true})
       .then((res) => {
         console.log(res.data);
       })
       .catch((err) => console.log(err));
       axios
-      .delete(`${ENDPOINT}/api/deleteSold/${product.client_id}`)
+      .delete(`${ENDPOINT}/api/deleteSold/${product.client_id}`, {withCredentials:true})
       .then((res) => {
         console.log(res.data);
-      })
+      }, {withCredentials:true})
       .catch((err) => console.log(err));
     setRender(!render)
   };

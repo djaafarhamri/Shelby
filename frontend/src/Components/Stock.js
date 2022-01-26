@@ -10,7 +10,7 @@ const Stock = () => {
   const [selected, setSelected] = useState("m");
   useEffect(() => {
     axios
-      .get(`${ENDPOINT}/api/getAllProducts`)
+      .get(`${ENDPOINT}/api/getAllProducts`, {withCredentials:true})
       .then((res) => {
         setProducts(res.data);
       })

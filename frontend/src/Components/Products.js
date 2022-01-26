@@ -26,7 +26,7 @@ const Products = () => {
   let search = searchParams.get("s");
   useEffect(() => {
     axios
-      .get(`${ENDPOINT}/api/getallTailles`)
+      .get(`${ENDPOINT}/api/getallTailles`, {withCredentials:true})
       .then((res) => {
         setAllTailles(res.data);
         console.log(res.data);
@@ -35,7 +35,7 @@ const Products = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`${ENDPOINT}/api/getallPointure`)
+      .get(`${ENDPOINT}/api/getallPointure`, {withCredentials:true})
       .then((res) => {
         setAllPointure(res.data);
         console.log(res.data);
@@ -44,7 +44,7 @@ const Products = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`${ENDPOINT}/api/getAllMarques`)
+      .get(`${ENDPOINT}/api/getAllMarques`, {withCredentials:true})
       .then((res) => {
         setAllMarques(res.data);
         console.log(res.data);
@@ -62,7 +62,7 @@ const Products = () => {
         allMarques,
         allPointure,
         allTailles,
-      })
+      }, {withCredentials:true})
       .then((res) => {
         setProducts(res.data);
       })

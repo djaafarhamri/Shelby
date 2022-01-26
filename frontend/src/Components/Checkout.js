@@ -16,7 +16,7 @@ const Checkout = () => {
       axios
       .post(`${ENDPOINT}/api/takeProduct`, {
         _id: product._id,
-      })
+      }, {withCredentials:true})
       .then((res) => {
           console.log(res.data);
       })
@@ -28,7 +28,7 @@ const Checkout = () => {
         adress,
         ref: product.ref,
         status: 'progress'
-      });
+      }, {withCredentials:true});
     }
   };
   const toggletab = (index) => {

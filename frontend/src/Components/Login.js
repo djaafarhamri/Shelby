@@ -18,7 +18,6 @@ const Login = () => {
           withCredentials: true
       })
       .then((res) => {
-        console.log(res.cookie);
         if (res.data.role === "admin") {
           nav("/admin");
         } else if (res.data.role === "manager") {

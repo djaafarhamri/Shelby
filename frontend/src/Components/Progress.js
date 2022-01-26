@@ -10,7 +10,7 @@ const Progress = () => {
 
   useEffect(() => {
     axios
-      .get(`${ENDPOINT}/api/getProgress`)
+      .get(`${ENDPOINT}/api/getProgress`, {withCredentials:true})
       .then((res) => {
         setProducts(res.data);
       })
@@ -22,7 +22,7 @@ const Progress = () => {
       .post(`${ENDPOINT}/api/updateToDelivery`, {
         _id,
         status: "delivery",
-      })
+      }, {withCredentials:true})
       .then((res) => {
         return res.data;
       })

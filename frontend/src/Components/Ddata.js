@@ -16,7 +16,7 @@ const Ddata = ({ setShowDeliver, clients }) => {
               adress,
               phone,
               status: "delivery",
-            })
+            }, {withCredentials:true})
             .then((res) => {
               console.log(res.data);
             })

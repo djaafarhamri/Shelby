@@ -23,7 +23,6 @@ const requireAuth = (req, res, next) => {
 // require admin
 const requireAdmin = (req, res, next) => {
   const token = req.cookies.jwt;
-  console.log(token);
   // check json web token exists & is verified
   if (token !== undefined) {
     jwt.verify(token, process.env.JWT_SECRET, async (err, decodedToken) => {

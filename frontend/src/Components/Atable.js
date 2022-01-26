@@ -20,7 +20,7 @@ const Atable = () => {
 
   useEffect(() => {
     axios
-      .get(`${ENDPOINT}/api/getVendre`)
+      .get(`${ENDPOINT}/api/getVendre`, {withCredentials:true})
       .then((res) => {
         setProducts(res.data.products);
         setClients(res.data.clients);
@@ -36,7 +36,7 @@ const Atable = () => {
         .post(`${ENDPOINT}/api/updateTo24`, {
           _id: client._id,
           status: "24",
-        })
+        }, {withCredentials:true})
         .then((res) => {
           console.log(res.data);
         })
@@ -44,7 +44,7 @@ const Atable = () => {
       axios
         .post(`${ENDPOINT}/api/addSold`, {
           customer_id: client._id,
-        })
+        }, {withCredentials:true})
         .then((res) => console.log(res.data))
         .catch((err) => {
           console.log(err);
@@ -53,7 +53,7 @@ const Atable = () => {
       axios
         .post(`${ENDPOINT}/api/addToLaCaisse`, {
           montant: products[clients.indexOf(client)].price,
-        })
+        }, {withCredentials:true})
         .then((res) => console.log(res.data))
         .catch((err) => {
           console.log(err);
@@ -68,7 +68,7 @@ const Atable = () => {
           _id: client._id,
           status: "pending",
           prixPay,
-        })
+        }, {withCredentials:true})
         .then((res) => {
           console.log(res.data);
         })
@@ -81,22 +81,22 @@ const Atable = () => {
     axios
       .post(`${ENDPOINT}/api/return`, {
         product,
-      })
+      }, {withCredentials:true})
       .then((res) => {
         console.log(res.data);
       })
       .catch((err) => console.log(err));
     axios
-      .delete(`${ENDPOINT}/api/deleteCustomer/${client._id}`)
+      .delete(`${ENDPOINT}/api/deleteCustomer/${client._id}`, {withCredentials:true})
       .then((res) => {
         console.log(res.data);
       })
       .catch((err) => console.log(err));
     axios
-      .delete(`${ENDPOINT}/api/deleteSold/${client._id}`)
+      .delete(`${ENDPOINT}/api/deleteSold/${client._id}`, {withCredentials:true})
       .then((res) => {
         console.log(res.data);
-      })
+      }, {withCredentials:true})
       .catch((err) => console.log(err));
     setRender(!render);
   };
