@@ -15,6 +15,7 @@ const Navbar = () => {
   const[search,issearching]=useState(false)
   const nav = useNavigate()
   return (
+    <div className='bg-royal'>
     <div className="flex bg-royal  justify-around text-palete ">
       <div className="flex-auto self-start   py-3">
       <svg onClick={()=>isopen(!open)} className="w-8 h-8 relative " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -49,13 +50,11 @@ const Navbar = () => {
         <img src={logo} alt="" />
         <p className='py-3 font-yellow-tail text-4xl hidden sm:block '>Boutique</p>
       </div>
-      <div className="flex-auto flex justify-around py-3">
-      <svg onClick={()=>{issearching(!search)}} className="w-8 h-9 relative " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-        {search && <div className='flex flex-col absolute top-0 mt-10'>
-          <input className='rounded-xl font-monteserrat text-black text-xl py-1 px-1 m-2 bg-black' type="text" placeholder='Recherche...' />
-        </div> }
+      <div className="flex-auto flex justify-center py-3">
+     
+         
         <img 
-        className='px-3'
+        className=''
         onClick={() => {
           if (cart.length === 0) {
             alert('there is nohing in the cart')
@@ -63,9 +62,13 @@ const Navbar = () => {
             
           }
           nav('/checkout')
-        }} src={panier} alt="" className="h-6 sm:h-8"/>
+        }} src={panier} alt="" className="h-6 sm:h-8 mr-4"/>
       </div>
     </div>
+    <div className='flex   translate--4'>
+    <input className='w-full rounded-xl font-monteserrat text-palete text-xl py-1  bg-gray' type="text" placeholder='Recherche...' />
+  </div>
+  </div>
   );
 };
 
