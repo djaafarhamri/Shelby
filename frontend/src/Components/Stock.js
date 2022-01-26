@@ -46,7 +46,7 @@ const Stock = () => {
                     <p className="stock-name">{product.title}</p>
                     <p className="stock-ref">{product.ref}</p>
                     <p className="stock-taille">{product.taille}</p>
-                    <div style={{backgroundColor: product.color, height: '40px', width: '40px'}} className="stock-color"></div>
+                    <div style={{backgroundColor: product.color, height: '40px', width: '40px', border: '2px solid'}} className="stock-color"></div>
                     <p className="stock-quantity">{product.quantity}</p>
                     <p className="stock-prix">{product.price}</p>
                   </div>

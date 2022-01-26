@@ -43,7 +43,7 @@ const Progress = () => {
             <p className="ptable-name">{product.name}</p>
             <p className="ptable-code">{product.ref}</p>
             <p className="ptable-prix_reste">{product.taille}</p>
-            <p className="ptable-taille">{product.color}</p>
+            <div style={{backgroundColor: product.color, height: '40px', width: '40px', border: '2px solid'}} className="ptable-taille"></div>
             <button
               className="ptable-option"
               onClick={() => {

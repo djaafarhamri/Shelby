@@ -16,6 +16,7 @@ const Product = () => {
   const [color, setColor] = useState('');
   const [taille, setTaille] = useState('');
   const [chosenT, setChosenT] = useState('');
+  const [chosenC, setChosenC] = useState('');
   const { ref } = useParams();
   useEffect(() => {
     console.log('taille: ', taille);
@@ -24,7 +25,11 @@ const Product = () => {
         ref,
         taille,
       })
-      .then((res) => setColors(res.data))
+      .then((res) => {
+        setColors(res.data)
+        setColor(res.data[0])
+        setChosenC(res.data[0])
+      })
       .catch((err) => console.log(err));
   }, [ref, taille])
   // const getColor = (t) => {
@@ -118,22 +123,24 @@ const Product = () => {
                       type="button"
                       style={chosenT === t.t ? {backgroundColor: '#061701', color: 'rgb(248 250 252)'}:{backgroundColor: '#fff', color: '#000'}}
                       className="ring-1 ring-black text-xl px-1 mx-3 "
-                    >
+                      >
                       {t.t}
                     </button>
                   )
-              )}
+                  )}
           </div>
           <div className="flex flex-wrap mt-3 h-auto">
             {colors &&
               colors.map((c, i) => (
                 <button
-                  key={i}
-                  onClick={() => {
-                    setColor(c);
-                  }}
-                  type="button"
-                  className="ring-1 ring-black text-xl px-1 mx-3 active:bg-royal active:text-palete focus:bg-royal focus:text-palete"
+                key={i}
+                onClick={() => {
+                  setColor(c);
+                  setChosenC(c);
+                }}
+                type="button"
+                style={chosenC === c ? {border: '2px solid'}:{border: '0'}}
+                  className="ring-1 ring-black text-xl px-1 mx-3 "
                 >
                   <div style={{backgroundColor: c, height: '40px', width: '40px'}}></div>
                 </button>

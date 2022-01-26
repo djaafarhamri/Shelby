@@ -102,7 +102,7 @@ const Otable = () => {
             <p className="otable-name">{product.name}</p>
             <p className="otable-code">{product.ref}</p>
             <p className="otable-taille">{product.taille}</p>
-            <p style={{color: product.color}} className="otable-color"></p>
+            <div style={{backgroundColor: product.color, height: '40px', width: '40px', border: '2px solid'}} className="otable-color"></div>
             <p className="otable-prix">{product.price}</p>
             <div className="otable-option">
               <button
