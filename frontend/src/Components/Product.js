@@ -15,6 +15,7 @@ const Product = () => {
   const [colors, setColors] = useState([]);
   const [color, setColor] = useState('');
   const [taille, setTaille] = useState('');
+  const [chosenT, setChosenT] = useState('');
   const { ref } = useParams();
   useEffect(() => {
     console.log('taille: ', taille);
@@ -43,6 +44,7 @@ const Product = () => {
         setProduct(res.data.product[0]);
         setTailles(res.data.t);
         setTaille(res.data.t[0].t);
+        setChosenT(res.data.t[0].t);
         setImages(res.data.product[0].second_images.split(","));
       })
       .catch((err) => console.log(err));
@@ -109,12 +111,13 @@ const Product = () => {
                   t.q !== 0 && (
                     <button
                       key={i}
-                      ref={tRef.current[i]}
                       onClick={() => {
                         setTaille(t.t);
+                        setChosenT(t.t)
                       }}
                       type="button"
-                      className="ring-1 ring-black text-xl px-1 mx-3 active:bg-royal active:text-palete focus:bg-royal focus:text-palete"
+                      style={chosenT === t.t ? {backgroundColor: '#061701', color: 'rgb(248 250 252)'}:{backgroundColor: '#fff', color: '#000'}}
+                      className="ring-1 ring-black text-xl px-1 mx-3 "
                     >
                       {t.t}
                     </button>
