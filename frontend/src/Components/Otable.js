@@ -93,6 +93,7 @@ const Otable = () => {
       <h3 className="otable-name">Name</h3>
       <h3 className="otable-code">ref</h3>
       <h3 className="otable-taille">taille</h3>
+      <h3 className="otable-color">color</h3>
       <h3 className="otable-prix">price</h3>
       <h3 className="otable-option">option</h3>
       {products &&
@@ -101,6 +102,7 @@ const Otable = () => {
             <p className="otable-name">{product.name}</p>
             <p className="otable-code">{product.ref}</p>
             <p className="otable-taille">{product.taille}</p>
+            <p style={{color: product.color}} className="otable-color"></p>
             <p className="otable-prix">{product.price}</p>
             <div className="otable-option">
               <button

@@ -430,11 +430,13 @@ module.exports.takeProduct = async (req, res) => {
     const product = await Product.findOne({
       _id,
     });
-    await Product.findOneAndUpdate(
-      { _id },
-      { $set: { quantity: product.quantity - 1 } }
-    );
-    res.json({ product });
+    if(product.quantity !== 0){
+      await Product.findOneAndUpdate(
+        { _id },
+        { $set: { quantity: product.quantity - 1 } }
+      );
+      res.json({ product });
+    }
   } catch (e) {
     console.log(e);
     res.status(404).json("error");

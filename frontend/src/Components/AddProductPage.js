@@ -153,7 +153,7 @@ const AddProductPage = ({ setSelected }) => {
           <option value="Shoes">Shoes</option>
           <option value="Accessoire">Accessoire</option>
         </select>
-        <p>Taille</p>
+        <p>Taille/Color/Quantity</p>
         <TableData setTailleQte={setTailleQte} tailleQte={tailleQte} />
         <p>Reference</p>
         <input

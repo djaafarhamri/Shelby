@@ -4,6 +4,7 @@ import Ptable from "./Ptable";
 import Otable from "./Otable";
 import "./Vendre.css";
 import Htable from "./Htable";
+import Progress from "./Progress";
 
 //! d -> Delivered
 //! p -> Pending
@@ -99,7 +100,12 @@ const Vendre = () => {
             <Otable />
           </div>
         )}
-        {selected === "i" && <h2>In Progress</h2>}
+        {selected === "i" && (
+          <>
+            <h2>In Progress</h2>
+            <Progress />
+          </>
+        )}
         {selected === "24" && (
           <div className="scroll">
             <h2>24 heurs</h2>

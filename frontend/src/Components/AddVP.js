@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import BarcodeReader from "react-barcode-reader";
 import axios from "axios";
 import "./AddVP.css";
@@ -11,7 +11,10 @@ const AddVP = ({
   setShowAdd,
 }) => {
   const [product, setProduct] = useState([]);
-
+  const scan = useRef(null)
+  useEffect(() => {
+    scan.current.focus()
+  }, [])
   const ok = (ref) => {
     axios
       .get(`${ENDPOINT}/api/getProductByref/${ref}`)
@@ -60,6 +63,7 @@ const AddVP = ({
       />
       <input
         style={{ color: "black" }}
+        ref={scan}
         type="text"
         onChange={(e) => {
           setCode(e.target.value);

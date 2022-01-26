@@ -16,7 +16,7 @@ const Atable = () => {
   const [showBon, setShowBon] = useState(false);
   const [showPending, setShowPending] = useState(false);
   const [render, setRender] = useState(false);
-  const [prixPay, setPrixPay] = useState('');
+  const [prixPay, setPrixPay] = useState("");
 
   useEffect(() => {
     axios
@@ -49,7 +49,7 @@ const Atable = () => {
         .catch((err) => {
           console.log(err);
         });
-      
+
       axios
         .post(`${ENDPOINT}/api/addToLaCaisse`, {
           montant: products[clients.indexOf(client)].price,
@@ -58,7 +58,6 @@ const Atable = () => {
         .catch((err) => {
           console.log(err);
         });
-      
     }
     setShowBon(true);
   };
@@ -76,7 +75,7 @@ const Atable = () => {
         .catch((err) => console.log(err));
     }
     setShowBon(true);
-    setRender(!render)
+    setRender(!render);
   };
   const returne = (product, client) => {
     axios
@@ -99,7 +98,7 @@ const Atable = () => {
         console.log(res.data);
       })
       .catch((err) => console.log(err));
-    setRender(!render)
+    setRender(!render);
   };
 
   return (
@@ -114,14 +113,25 @@ const Atable = () => {
             name={clients[0].username}
           />
         )}
-        {showPending && 
-        <>
-          <h2>Prix paye</h2>
-          <input type="text" onChange={(e) => {setPrixPay(e.target.value)}} />
-          <button onClick={pending}>pending</button>
-          <button onClick={() => {setShowPending(false)}}>annuler</button>
-        </>
-        }
+        {showPending && (
+          <>
+            <h2>Prix paye</h2>
+            <input
+              type="text"
+              onChange={(e) => {
+                setPrixPay(e.target.value);
+              }}
+            />
+            <button onClick={pending}>pending</button>
+            <button
+              onClick={() => {
+                setShowPending(false);
+              }}
+            >
+              annuler
+            </button>
+          </>
+        )}
         {showAdd && (
           <AddVP code={code} setCode={setCode} setShowAdd={setShowAdd} />
         )}
@@ -131,6 +141,7 @@ const Atable = () => {
         <h3 className="atable-name">Name</h3>
         <h3 className="atable-code">Ref</h3>
         <h3 className="atable-taille">Taille</h3>
+        <h3 className="atable-color">Color</h3>
         <h3 className="atable-prix">Prix</h3>
         <h3 className="atable-status">del</h3>
         {products &&
@@ -139,6 +150,7 @@ const Atable = () => {
               <p className="atable-name">{product.title}</p>
               <p className="atable-code">{product.ref}</p>
               <p className="atable-taille">{product.taille}</p>
+              <p style={{ color: product.color }} className="atable-color"></p>
               <p className="atable-prix">{product.price}</p>
               <button
                 className="atable-status"
@@ -146,7 +158,11 @@ const Atable = () => {
                   returne(product, clients[index]);
                 }}
               >
-                <img style={{height: '40px', width: '40px'}} src="https://img.icons8.com/plasticine/100/000000/filled-trash.png" alt="remove"/>
+                <img
+                  style={{ height: "40px", width: "40px" }}
+                  src="https://img.icons8.com/plasticine/100/000000/filled-trash.png"
+                  alt="remove"
+                />
               </button>
             </div>
           ))}
@@ -160,7 +176,13 @@ const Atable = () => {
         >
           deliver
         </button>
-        <button onClick={() => {setShowPending(true)}}>pending</button>
+        <button
+          onClick={() => {
+            setShowPending(true);
+          }}
+        >
+          pending
+        </button>
         <button
           onClick={() => {
             setShowAdd(true);

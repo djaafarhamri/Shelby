@@ -6,8 +6,9 @@ function TableData({setTailleQte, tailleQte}) {
   const tableRows = tailleQte.map((info, key) => {
     return (
       <tr key={key}>
-        <td>{info.taille}</td>
-        <td>{info.quantity}</td>
+        <td style={{border: '1px solid'}}>{info.taille}</td>
+        <td style={{border: '1px solid'}}>{info.color}</td>
+        <td style={{border: '1px solid'}}>{info.quantity}</td>
         <td><button onClick={() => {del(key)}}>del</button></td>
       </tr>
     );
@@ -21,7 +22,6 @@ function TableData({setTailleQte, tailleQte}) {
   
   const del = (data) => {
     setTailleQte((names) => names.filter((_, i) => i !== data))
-       
   };
   
   return (
@@ -30,6 +30,7 @@ function TableData({setTailleQte, tailleQte}) {
         <thead>
           <tr>
             <th>Taille</th>
+            <th>color</th>
             <th>Quantity</th>
           </tr>
         </thead>
