@@ -44,6 +44,7 @@ router.get("/api/getProductByrefF/:ref", productController.getProductByrefF);
 router.get("/api/getProductByid/:id", productController.getProductByid);
 router.post("/api/return", productController.return);
 router.post("/api/returne", productController.returne);
+router.post("/api/returnD", productController.returnD);
 router.post("/api/takeProduct", productController.takeProduct);
 
 module.exports = router;

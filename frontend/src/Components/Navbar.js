@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import panier from "../assets/panier.svg";
 import userImg from "../assets/user.svg";
+import "./Navbar.css";
 import tiktok from "../assets/tiktok.svg";
 import facebook from "../assets/facebook.svg";
 import instagram from "../assets/instagram.svg";
@@ -11,7 +12,7 @@ import { CartContext } from "../contexts/panier";
 const Navbar = () => {
   const [cart, setCart] = useContext(CartContext);
   const [open, isopen] = useState(false);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const nav = useNavigate();
   return (
     <div className="bg-royal">
@@ -85,30 +86,33 @@ const Navbar = () => {
             </div>
           )}
         </div>
-        <input
-          className="hidden h-10 mt-3 ml-4 md:block rounded-xl  font-monteserrat text-black text-xl py-1 px-1 bg-gray"
-          type="text"
-          placeholder="Recherche..."
-          onChange={(e) => {setSearch(e.target.value)}}
-          onKeyUp={(e) => {
-            if (e.key === 'Enter') {
-              var s = search.replace(/\s/g, '+')
-              nav(`/products/?s=${s}`)
-            }
-          }}
-        />
 
         <div className="flex-auto flex place-content-center md:mr-5 ">
-          <p className=" py-3 font-yellow-tail text-4xl hidden sm:block">
+          <p className="shelby-logo-123 py-3 px-3 text-4xl hidden sm:block">
             Shelby
           </p>
           <img src={logo} alt="" />
-          <p className="py-3 font-yellow-tail text-4xl hidden sm:block ">
+          <p className="shelby-logo-123 px-3 py-3 text-4xl hidden sm:block ">
             Boutique
           </p>
         </div>
-        <div className="md:flex-initial md:w-32 flex justify-end py-3">
-          <img            onClick={() => {
+        <div className="md:flex-initial md:w-32 flex justify-end">
+          <input
+            className="hidden h-10 mt-3 ml-4 md:block rounded-xl mr-28 font-monteserrat text-black text-xl py-1 px-1 bg-gray"
+            type="text"
+            placeholder="Recherche2x..."
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
+            onKeyUp={(e) => {
+              if (e.key === "Enter") {
+                var s = search.replace(/\s/g, "+");
+                nav(`/products/?s=${s}`);
+              }
+            }}
+          />
+          <img
+            onClick={() => {
               if (cart.length === 0) {
                 alert("there is nohing in the cart");
               } else {
@@ -117,7 +121,7 @@ const Navbar = () => {
             }}
             src={panier}
             alt=""
-            className="h-6 sm:h-8 mr-4"
+            className="h-6 sm:h-8 mt-4 ml-4 mb-4 mr-9"
           />
         </div>
       </div>
@@ -126,11 +130,13 @@ const Navbar = () => {
           className="w-full rounded-xl font-monteserrat text-black text-xl py-1 px-1 bg-gray"
           type="text"
           placeholder="Recherche..."
-          onChange={(e) => {setSearch(e.target.value)}}
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
           onKeyUp={(e) => {
-            if (e.key === 'Enter') {
-              var s = search.replace(/\s/g, '+')
-              nav(`products/?s=${s}`)
+            if (e.key === "Enter") {
+              var s = search.replace(/\s/g, "+");
+              nav(`products/?s=${s}`);
             }
           }}
         />

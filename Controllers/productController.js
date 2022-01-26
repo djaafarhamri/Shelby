@@ -126,7 +126,8 @@ module.exports.getAllNoDuplProducts = async (req, res) => {
 module.exports.getAllProducts = async (req, res) => {
   try {
     const products = await Product.find();
-    res.status(200).json(products);
+    let prod = products.filter((p) => p.quantity !== 0);
+    res.status(200).json(prod);
   } catch (e) {
     console.log(e);
     res.status(404).json("no products found");
@@ -157,7 +158,7 @@ module.exports.getfilteredProducts = async (req, res) => {
     marques = allMarques;
   }
   try {
-    if (req.query.search !== 'null') {
+    if (req.query.search !== "null") {
       console.log(req.query.search);
       const regex = new RegExp(escapeRegex(req.query.search), "gi");
       let products = await Product.find({
@@ -170,7 +171,8 @@ module.exports.getfilteredProducts = async (req, res) => {
       let product = products.filter(
         (v, i, a) => a.findIndex((t) => t.ref === v.ref) === i
       );
-      res.status(200).json(product);
+      let prod = product.filter((p) => p.quantity !== 0);
+      res.status(200).json(prod);
     } else {
       let products = await Product.find({
         category: { $in: categories },
@@ -182,7 +184,8 @@ module.exports.getfilteredProducts = async (req, res) => {
       let product = products.filter(
         (v, i, a) => a.findIndex((t) => t.ref === v.ref) === i
       );
-      res.status(200).json(product);
+      let prod = product.filter((p) => p.quantity !== 0);
+      res.status(200).json(prod);
     }
   } catch (e) {
     console.log(e);
@@ -259,7 +262,7 @@ module.exports.getallTailles = async (req, res) => {
     let tailles = [];
     for (let p of products) {
       let taille = p.taille.toUpperCase();
-      if (taille in tailles) {
+      if (taille in tailles || p.quantity === 0) {
         continue;
       } else {
         tailles.push(taille);
@@ -281,7 +284,7 @@ module.exports.getallPointure = async (req, res) => {
     let tailles = [];
     for (let p of products) {
       let taille = p.taille.toUpperCase();
-      if (taille in tailles) {
+      if (taille in tailles || p.quantity === 0) {
         continue;
       } else {
         tailles.push(taille);
@@ -410,6 +413,26 @@ module.exports.return = async (req, res) => {
     if (product1) {
       await Product.findOneAndUpdate(
         { _id: product._id },
+        { $set: { quantity: product1.quantity + 1 } }
+      );
+    }
+  } catch (e) {
+    console.log(e);
+    res.status(400).json("error");
+  }
+};
+
+module.exports.returnD = async (req, res) => {
+  const { product } = req.body;
+  console.log("d : ", product);
+  try {
+    const product1 = await Product.findOne({
+      _id: product.product_id,
+    });
+    console.log("prod: ", product1);
+    if (product1) {
+      await Product.findOneAndUpdate(
+        { _id: product.product_id },
         { $set: { quantity: product1.quantity + 1 } }
       );
     }

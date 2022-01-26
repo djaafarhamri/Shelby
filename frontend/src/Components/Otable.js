@@ -43,7 +43,7 @@ const Otable = () => {
 
   const returne = (product) => {
     axios
-      .post(`${ENDPOINT}/api/return`, {
+      .post(`${ENDPOINT}/api/returnD`, {
         product,
       })
       .then((res) => {
