@@ -7,6 +7,7 @@ import MarqueFilter from "./MarqueFilter";
 import TailleFilter from "./TailleFilter";
 import PointureFilter from "./PointureFilter";
 import CategorieFilter from "./CategorieFilter";
+import { useSearchParams } from "react-router-dom";
 
 const ENDPOINT = "http://localhost:4000";
 
@@ -20,6 +21,8 @@ const Products = () => {
   const [allTailles, setAllTailles] = useState([]);
   const [allPointure, setAllPointure] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  let search = searchParams.get("s");
   useEffect(() => {
     axios
       .get(`${ENDPOINT}/api/getallTailles`)
@@ -49,7 +52,7 @@ const Products = () => {
   }, []);
   useEffect(() => {
     axios
-      .post(`${ENDPOINT}/api/getfilteredProducts`, {
+      .post(`${ENDPOINT}/api/getfilteredProducts/?search=${search}`, {
         categories,
         genres,
         pointures,
@@ -63,16 +66,7 @@ const Products = () => {
         setProducts(res.data);
       })
       .catch((err) => console.log(err));
-  }, [
-    allMarques,
-    allPointure,
-    allTailles,
-    categories,
-    genres,
-    marques,
-    pointures,
-    tailles,
-  ]);
+  }, [allMarques, allPointure, allTailles, categories, genres, marques, pointures, search, tailles]);
   const [isopen, setopen] = useState(true);
 
   return (
@@ -120,7 +114,6 @@ const Products = () => {
         <div
           className="absolute bg-gray z-30 w-64 h-screen"
           style={isopen ? { display: "none" } : { display: "inline" }}
-          
         >
           <div className="relative ">
             <div className="flex justify-end">

@@ -156,22 +156,34 @@ module.exports.getfilteredProducts = async (req, res) => {
   if (marques.length === 0) {
     marques = allMarques;
   }
-  console.log('ss');
-  console.log(genres);
-  console.log(categories);
-  console.log(marques);
-  console.log(Rtailles);
   try {
-    const products = await Product.find({
-      category: { $in: categories },
-      genre: { $in: genres },
-      taille: { $in: Rtailles },
-      marque: { $in: marques },
-    });
-    let product = products.filter(
-      (v, i, a) => a.findIndex((t) => t.ref === v.ref) === i
-    );
-    res.status(200).json(product);
+    if (req.query.search !== 'null') {
+      console.log(req.query.search);
+      const regex = new RegExp(escapeRegex(req.query.search), "gi");
+      let products = await Product.find({
+        title: regex,
+        category: { $in: categories },
+        genre: { $in: genres },
+        taille: { $in: Rtailles },
+        marque: { $in: marques },
+      });
+      let product = products.filter(
+        (v, i, a) => a.findIndex((t) => t.ref === v.ref) === i
+      );
+      res.status(200).json(product);
+    } else {
+      let products = await Product.find({
+        category: { $in: categories },
+        genre: { $in: genres },
+        taille: { $in: Rtailles },
+        marque: { $in: marques },
+      });
+
+      let product = products.filter(
+        (v, i, a) => a.findIndex((t) => t.ref === v.ref) === i
+      );
+      res.status(200).json(product);
+    }
   } catch (e) {
     console.log(e);
     res.status(404).json("no products found");
@@ -430,7 +442,7 @@ module.exports.takeProduct = async (req, res) => {
     const product = await Product.findOne({
       _id,
     });
-    if(product.quantity !== 0){
+    if (product.quantity !== 0) {
       await Product.findOneAndUpdate(
         { _id },
         { $set: { quantity: product.quantity - 1 } }
