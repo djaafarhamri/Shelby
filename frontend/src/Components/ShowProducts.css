@@ -1,0 +1,44 @@
+.addvp {
+    position: absolute;
+    height: 400px;
+    background: #fff;
+    right: 25vw;
+    top: 25vh;
+    border: 3px solid;
+  }
+  .addvp input {
+    border: 2px solid;
+  }
+  .prod {
+    display: grid;
+    grid-template-columns: 200px 100px 100px 100px 70px;
+    border-bottom: .5px solid;
+  }
+  .prod-title {
+    width: 200px;
+    grid-column: 1/2;
+  }
+  .prod-taille {
+    width: 100px;
+    grid-column: 2/3;
+  }
+  .prod-quantity {
+    width: 100px;
+    grid-column: 3/4;
+  }
+  .prod-price {
+    width: 100px;
+    grid-column: 4/5;
+  }
+  .prod-add {
+    width: 70px;
+    grid-column: 5/6;
+  }
+  .prod-add-btn {
+    width: 69px;
+    background-color: rgba(247, 233, 142, 1);
+    height: 30px;
+    font-weight: bold;
+    grid-column: 5/6;
+  }
+  

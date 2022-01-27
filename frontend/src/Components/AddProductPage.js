@@ -23,7 +23,6 @@ const AddProductPage = ({ setSelected }) => {
     setSelectedFile(event.target.files[0]);
   };
   const changeHandler2 = (event) => {
-    console.log("ssssssssssss: ", event.target.files);
     setSelectedFiles(event.target.files);
   };
   const ajouter = async () => {
@@ -38,12 +37,10 @@ const AddProductPage = ({ setSelected }) => {
     await axios
       .post(`${ENDPOINT}/api/uploadMainImage`, formData, {withCredentials:true})
       .then((res) => {
-        console.log("main");
         let path = res.data;
         axios
           .post(`${ENDPOINT}/api/uploadSecondImages`, formData2, {withCredentials:true})
           .then((res) => {
-            console.log("second");
             let paths = res.data;
             for (let prod of tailleQte) {
               axios
@@ -69,12 +66,10 @@ const AddProductPage = ({ setSelected }) => {
             }
           })
           .catch((err) => {
-            console.log("second err");
             console.log(err);
           });
       })
       .catch((err) => {
-        console.log("main err");
         console.log(err);
       });
   };

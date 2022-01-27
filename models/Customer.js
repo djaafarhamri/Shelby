@@ -6,6 +6,10 @@ const customerSchema = mongoose.Schema(
       type: Object,
       required: true,
     },
+    client: {
+      type: String,
+      default: '0'
+    },
     username: {
       type: String,
     },

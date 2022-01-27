@@ -4,7 +4,7 @@ import axios from "axios";
 
 const ENDPOINT = "http://localhost:4000";
 
-const Htable = () => {
+const Htable = ({search}) => {
   const [products, setProducts] = useState([]);
   const [render, setRender] = useState(false);
 

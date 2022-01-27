@@ -43,7 +43,6 @@ const requireAdmin = (req, res, next) => {
 // require manager
 const requireManager = (req, res, next) => {
   const token = req.cookies.jwt;
-  console.log('token', token);
   // check json web token exists & is verified
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, async (err, decodedToken) => {

@@ -2,7 +2,10 @@ import Navbar from "./Navbar";
 import { useContext, useState } from "react";
 import { CartContext } from "../contexts/panier";
 import axios from "axios";
+const { v4 } = require('uuid')
+
 const ENDPOINT = "http://localhost:4000";
+
 const Checkout = () => {
   const [value, setvalue] = useState("");
   const [toggle, settoggle] = useState(1);
@@ -12,6 +15,7 @@ const Checkout = () => {
   const [adress, setAdress] = useState("");
   const [cart, setCart] = useContext(CartContext);
   const acheter = () => {
+    var cid = v4()
     for (let product of cart) {
       axios
       .post(`${ENDPOINT}/api/takeProduct`, {
@@ -23,6 +27,7 @@ const Checkout = () => {
       .catch((err) => console.log(err));
       axios.post(`${ENDPOINT}/api/addCustomer`, {
         id: product._id,
+        client: cid,
         username: nom + prenom,
         phone,
         adress,

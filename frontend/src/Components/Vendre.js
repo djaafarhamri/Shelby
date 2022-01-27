@@ -13,11 +13,12 @@ import Progress from "./Progress";
 
 const Vendre = () => {
   const [selected, setSelected] = useState("a");
+  const [search, setSearch] = useState("");
 
   return (
     <div className="vendre">
       <div className="admin-search">
-        <input type="text" placeholder="Search here" />
+        <input onChange={(e) => {setSearch(e.target.value)}} type="text" placeholder="Search here" />
       </div>
       <div className="options">
         <button
@@ -85,31 +86,31 @@ const Vendre = () => {
         {selected === "a" && (
           <div className="scroll">
             <h2>Vendre</h2>
-            <Atable />
+            <Atable search={search} />
           </div>
         )}
         {selected === "p" && (
           <div className="scroll">
             <h2>Pending</h2>
-            <Ptable />
+            <Ptable search={search} />
           </div>
         )}
         {selected === "o" && (
           <div className="scroll">
             <h2>On Deleviry</h2>
-            <Otable />
+            <Otable search={search} />
           </div>
         )}
         {selected === "i" && (
           <>
             <h2>In Progress</h2>
-            <Progress />
+            <Progress search={search} />
           </>
         )}
         {selected === "24" && (
           <div className="scroll">
             <h2>24 heurs</h2>
-            <Htable />
+            <Htable search={search} />
           </div>
         )}
       </div>

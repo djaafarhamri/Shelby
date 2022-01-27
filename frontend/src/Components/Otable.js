@@ -6,7 +6,7 @@ import nonValid from "../assets/nonValid.png";
 
 const ENDPOINT = "http://localhost:4000";
 
-const Otable = () => {
+const Otable = ({search}) => {
   const [products, setProducts] = useState([]);
   const [showValid, setShowValid] = useState(false);
   const [client, setClient] = useState();
@@ -14,12 +14,12 @@ const Otable = () => {
 
   useEffect(() => {
     axios
-      .get(`${ENDPOINT}/api/getDelivery`, {withCredentials: true})
+      .get(`${ENDPOINT}/api/getDelivery/?search=${search}`, {withCredentials: true})
       .then((res) => {
         setProducts(res.data);
       })
       .catch((err) => console.log(err));
-  }, [render]);
+  }, [render, search]);
 
   const valider = (id) => {
     axios
@@ -99,7 +99,7 @@ const Otable = () => {
       {products &&
         products.map((product, index) => (
           <div key={index} className="on-admin">
-            <p className="otable-name">{product.name}</p>
+            <p className="otable-name">{product.client}</p>
             <p className="otable-code">{product.ref}</p>
             <p className="otable-taille">{product.taille}</p>
             <div style={{backgroundColor: product.color, height: '40px', width: '40px', border: '2px solid'}} className="otable-color"></div>

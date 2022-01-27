@@ -14,7 +14,6 @@ module.exports.getLaCaisse = async (req, res) => {
     const { montant } = req.body
     try {
       const caisse = await Caisse.findOne({id: 'caisse'});
-      console.log(caisse.montant);
       const c = await Caisse.findOneAndUpdate({id: 'caisse'}, {montant: caisse.montant + montant});
       res.status(200).json(`added: ${montant} in ${c.montant}`);
     } catch (e) {
