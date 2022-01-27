@@ -16,8 +16,8 @@ const Navbar = () => {
   const nav = useNavigate();
   return (
     <div className="bg-royal">
-      <div className="flex md:flex-auto bg-royal  justify-around text-palete ">
-        <div className=" self-start   py-3">
+      <div className="flex md:flex-auto bg-royal justify-around text-palete ">
+        <div className=" self-start py-3">
           <svg
             onClick={() => isopen(!open)}
             className="w-8 h-8 relative "
@@ -110,7 +110,7 @@ const Navbar = () => {
           </p>
         </div>
         <div className="md:flex-initial md:w-32 flex justify-end">
-          
+          <p>{cart.length}</p>
           <img
             onClick={() => {
               if (cart.length === 0) {

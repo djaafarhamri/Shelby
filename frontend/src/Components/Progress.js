@@ -5,7 +5,7 @@ import ShowProducts from "./ShowProducts";
 
 const ENDPOINT = "http://localhost:4000";
 
-const Progress = () => {
+const Progress = ({search}) => {
   const [products, setProducts] = useState([]);
   const [prod, setProd] = useState([]);
   const [showProducts, setShowProducts] = useState(false);

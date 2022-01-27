@@ -7,7 +7,7 @@ import Bon from "./Bon";
 
 const ENDPOINT = "http://localhost:4000";
 
-const Atable = () => {
+const Atable = ({search}) => {
   const [products, setProducts] = useState([]);
   const [clients, setClients] = useState([]);
   const [code, setCode] = useState("");
