@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import hero from "../assets/home-img.png";
 import Navbar from "./Navbar";
+import "./Home.css"
 const Home = () => {
   return (
     <div>

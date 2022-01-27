@@ -90,7 +90,7 @@ const Product = () => {
                       key={i}
                       onClick={() => {setTaille(t.t)}}
                       type="button"
-                      className="ring-1 ring-black text-xl px-1 mx-3 active:bg-royal active:text-palete focus:bg-royal focus:text-palete"
+                      className="ring-1  ring-black text-xl px-1 mx-3 active:bg-royal active:text-palete focus:bg-royal focus:text-palete"
                     >
                       {t.t}
                     </button>
