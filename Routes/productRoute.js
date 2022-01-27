@@ -41,6 +41,7 @@ router.get("/api/getProductByTitle/:title", productController.getProductByTitle)
 router.get("/api/getProductByref/:ref", productController.getProductByref);
 router.post("/api/getProductByrefAndTaille", productController.getProductByrefAndTaille);
 router.post("/api/getColor", productController.getColor);
+router.get("/api/getProductsByclient/:cid", productController.getProductsByclient);
 router.get("/api/getProductByrefF/:ref", productController.getProductByrefF);
 router.get("/api/getProductByid/:id", productController.getProductByid);
 router.post("/api/return", productController.return);

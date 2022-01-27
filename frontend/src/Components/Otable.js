@@ -99,7 +99,7 @@ const Otable = () => {
       {products &&
         products.map((product, index) => (
           <div key={index} className="on-admin">
-            <p className="otable-name">{product.name}</p>
+            <p className="otable-name">{product.client}</p>
             <p className="otable-code">{product.ref}</p>
             <p className="otable-taille">{product.taille}</p>
             <div style={{backgroundColor: product.color, height: '40px', width: '40px', border: '2px solid'}} className="otable-color"></div>

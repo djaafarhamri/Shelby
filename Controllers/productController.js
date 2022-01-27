@@ -31,11 +31,9 @@ module.exports.addProduct = async (req, res) => {
   } = req.body;
   const refExist = await Product.find({ ref });
   if (refExist.length) {
-    console.log('dupl');
     res.json("duplicate ref");
   } else {
     try {
-      console.log("tssst");
       const product = await Product.create({
         ref,
         title,
@@ -53,7 +51,6 @@ module.exports.addProduct = async (req, res) => {
       });
       res.status(200).json(product);
     } catch (e) {
-      console.log('eeeeeeeeeeee');
       console.log(e);
       res.status(400).json("error occured while adding the product");
     }
@@ -163,7 +160,6 @@ module.exports.getfilteredProducts = async (req, res) => {
   }
   try {
     if (req.query.search !== "null") {
-      console.log(req.query.search);
       const regex = new RegExp(escapeRegex(req.query.search), "gi");
       let products = await Product.find({
         title: regex,
@@ -184,7 +180,6 @@ module.exports.getfilteredProducts = async (req, res) => {
         taille: { $in: Rtailles },
         marque: { $in: marques },
       });
-      console.log(products);
       let product = products.filter(
         (v, i, a) => a.findIndex((t) => t.ref === v.ref) === i
       );
@@ -381,7 +376,6 @@ module.exports.getProductByrefAndTaille = async (req, res) => {
 module.exports.getProductByrefF = async (req, res) => {
   const ref = req.params.ref;
   try {
-    console.log("trying");
     const products = await Product.find({ ref });
     let tailles = [];
     for (let p of products) {
@@ -390,11 +384,9 @@ module.exports.getProductByrefF = async (req, res) => {
     let product = products.filter(
       (v, i, a) => a.findIndex((t) => t.ref === v.ref) === i
     );
-    console.log('tailles: ', tailles);
     let t = tailles.filter(
       (v, i, a) => a.findIndex((t) => t.t === v.t) === i
       );
-      console.log('t : ', t);
     res.status(200).json({ product, t });
   } catch (e) {
     console.log(e);
@@ -415,18 +407,36 @@ module.exports.getProductByid = async (req, res) => {
 
 module.exports.getColor = async (req, res) => {
   const { ref, taille } = req.body;
-  console.log("ref/taille : ", ref, taille);
   try {
     const product = await Product.find({ ref, taille });
     let colors = [];
     for (let p of product) {
       colors.push(p.color);
     }
-    console.log("colors : ", colors);
     res.status(200).json(colors);
   } catch (e) {
     console.log(e);
     res.status(404).json("no color found");
+  }
+};
+
+module.exports.getProductsByclient = async (req, res) => {
+  const cid = req.params.cid;
+  if (cid) {
+    const client = await Customer.find({ client: cid });
+    try {
+      let products = []
+      for (let prod of client){
+        const p = await Product.findById(prod.id)
+        products.push(p)
+      } 
+      res.status(200).json({products, client});
+    } catch (e) {
+      console.log(e);
+      res.status(400).json("error");
+    }
+  } else {
+    res.status(400).json("error");
   }
 };
 
@@ -450,12 +460,10 @@ module.exports.return = async (req, res) => {
 
 module.exports.returnD = async (req, res) => {
   const { product } = req.body;
-  console.log("d : ", product);
   try {
     const product1 = await Product.findOne({
       _id: product.product_id,
     });
-    console.log("prod: ", product1);
     if (product1) {
       await Product.findOneAndUpdate(
         { _id: product.product_id },
@@ -470,7 +478,6 @@ module.exports.returnD = async (req, res) => {
 
 module.exports.returne = async (req, res) => {
   const { product } = req.body;
-  console.log("product : ", product);
   try {
     const client = await Customer.findOne({ _id: product.client_id });
     const product1 = await Product.findById(client.id);

@@ -20,7 +20,7 @@ const Home = () => {
         <h1 className="hidden sm:block sm:text-4xl lg:text-5xl absolute  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-palete">
           Dand Votre Boutique{" "}
         </h1>
-        <Link to='/products'>
+        <Link to="/products">
           <button className="absolute text-2xl sm:text-3xl bg-palete bottom-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-2xl py-2 px-2">
             découvrir
           </button>

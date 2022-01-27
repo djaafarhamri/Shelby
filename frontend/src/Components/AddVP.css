@@ -1,4 +1,4 @@
-.addvp {
+.show-products {
   position: absolute;
   height: 400px;
   background: #fff;
@@ -6,35 +6,39 @@
   top: 25vh;
   border: 3px solid;
 }
-.addvp input {
+.show-products input {
   border: 2px solid;
 }
-.prod {
+.show {
   display: grid;
-  grid-template-columns: 200px 100px 100px 100px 70px;
+  grid-template-columns: 200px 100px 100px 100px 70px 70px;
   border-bottom: .5px solid;
 }
-.prod-title {
+.show-title {
   width: 200px;
   grid-column: 1/2;
 }
-.prod-taille {
+.show-taille {
   width: 100px;
   grid-column: 2/3;
 }
-.prod-quantity {
+.show-quantity {
   width: 100px;
   grid-column: 3/4;
 }
-.prod-price {
+.show-price {
   width: 100px;
   grid-column: 4/5;
 }
-.prod-add {
+.show-add {
   width: 70px;
   grid-column: 5/6;
 }
-.prod-add-btn {
+.show-del {
+  width: 70px;
+  grid-column: 6/7;
+}
+.show-add-btn {
   width: 69px;
   background-color: rgba(247, 233, 142, 1);
   height: 30px;

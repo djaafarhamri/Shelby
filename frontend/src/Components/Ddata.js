@@ -1,17 +1,21 @@
 import "./Ddata.css";
 import { useState } from "react";
 import axios from "axios";
+const { v4 } = require('uuid')
+
 const ENDPOINT = 'http://localhost:4000'
 const Ddata = ({ setShowDeliver, clients }) => {
   const [nom, setNom] = useState("");
   const [adress, setAdress] = useState("");
   const [phone, setPhone] = useState("");
   const deliver = () => {
+    let cid = v4();
     if (nom !== "" && adress !== "" && phone !== "") {
       for (let client of clients) {
           axios
             .post(`${ENDPOINT}/api/updateToDelivery`, {
               _id: client._id,
+              client: cid,
               nom,
               adress,
               phone,
