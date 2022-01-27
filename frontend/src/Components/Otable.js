@@ -14,7 +14,7 @@ const Otable = () => {
 
   useEffect(() => {
     axios
-      .get(`${ENDPOINT}/api/getDelivery`)
+      .get(`${ENDPOINT}/api/getDelivery`, {withCredentials: true})
       .then((res) => {
         setProducts(res.data);
       })
@@ -26,7 +26,7 @@ const Otable = () => {
       .post(`${ENDPOINT}/api/updateTo24`, {
         _id: id,
         status: "24",
-      })
+      }, {withCredentials:true})
       .then((res) => {
         return res.data;
       })
@@ -34,7 +34,7 @@ const Otable = () => {
     axios
       .post(`${ENDPOINT}/api/addSold`, {
         customer_id: id,
-      })
+      }, {withCredentials:true})
       .then((res) => console.log(res.data))
       .catch((err) => {
         console.log(err);
@@ -43,24 +43,24 @@ const Otable = () => {
 
   const returne = (product) => {
     axios
-      .post(`${ENDPOINT}/api/return`, {
+      .post(`${ENDPOINT}/api/returnD`, {
         product,
-      })
+      }, {withCredentials:true})
       .then((res) => {
         return res.data;
       })
       .catch((err) => console.log(err));
     axios
-      .delete(`${ENDPOINT}/api/deleteCustomer/${product.client_id}`)
+      .delete(`${ENDPOINT}/api/deleteCustomer/${product.client_id}`, {withCredentials:true})
       .then((res) => {
         return res.data;
       })
       .catch((err) => console.log(err));
     axios
-      .delete(`${ENDPOINT}/api/deleteSold/${product._id}`)
+      .delete(`${ENDPOINT}/api/deleteSold/${product._id}`, {withCredentials:true})
       .then((res) => {
         return res.data;
-      })
+      }, {withCredentials:true})
       .catch((err) => console.log(err));
     setRender(!render)
   };
@@ -93,6 +93,7 @@ const Otable = () => {
       <h3 className="otable-name">Name</h3>
       <h3 className="otable-code">ref</h3>
       <h3 className="otable-taille">taille</h3>
+      <h3 className="otable-color">color</h3>
       <h3 className="otable-prix">price</h3>
       <h3 className="otable-option">option</h3>
       {products &&
@@ -101,6 +102,7 @@ const Otable = () => {
             <p className="otable-name">{product.name}</p>
             <p className="otable-code">{product.ref}</p>
             <p className="otable-taille">{product.taille}</p>
+            <div style={{backgroundColor: product.color, height: '40px', width: '40px', border: '2px solid'}} className="otable-color"></div>
             <p className="otable-prix">{product.price}</p>
             <div className="otable-option">
               <button

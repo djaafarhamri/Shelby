@@ -36,15 +36,15 @@ const AddProductPage = ({ setSelected }) => {
     }
 
     await axios
-      .post(`${ENDPOINT}/api/uploadMainImage`, formData)
+      .post(`${ENDPOINT}/api/uploadMainImage`, formData, {withCredentials:true})
       .then((res) => {
-        let path = (res.data);
+        console.log("main");
+        let path = res.data;
         axios
-          .post(`${ENDPOINT}/api/uploadSecondImages`, formData2)
+          .post(`${ENDPOINT}/api/uploadSecondImages`, formData2, {withCredentials:true})
           .then((res) => {
-            let paths = (res.data);
-            console.log("main: ", path);
-            console.log("second: ", paths);
+            console.log("second");
+            let paths = res.data;
             for (let prod of tailleQte) {
               axios
                 .post(`${ENDPOINT}/api/addProduct`, {
@@ -57,19 +57,24 @@ const AddProductPage = ({ setSelected }) => {
                   prixAch,
                   price: prix,
                   taille: prod.taille,
+                  color: prod.color,
                   quantity: prod.quantity,
                   main_image: path,
                   second_images: paths,
+                }, {
+                  withCredentials: true
                 })
                 .then((res) => console.log(res.data))
                 .catch((err) => console.log(err));
             }
           })
           .catch((err) => {
+            console.log("second err");
             console.log(err);
           });
       })
       .catch((err) => {
+        console.log("main err");
         console.log(err);
       });
   };
@@ -139,7 +144,7 @@ const AddProductPage = ({ setSelected }) => {
         >
           <option value="Classic">Classic</option>
           <option value="Sport">Sport</option>
-          <option value="Semi-Classic">Semi-Classic</option>
+          <option value="Semi-classic">Semi-Classic</option>
         </select>
         <p>Categorie</p>
         <select
@@ -151,9 +156,9 @@ const AddProductPage = ({ setSelected }) => {
         >
           <option value="Clothes">Clothes</option>
           <option value="Shoes">Shoes</option>
-          <option value="Accessoire">Accessoire</option>
+          <option value="Accessoires">Accessoire</option>
         </select>
-        <p>Taille</p>
+        <p>Taille/Color/Quantity</p>
         <TableData setTailleQte={setTailleQte} tailleQte={tailleQte} />
         <p>Reference</p>
         <input

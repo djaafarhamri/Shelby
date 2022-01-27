@@ -10,7 +10,7 @@ const Stock = () => {
   const [selected, setSelected] = useState("m");
   useEffect(() => {
     axios
-      .get(`${ENDPOINT}/api/getAllProducts`)
+      .get(`${ENDPOINT}/api/getAllProducts`, {withCredentials:true})
       .then((res) => {
         setProducts(res.data);
       })
@@ -37,6 +37,7 @@ const Stock = () => {
               <h3 className="stock-name">Name</h3>
               <h3 className="stock-ref">Ref</h3>
               <h3 className="stock-taille">Taille</h3>
+              <h3 className="stock-color">Color</h3>
               <h3 className="stock-quantity">Quantity</h3>
               <h3 className="stock-prix">Prix</h3>
               {products &&
@@ -45,6 +46,7 @@ const Stock = () => {
                     <p className="stock-name">{product.title}</p>
                     <p className="stock-ref">{product.ref}</p>
                     <p className="stock-taille">{product.taille}</p>
+                    <div style={{backgroundColor: product.color, height: '40px', width: '40px', border: '2px solid'}} className="stock-color"></div>
                     <p className="stock-quantity">{product.quantity}</p>
                     <p className="stock-prix">{product.price}</p>
                   </div>

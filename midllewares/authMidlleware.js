@@ -24,36 +24,39 @@ const requireAuth = (req, res, next) => {
 const requireAdmin = (req, res, next) => {
   const token = req.cookies.jwt;
   // check json web token exists & is verified
-  if (token) {
+  if (token !== undefined) {
     jwt.verify(token, process.env.JWT_SECRET, async (err, decodedToken) => {
       let admin = await User.findById(decodedToken.id);
-      if (err || admin.isAdmin !== "admin") {
-          if(err) console.log(err.message);
-        res.status(400).json('not admin');
-    } else {
+      if (err || admin.role !== "admin") {
+        if (err) console.log(err.message);
+        console.log("not admin");
+        res.status(400).json("not admin");
+      } else {
         next();
-    }
-});
-} else {
-    res.status(400).json('no token found');
+      }
+    });
+  } else {
+    console.log("no token");
+    res.status(400).json("no token found");
   }
 };
 // require manager
 const requireManager = (req, res, next) => {
   const token = req.cookies.jwt;
+  console.log('token', token);
   // check json web token exists & is verified
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, async (err, decodedToken) => {
       let admin = await User.findById(decodedToken.id);
-      if (!err && (admin.role === "manager" || admin.role === "admin")) {
+      if (!err && (admin.role === "vendeur" || admin.role === "admin")) {
         next();
       } else {
-        if(err) console.log(err.message);
-        res.status(400).json('not manager');
-    }
-});
-} else {
-    res.status(400).json('no token found');
+        if (err) console.log(err.message);
+        res.status(400).json("not manager");
+      }
+    });
+  } else {
+    res.status(400).json("no token found");
   }
 };
 
@@ -77,4 +80,4 @@ const checkUser = (req, res, next) => {
   }
 };
 
-module.exports = { requireAuth, checkUser, requireAdmin };
+module.exports = { requireAuth, checkUser, requireAdmin, requireManager };

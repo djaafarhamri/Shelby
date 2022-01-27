@@ -24,9 +24,9 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({ storage })
 
-router.post("/api/uploadMainImage", upload.single('productMainImage'), productController.uploadMainImage);
-router.post("/api/uploadSecondImages", upload.array('productSecondImages', 3), productController.uploadSecondImages);
-router.post("/api/addProduct", productController.addProduct);
+router.post("/api/uploadMainImage", requireAdmin, upload.single('productMainImage'), productController.uploadMainImage);
+router.post("/api/uploadSecondImages", requireAdmin, upload.array('productSecondImages', 3), productController.uploadSecondImages);
+router.post("/api/addProduct", requireAdmin, productController.addProduct);
 router.post("/api/updateProduct/:id", requireAdmin, productController.updateProduct);
 router.delete("/api/deleteProduct/:id", requireAdmin, productController.deleteProduct);
 router.get("/api/getAllNoDuplProducts", productController.getAllNoDuplProducts);
@@ -40,10 +40,12 @@ router.get("/api/getallPointure", productController.getallPointure);
 router.get("/api/getProductByTitle/:title", productController.getProductByTitle);
 router.get("/api/getProductByref/:ref", productController.getProductByref);
 router.post("/api/getProductByrefAndTaille", productController.getProductByrefAndTaille);
+router.post("/api/getColor", productController.getColor);
 router.get("/api/getProductByrefF/:ref", productController.getProductByrefF);
 router.get("/api/getProductByid/:id", productController.getProductByid);
 router.post("/api/return", productController.return);
 router.post("/api/returne", productController.returne);
+router.post("/api/returnD", productController.returnD);
 router.post("/api/takeProduct", productController.takeProduct);
 
 module.exports = router;

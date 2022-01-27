@@ -10,7 +10,7 @@ const Ptable = () => {
 
   useEffect(() => {
     axios
-      .get(`${ENDPOINT}/api/getPending`)
+      .get(`${ENDPOINT}/api/getPending`, {withCredentials:true})
       .then((res) => {
         setProducts(res.data);
       })
@@ -22,7 +22,7 @@ const Ptable = () => {
       .post(`${ENDPOINT}/api/updateTo24`, {
         _id,
         status: "24",
-      })
+      }, {withCredentials:true})
       .then((res) => {
         return res.data;
       })
@@ -30,7 +30,7 @@ const Ptable = () => {
     axios
       .post(`${ENDPOINT}/api/addSold`, {
         customer_id: _id,
-      })
+      }, {withCredentials:true})
       .then((res) => console.log(res.data))
       .catch((err) => {
         console.log(err);

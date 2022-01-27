@@ -16,6 +16,9 @@ const customerSchema = mongoose.Schema(
     adress: {
       type: String,
     },
+    livrason: {
+      type: String,
+    },
     ref: {
       type: String,
       required: [true, "product required"],

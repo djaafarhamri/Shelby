@@ -8,7 +8,7 @@ const Recent = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-      axios.get(`${ENDPOINT}/api/getTodaysSolds`)
+      axios.get(`${ENDPOINT}/api/getTodaysSolds`, {withCredentials:true})
       .then((res) => {setProducts(res.data)})
       .catch(err => {console.log(err)})
   }, [])

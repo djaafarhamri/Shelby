@@ -18,10 +18,10 @@ const Dashboard = () => {
     axios
       .post(`${ENDPOINT}/api/takeFromLaCaisse`, {
         montant,
-      })
+      }, {withCredentials:true})
       .then((res) => {
         axios
-          .get(`${ENDPOINT}/api/getLacaisse`)
+          .get(`${ENDPOINT}/api/getLacaisse`, {withCredentials:true})
           .then((res) => setCaisse(res.data.montant))
           .catch((err) => console.log(err));
       })
@@ -32,7 +32,7 @@ const Dashboard = () => {
       .post(`${ENDPOINT}/api/getProfitByDate`, {
         dateStart,
         dateEnd,
-      })
+      }, {withCredentials:true})
       .then((res) => setCustomProfit(res.data))
       .catch((err) => console.log(err));
   };
@@ -45,13 +45,13 @@ const Dashboard = () => {
           new Date().getDate()
         ),
         dateEnd: new Date(Date.now()),
-      })
+      }, {withCredentials:true})
       .then((res) => setYearlyProfit(res.data))
       .catch((err) => console.log(err));
   }, []);
   useEffect(() => {
     axios
-      .get(`${ENDPOINT}/api/getLacaisse`)
+      .get(`${ENDPOINT}/api/getLacaisse`, {withCredentials:true})
       .then((res) => setCaisse(res.data.montant))
       .catch((err) => console.log(err));
   }, []);
@@ -65,7 +65,7 @@ const Dashboard = () => {
           new Date().getDate()
         ),
         dateEnd: new Date(Date.now()),
-      })
+      }, {withCredentials:true})
       .then((res) => setMonthlyProfit(res.data))
       .catch((err) => console.log(err));
   }, []);

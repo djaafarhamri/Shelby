@@ -2,12 +2,29 @@ import logo from "../assets/logo.png";
 import dashboard from "../assets/dashboard.png";
 import warehouse from "../assets/warehouse.png";
 import "./AdminPage.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Vendre from "./Vendre";
 import Stock from "./Stock";
 import Dashboard from "./Dashboard";
+import axios from "axios";
+import { useNavigate } from "react-router";
+const ENDPOINT = "http://localhost:4000";
 
 const AdminPage = () => {
+  const nav = useNavigate();
+  useEffect(() => {
+    axios
+      .get(`${ENDPOINT}/api/checkuser`, {withCredentials: true})
+      .then((res) => {
+        console.log(res.status);
+        if (res.status !== 200) {
+          nav("/login");
+        }
+      })
+      .catch((err) => nav("/login"));
+
+    // eslint-disable-next-line
+  }, []);
   const [selected, setSelected] = useState("d");
   const selectD = () => {
     setSelected("d");
@@ -41,7 +58,8 @@ const AdminPage = () => {
               <img src={warehouse} alt="" /> Vendre
             </button>
           </div>
-        )}{ selected === "s" && (
+        )}
+        {selected === "s" && (
           <div className="dashboard-buttons">
             <button className="dashboard-btn-n" onClick={selectD}>
               <img src={dashboard} alt="" /> Dashboard
@@ -54,7 +72,7 @@ const AdminPage = () => {
             </button>
           </div>
         )}
-        { selected === "v" && (
+        {selected === "v" && (
           <div className="dashboard-buttons">
             <button className="dashboard-btn-n" onClick={selectD}>
               <img src={dashboard} alt="" /> Dashboard

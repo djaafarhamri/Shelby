@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import BarcodeReader from "react-barcode-reader";
 import axios from "axios";
 import "./AddVP.css";
@@ -11,10 +11,13 @@ const AddVP = ({
   setShowAdd,
 }) => {
   const [product, setProduct] = useState([]);
-
+  const scan = useRef(null)
+  useEffect(() => {
+    scan.current.focus()
+  }, [])
   const ok = (ref) => {
     axios
-      .get(`${ENDPOINT}/api/getProductByref/${ref}`)
+      .get(`${ENDPOINT}/api/getProductByref/${ref}`, {withCredentials:true})
       .then((res) => {
         setProduct(res.data);
       })
@@ -25,12 +28,10 @@ const AddVP = ({
     axios
       .post(`${ENDPOINT}/api/takeProduct`, {
         _id: prod._id,
-      })
+      }, {withCredentials:true})
       .then((res) => {
         if (res.data !== "taille non exist") {
           ok(code);
-        } else {
-          console.log(res.data);
         }
       })
       .catch((err) => console.log(err));
@@ -60,6 +61,7 @@ const AddVP = ({
       />
       <input
         style={{ color: "black" }}
+        ref={scan}
         type="text"
         onChange={(e) => {
           setCode(e.target.value);

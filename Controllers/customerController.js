@@ -31,6 +31,7 @@ module.exports.getVendre = async (req, res) => {
       let product = await Product.findOne({ _id: client.id });
       products.push(product);
     }
+    console.log('vendre: ', clients);
     res.status(200).json({ products, clients });
   } catch (e) {
     console.log(e);
@@ -41,6 +42,7 @@ module.exports.get24 = async (req, res) => {
   const response = [];
   try {
     const clients = await Customer.find({ status: "24" });
+    console.log(clients);
     for (let client of clients) {
       const product = await Product.findOne({ _id: client.id });
       if (product) {
@@ -50,6 +52,7 @@ module.exports.get24 = async (req, res) => {
           name: product.title,
           ref: product.ref,
           taille: product.taille,
+          color: product.color,
           client: client.username,
           phone: client.phone,
           adress: client.adress,
@@ -67,6 +70,7 @@ module.exports.getProgress = async (req, res) => {
   const response = [];
   try {
     const clients = await Customer.find({ status: "progress" });
+    console.log('clients: ', clients);
     for (let client of clients) {
       const product = await Product.findOne({ _id: client.id });
       response.push({
@@ -75,6 +79,7 @@ module.exports.getProgress = async (req, res) => {
         name: product.title,
         ref: product.ref,
         taille: product.taille,
+        color: product.color,
         client: client.username,
         phone: client.phone,
         adress: client.adress,
@@ -99,6 +104,7 @@ module.exports.getDelivery = async (req, res) => {
         name: product.title,
         ref: product.ref,
         taille: product.taille,
+        color: product.color,
         client: client.username,
         phone: client.phone,
         adress: client.adress,
@@ -113,10 +119,13 @@ module.exports.getDelivery = async (req, res) => {
 };
 
 module.exports.addCustomer = async (req, res) => {
-  const { id, username, phone, adress, ref, status } = req.body;
+  const { id, username, phone, adress, livrason, ref, status } = req.body;
+  const product = Product.find({ _id: id })
   try {
-    await Customer.create({ id: id, username, phone, adress, ref, status });
-    res.status(200).json("client created");
+    if (product.quantity !== 0) {
+      await Customer.create({ id, username, phone, adress, livrason, ref, status });
+      res.status(200).json("client created");
+    }
   } catch (e) {
     console.log(e);
     res.status(400).json("error");

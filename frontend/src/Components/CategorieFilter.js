@@ -4,7 +4,7 @@ const CategorieFilter = ({ categories, setCategories }) => {
 
     return (
       <div className="categories border-b-2 border-black opacity-100 z-40 ">
-        <div className="flex mb-1">
+        <div className="flex mb-1 ml-2">
           <input
           className="mt-2"
             type="checkbox"
@@ -21,9 +21,9 @@ const CategorieFilter = ({ categories, setCategories }) => {
               }
             }}
           />
-          <p>Shoes</p>
+          <p className=" text-xl md:text-2xl">Shoes</p>
         </div>
-        <div className="flex mb-1">
+        <div className="flex mb-1 ml-2">
           <input
           className="mt-2"
             type="checkbox"
@@ -40,9 +40,9 @@ const CategorieFilter = ({ categories, setCategories }) => {
               }
             }}
           />
-          <p>Clothes</p>
+          <p className=" text-xl md:text-2xl">Clothes</p>
         </div>
-        <div className="flex mb-1">
+        <div className="flex mb-1 ml-2">
           <input
           className="mt-2"
             type="checkbox"
@@ -59,7 +59,7 @@ const CategorieFilter = ({ categories, setCategories }) => {
               }
             }}
           />
-          <p>Accessoires</p>
+          <p className=" text-xl md:text-2xl">Accessoires</p>
         </div>
       </div>
     );

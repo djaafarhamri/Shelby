@@ -8,7 +8,7 @@
   border-radius: 15px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   display: grid;
-  grid-template-columns: 400px 200px 100px 200px 200px;
+  grid-template-columns: 400px 200px 100px 100px 200px 200px;
 }
 .atable h3 {
   font-family: Dongle;
@@ -32,13 +32,16 @@
 .atable-taille {
   grid-column: 3/4;
 }
-
-.atable-prix {
+.atable-color {
   grid-column: 4/5;
 }
 
-.atable-status {
+.atable-prix {
   grid-column: 5/6;
+}
+
+.atable-status {
+  grid-column: 6/7;
 }
 .all-products-admin {
   display: contents;
