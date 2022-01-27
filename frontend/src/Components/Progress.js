@@ -17,10 +17,14 @@ const Progress = () => {
       .catch((err) => console.log(err));
   }, [render]);
 
-  const valider = (_id) => {
+  const valider = (product) => {
+    console.log('progress: ', product);
     axios
       .post(`${ENDPOINT}/api/updateToDelivery`, {
-        _id,
+        _id: product.client_id,
+        nom: product.client,
+        adress: product.adress,
+        phone: product.phone,
         status: "delivery",
       }, {withCredentials:true})
       .then((res) => {
@@ -47,7 +51,7 @@ const Progress = () => {
             <button
               className="ptable-option"
               onClick={() => {
-                valider(product.client_id);
+                valider(product);
               }}
             >
               valider

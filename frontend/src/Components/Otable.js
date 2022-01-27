@@ -14,7 +14,7 @@ const Otable = () => {
 
   useEffect(() => {
     axios
-      .get(`${ENDPOINT}/api/getDelivery`, {withCredentials:true})
+      .get(`${ENDPOINT}/api/getDelivery`, {withCredentials: true})
       .then((res) => {
         setProducts(res.data);
       })

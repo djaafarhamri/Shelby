@@ -3,7 +3,7 @@ const { requireAdmin, requireManager } = require("../midllewares/authMidlleware.
 const customerController = require("../Controllers/customerController.js");
 const router = Router();
 
-router.post("/api /addCustomer", customerController.addCustomer);
+router.post("/api/addCustomer", customerController.addCustomer);
 router.delete("/api/deleteCustomer/:id", customerController.deleteCustomer);
 router.post("/api/updateToPending", requireManager, customerController.updateToPending);
 router.post("/api/updateToDelivery", requireManager, customerController.updateToDelivery);

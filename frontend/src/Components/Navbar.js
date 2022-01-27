@@ -86,19 +86,8 @@ const Navbar = () => {
             </div>
           )}
         </div>
-
-        <div className="flex-auto flex place-content-center md:mr-5 ">
-          <p className="shelby-logo-123 py-3 px-3 text-4xl hidden sm:block">
-            Shelby
-          </p>
-          <img src={logo} alt="" />
-          <p className="shelby-logo-123 px-3 py-3 text-4xl hidden sm:block ">
-            Boutique
-          </p>
-        </div>
-        <div className="md:flex-initial md:w-32 flex justify-end">
-          <input
-            className="hidden h-10 mt-3 ml-4 md:block rounded-xl mr-28 font-monteserrat text-black text-xl py-1 px-1 bg-gray"
+        <input
+            className="hidden h-10 mt-3 ml-4 md:block rounded-xl  font-monteserrat text-black text-xl py-1 px-1 bg-gray"
             type="text"
             placeholder="Recherche2x..."
             onChange={(e) => {
@@ -111,6 +100,17 @@ const Navbar = () => {
               }
             }}
           />
+        <div className="flex-auto flex place-content-center md:mr-5 ">
+          <p className="shelby-logo-123 py-3 px-3 text-4xl hidden md:block">
+            Shelby
+          </p>
+          <img src={logo} alt="" />
+          <p className="shelby-logo-123 px-3 py-3 text-4xl hidden md:block ">
+            Boutique
+          </p>
+        </div>
+        <div className="md:flex-initial md:w-32 flex justify-end">
+          
           <img
             onClick={() => {
               if (cart.length === 0) {
@@ -121,13 +121,13 @@ const Navbar = () => {
             }}
             src={panier}
             alt=""
-            className="h-6 sm:h-8 mt-4 ml-4 mb-4 mr-9"
+            className="h-6 sm:h-8 mt-4 ml-4 mb-4 mr-4"
           />
         </div>
       </div>
       <div className="flex  md:hidden">
         <input
-          className="w-full rounded-xl font-monteserrat text-black text-xl py-1 px-1 bg-gray"
+          className="w-full rounded-xl font-monteserrat text-black text-xl py-1 px-1 bg-gray "
           type="text"
           placeholder="Recherche..."
           onChange={(e) => {

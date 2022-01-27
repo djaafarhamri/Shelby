@@ -43,7 +43,7 @@ const AddVP = ({
         adress: "vide",
         ref: prod.ref,
         status: 'vendre',
-      }, {withCredentials:true})
+      })
       .then((res) => {
         console.log(res.data);
       })

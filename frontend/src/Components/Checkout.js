@@ -26,6 +26,7 @@ const Checkout = () => {
         username: nom + prenom,
         phone,
         adress,
+        livrason: value,
         ref: product.ref,
         status: 'progress'
       }, {withCredentials:true});
@@ -166,7 +167,6 @@ const Checkout = () => {
                     checked={value === "maison"}
                     onChange={() => setvalue("maison")}
                     value="maison"
-                    className=""
                   />
                   a la maison (550DA)
                 </label>
@@ -209,31 +209,35 @@ const Checkout = () => {
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div className="col-span-1">
-                <label className=" text-xl mt-5">Nom:</label>
+                <label className=" text-xl mt-5">Nom</label>
                 <input
+                onChange={(e) => {setNom(e.target.value)}}
                   type="text"
                   placeholder="Entrer votre nom"
                   className="py-1 px-2 text-xl border-2 rounded-xl md:text-lg"
                 />
               </div>
               <div className="col-span-1">
-                <label className=" text-xl mt-5 ">Prénom:</label>
+                <label className=" text-xl mt-5 ">Prénom</label>
                 <input
-                  type="text"
+                onChange={(e) => {setPreNom(e.target.value)}}
+                type="text"
                   placeholder="Entrer votre prénom"
                   className="py-1 px-2 text-xl border-2 rounded-xl md:text-lg"
                 />
                 <br />
               </div>
-              <label className=" text-xl mt-5">Ville:</label> <br />
+              <label className=" text-xl mt-5">Phone</label> <br />
               <input
+                onChange={(e) => {setPhone(e.target.value)}}
                 type="text"
                 placeholder="Entrer votre ville"
                 className="py-1 px-2 text-xl border-2 rounded-xl md:text-lg"
               />{" "}
               <br />
-              <label className=" text-xl mt-5">Adresse:</label> <br />
+              <label className=" text-xl mt-5">Adresse</label> <br />
               <input
+                onChange={(e) => {setAdress(e.target.value)}}
                 type="text"
                 placeholder="Entrer votre Adresse"
                 className="py-1 px-2 text-xl border-2 rounded-xl md:text-lg"
@@ -249,7 +253,6 @@ const Checkout = () => {
                   checked={value === "maison"}
                   onChange={() => setvalue("maison")}
                   value="maison"
-                  className=""
                 />
                 a la maison (550DA)
               </label>
