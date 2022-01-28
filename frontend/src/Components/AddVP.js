@@ -1,23 +1,19 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from "react";
 import BarcodeReader from "react-barcode-reader";
 import axios from "axios";
 import "./AddVP.css";
 
 const ENDPOINT = "http://localhost:4000";
 
-const AddVP = ({
-  code,
-  setCode,
-  setShowAdd,
-}) => {
+const AddVP = ({ code, setCode, setShowAdd }) => {
   const [product, setProduct] = useState([]);
-  const scan = useRef(null)
+  const scan = useRef(null);
   useEffect(() => {
-    scan.current.focus()
-  }, [])
+    scan.current.focus();
+  }, []);
   const ok = (ref) => {
     axios
-      .get(`${ENDPOINT}/api/getProductByref/${ref}`, {withCredentials:true})
+      .get(`${ENDPOINT}/api/getProductByref/${ref}`, { withCredentials: true })
       .then((res) => {
         setProduct(res.data);
       })
@@ -26,9 +22,13 @@ const AddVP = ({
 
   const add = (prod) => {
     axios
-      .post(`${ENDPOINT}/api/takeProduct`, {
-        _id: prod._id,
-      }, {withCredentials:true})
+      .post(
+        `${ENDPOINT}/api/takeProduct`,
+        {
+          _id: prod._id,
+        },
+        { withCredentials: true }
+      )
       .then((res) => {
         if (res.data !== "taille non exist") {
           ok(code);
@@ -42,7 +42,7 @@ const AddVP = ({
         phone: 1000000000,
         adress: "vide",
         ref: prod.ref,
-        status: 'vendre',
+        status: "vendre",
       })
       .then((res) => {
         console.log(res.data);
@@ -93,6 +93,7 @@ const AddVP = ({
           </div>
         ))}
       <button
+        className="btn-yel"
         onClick={() => {
           setShowAdd(false);
         }}

@@ -64,6 +64,7 @@ const Products = () => {
         allTailles,
       }, {withCredentials:true})
       .then((res) => {
+        console.log(res.data);
         setProducts(res.data);
       })
       .catch((err) => console.log(err));
@@ -255,8 +256,9 @@ const Products = () => {
 
       <div className="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-3 gap-y-5">
         {products &&
-          products.map((product, index) => (
+          products.map((product, i) => (
             <div 
+            key={i}
             onClick={() => {nav(`/product/${product.ref}`)}}
             className="group relative rounded-md  cursor-pointer ">
               <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 ">

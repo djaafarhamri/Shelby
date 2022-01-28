@@ -20,8 +20,9 @@ const Bon = ({ products, setShowBon, adress, phone, username }) => {
     <div className="bonpage">
       <div ref={componentRef} className="bon">
         <img src={logo} alt="" />
-        <p>{adress}</p>
-        <p>Tel: {phone}</p>
+        <p>Rue brahim djelloul N°04</p>
+        <p>Tel: 0552363020</p>
+        <p style={{marginLeft: '5px'}}>0550241868</p>
         <div style={{borderBottom: '1px solid'}}></div>
         <p>Client: {username}</p>
         <p>
@@ -44,8 +45,8 @@ const Bon = ({ products, setShowBon, adress, phone, username }) => {
           ))}
           <h4 className="total">Total: {sum(products)}</h4>
       </div>
-      <button onClick={handlePrint}>Print</button>
-      <button onClick={() => {setShowBon(false)}}>close</button>
+      <button className='btn-yel' onClick={handlePrint}>Print</button>
+      <button className='btn-yel' onClick={() => {setShowBon(false)}}>close</button>
     </div>
   );
 };

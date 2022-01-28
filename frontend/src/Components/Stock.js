@@ -8,6 +8,13 @@ const ENDPOINT = "http://localhost:4000";
 const Stock = () => {
   const [products, setProducts] = useState([]);
   const [selected, setSelected] = useState("m");
+  
+  const del = (product) => {
+    axios.delete(`${ENDPOINT}/api/deleteProduct/${product._id}`, {withCredentials: true})
+      .then((res) => {console.log(res.data)})
+      .catch((err) => {console.log(err)})
+  }
+  
   useEffect(() => {
     axios
       .get(`${ENDPOINT}/api/getAllProducts`, {withCredentials:true})
@@ -40,6 +47,7 @@ const Stock = () => {
               <h3 className="stock-color">Color</h3>
               <h3 className="stock-quantity">Quantity</h3>
               <h3 className="stock-prix">Prix</h3>
+              <h3 className="stock-del">Delete</h3>
               {products &&
                 products.map((product, index) => (
                   <div key={index} className="stock-admin">
@@ -49,6 +57,12 @@ const Stock = () => {
                     <div style={{backgroundColor: product.color, height: '40px', width: '40px', border: '2px solid'}} className="stock-color"></div>
                     <p className="stock-quantity">{product.quantity}</p>
                     <p className="stock-prix">{product.price}</p>
+                    <button 
+                      className="stock-del"
+                      onClick={() => {del(product)}}
+                      >
+                        del
+                        </button>
                   </div>
                 ))}
             </div>

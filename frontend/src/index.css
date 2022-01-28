@@ -3,3 +3,10 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Yellowtail&display=swap');
+.btn-yel {
+    background-color: rgba(247, 233, 142, 1);
+  margin: 20px;
+  height: 30px;
+  width: 100px;
+  font-weight: bold;
+}
