@@ -32,14 +32,14 @@ const Login = () => {
         <img className="h-screen" src={hero} alt="" />
       </div>
       <div className="col-span-2 text-monteserrat  h-screen justify-self-center flex flex-col sm:col-span-1 ">
-        <h1 className="text-center text-2xl mb-14 lg:text-3xl xl:text-5xl">
+        <h1 className="text-center text-4xl mb-14  xl:text-5xl">
           Bonjour
         </h1>
         <div className="my-4 text-xl lg:my-7 xl:my-9 xl:text-3xl">
           <p className="py-2">Nom d'utilisateur</p>
           <input
             type="text"
-            className="h-8 lg:h-11 "
+            className="h-8 lg:h-11 px-2 rounded-xl lg:w-80 "
             placeholder="Nom dutilisateur"
             onChange={(e) => {
               setUsername(e.target.value);
@@ -50,7 +50,7 @@ const Login = () => {
           <p className="py-2">Mot de pass</p>
           <input
             type="password"
-            className="h-8 lg:h-11"
+            className="h-8 lg:h-11  px-2 lg:w-80 rounded-xl"
             placeholder="Mot de pass"
             onChange={(e) => {
               setPassword(e.target.value);
@@ -59,7 +59,7 @@ const Login = () => {
         </div>
         <button
           onClick={login}
-          className="bg-royal py-1 text-palete self-center rounded-md px-3 lg:w-24 text-xl xl:text-3xl xl:"
+          className="bg-royal py-2 text-palete self-center rounded-md px-4 lg:w-24 text-xl xl:text-3xl xl:"
         >
           log-in
         </button>

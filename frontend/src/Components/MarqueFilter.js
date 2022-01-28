@@ -4,8 +4,9 @@ const MarqueFilter = ({ marques, setMarques, allMarques }) => {
       {allMarques &&
         allMarques.map((marque, i) => (
           <div key={i}>
-            <div className="flex">
+            <div className="flex ml-2 mb-1">
               <input
+              className="mt-2"
                 type="checkbox"
                 onChange={(e) => {
                   if (e.target.checked) {
@@ -21,7 +22,7 @@ const MarqueFilter = ({ marques, setMarques, allMarques }) => {
                   }
                 }}
               />
-              <p>{marque}</p>
+              <p className=" text-xl md:text-2xl">{marque}</p>
             </div>
           </div>
         ))}

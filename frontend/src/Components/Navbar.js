@@ -100,7 +100,7 @@ const Navbar = () => {
               }
             }}
           />
-        <div className="flex-auto flex place-content-center md:mr-5 ">
+        <div className="flex-auto flex place-content-center md:mr-5 lg:mr-16 ">
           <p className="shelby-logo-123 py-3 px-3 text-4xl hidden md:block">
             Shelby
           </p>
@@ -121,7 +121,7 @@ const Navbar = () => {
             }}
             src={panier}
             alt=""
-            className="h-6 sm:h-8 mt-4 ml-4 mb-4 mr-4"
+            className="h-6 sm:h-8 mt-4 sm:ml-4 mb-4 mr-4"
           />
         </div>
       </div>

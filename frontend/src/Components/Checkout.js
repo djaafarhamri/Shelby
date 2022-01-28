@@ -1,40 +1,81 @@
 import Navbar from "./Navbar";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../contexts/panier";
 import axios from "axios";
-const { v4 } = require('uuid')
+import { useNavigate } from "react-router";
+const { v4 } = require("uuid");
 
 const ENDPOINT = "http://localhost:4000";
 
 const Checkout = () => {
+  const nav = useNavigate()
   const [value, setvalue] = useState("");
   const [toggle, settoggle] = useState(1);
   const [nom, setNom] = useState("");
   const [prenom, setPreNom] = useState("");
   const [phone, setPhone] = useState("");
   const [adress, setAdress] = useState("");
+  const [commune, setCommune] = useState("");
+  const [ville, setVille] = useState("");
+  const [total, setTotal] = useState();
+  const [err, setErr] = useState(false);
   const [cart, setCart] = useContext(CartContext);
+  useEffect(() => {
+    setTotal(0);
+    let t = 0;
+    for (let p of cart) {
+      t = t + p.price;
+    }
+    if (value === "maison") {
+      t = t + 1000;
+    } else if (value === "bureau") {
+      t = t + 550;
+    }
+    setTotal(t);
+  }, [cart, value]);
   const acheter = () => {
-    var cid = v4()
-    for (let product of cart) {
-      axios
-      .post(`${ENDPOINT}/api/takeProduct`, {
-        _id: product._id,
-      }, {withCredentials:true})
-      .then((res) => {
-          console.log(res.data);
-      })
-      .catch((err) => console.log(err));
-      axios.post(`${ENDPOINT}/api/addCustomer`, {
-        id: product._id,
-        client: cid,
-        username: nom + prenom,
-        phone,
-        adress,
-        livrason: value,
-        ref: product.ref,
-        status: 'progress'
-      }, {withCredentials:true});
+    if (
+      nom === "" ||
+      prenom === "" ||
+      phone === "" ||
+      ville === "" ||
+      commune === "" ||
+      adress === "" ||
+      value === ""
+    ) {
+      setErr(true);
+    } else {
+      var cid = v4();
+      for (let product of cart) {
+        axios
+          .post(
+            `${ENDPOINT}/api/takeProduct`,
+            {
+              _id: product._id,
+            },
+            { withCredentials: true }
+          )
+          .then((res) => {
+            console.log(res.data);
+          })
+          .catch((err) => console.log(err));
+        axios.post(
+          `${ENDPOINT}/api/addCustomer`,
+          {
+            id: product._id,
+            client: cid,
+            username: nom + prenom,
+            phone,
+            adress,
+            commune,
+            ville,
+            livrason: value,
+            ref: product.ref,
+            status: "progress",
+          },
+          { withCredentials: true }
+        );
+      }
     }
   };
   const toggletab = (index) => {
@@ -42,35 +83,35 @@ const Checkout = () => {
   };
 
   return (
-    <div>
+    <div className="bg-check h-screen">
       <div>
-        <Navbar />
         <div className="grid justify-center md:hidden ">
-          <div className="flex tex-monteserrat text-2xl mb-3 ">
+          <div className="flex justify-center mt-3 tex-monteserrat text-2xl mb-3 ">
             <button
               className={
                 toggle === 1
-                  ? "border-2 border-solid bg-royal text-palete  "
-                  : "border-2 border-solid"
+                  ? "border-2 px-2  rounded-full border-solid border-crevet bg-crevet text-palete  text-3xl "
+                  : "border-2 px-2  rounded-full border-solid border-crevet"
               }
               onClick={() => toggletab(1)}
             >
-              Le panier
+              1
             </button>
+            <div className="h-1 w-20 bg-crevet mt-4"></div>
             <button
               className={
                 toggle === 2
-                  ? "border-2 border-solid bg-royal text-palete  "
-                  : "border-2 border-solid"
+                  ? "border-2 border-solid border-crevet px-2  rounded-full bg-crevet text-palete text-3xl"
+                  : "border-2 px-2  rounded-full border-solid border-crevet"
               }
               onClick={() => toggletab(2)}
             >
-              Les information
+              2
             </button>
           </div>
           <div className={toggle === 1 ? "block" : "hidden"}>
-            <h1 className="text-center text-monteserrat text-2xl mb-4">
-              vérifier les produit selectioner
+            <h1 className="text-center text-monteserrat font-medium text-5xl mb-4">
+              Panier
             </h1>
             {cart &&
               cart.map((product, i) => (
@@ -81,41 +122,48 @@ const Checkout = () => {
                     alt=""
                   />
                   <div className="relative">
-                    <h1 className=" text-xl font-monteserrat">
+                    <h1 className=" text-2xl font-monteserrat">
                       {product.title}
                     </h1>
-                    <p className="text-lg font-monteserrat">
+                    <p className="text-2xl font-monteserrat">
                       {product.price} DA
                     </p>
                     {product.category === "Shoes" ? (
-                      <p className="text-lg font-monteserrat">
+                      <p className="text-2xl font-monteserrat">
                         pointure: {product.taille}
                       </p>
                     ) : (
-                      <p className="text-lg font-monteserrat">
+                      <p className="text-2xl font-monteserrat">
                         taille: {product.taille}
                       </p>
                     )}
-                    <svg
-                      className="w-6 h-6 absolute right-0 top-0"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
+                    <button
+                      onClick={() => {
+                        let c = cart.filter((t) => t._id !== product._id);
+                        setCart(c);
+                      }}
                     >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                      ></path>
-                    </svg>
+                      <svg
+                        className="w-6 h-6 absolute right-0 top-0"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                        ></path>
+                      </svg>
+                    </button>
                   </div>
                 </div>
               ))}
             <div className="flex justify-center font-monteserrat">
               <button
-                className="mt-6 bg-royal text-palete text-2xl px-1 py-2 rounded-lg "
+                className="mt-6 bg-royal text-palete text-2xl px-6 py-2 font-semibold rounded-lg "
                 onClick={() => toggletab(2)}
               >
                 Next
@@ -124,157 +172,206 @@ const Checkout = () => {
           </div>
           <div className={toggle === 2 ? "block" : "hidden"}>
             <div className="grid gap-3 font-monteserrat">
-              <h1 className="text-center text-2xl">
-                Remplissez le formulaire de demande{" "}
-              </h1>
-              <label className=" text-xl">Nom</label>
+              <h1 className="text-center font-medium text-4xl">Paiement </h1>
+              <label className=" text-xl font-semibold">Nom</label>
               <input
                 onChange={(e) => {
                   setNom(e.target.value);
                 }}
                 type="text"
                 placeholder="Entrer votre nom"
-                className="py-1 px-2 text-xl border-2"
+                className="py-1 px-2 rounded-xl text-xl border-2"
               />
-              <label className=" text-xl">Prénom</label>
+              <label className=" text-xl  font-semibold">Prénom</label>
               <input
                 onChange={(e) => {
                   setPreNom(e.target.value);
                 }}
                 type="text"
                 placeholder="Entrer votre prénom"
-                className="py-1 px-2 text-xl border-2"
+                className="py-1 px-2 rounded-xl text-xl border-2"
               />
-              <label className=" text-xl">Phone</label>
+              <label className=" text-xl font-semibold">Telephone</label>
               <input
                 onChange={(e) => {
                   setPhone(e.target.value);
                 }}
                 type="text"
-                placeholder="Entrer votre ville"
-                className="py-1 px-2 text-xl border-2"
+                placeholder="Entrer votre nombre de tel"
+                className="py-1 px-2 text-xl rounded-xl border-2"
               />
-              <label className=" text-xl">Adresse</label>
+              <label className=" text-xl font-semibold">Ville</label>
+              <input
+                onChange={(e) => {
+                  setVille(e.target.value);
+                }}
+                type="text"
+                placeholder="Entrer votre Ville"
+                className="py-1 px-2 text-xl rounded-xl border-2"
+              />
+              <label className=" text-xl font-semibold">Commume</label>
+              <input
+                onChange={(e) => {
+                  setCommune(e.target.value);
+                }}
+                type="text"
+                placeholder="Entrer votre Commume"
+                className="py-1 px-2 text-xl rounded-xl border-2"
+              />
+              <label className=" text-xl font-semibold">Adresse</label>
               <input
                 onChange={(e) => {
                   setAdress(e.target.value);
                 }}
                 type="text"
                 placeholder="Entrer votre Adresse"
-                className="py-1 px-2 text-xl border-2"
+                className="py-1 px-2 text-xl rounded-xl border-2"
               />
-              <label className=" text-xl">Type de livraison</label>
+              <label className=" text-xl font-semibold">
+                Type de livraison
+              </label>
               <div className="flex justify-around">
                 <label className="text-xl">
                   <input
                     type="radio"
-                    className="h-3 w-3"
+                    className="h-5 w-5"
                     checked={value === "maison"}
                     onChange={() => setvalue("maison")}
                     value="maison"
                   />
-                  a la maison (550DA)
+                  a la maison (1000DA)
                 </label>
                 <label className="text-xl">
                   <input
                     type="radio"
                     checked={value === "bureau"}
                     onChange={() => setvalue("bureau")}
-                    className=" "
+                    className="h-5 w-5"
                   />
-                  a le bureau (1000DA)
+                  a le bureau (550DA)
                 </label>
               </div>
             </div>
             <div className="flex justify-center">
-              <button className="mt-6 bg-royal text-palete text-2xl px-1 py-2 rounded-lg ">
+              <button
+                onClick={acheter}
+                className="mt-6 bg-royal text-palete text-2xl px-6 py-2 font-semibold rounded-lg "
+              >
                 Acheter
               </button>
             </div>
           </div>
         </div>
-        <div className=" hidden md:grid md:grid-cols-2 md:gap-3">
+        <div className=" hidden md:grid md:grid-cols-2 md:gap-3 ">
           <div className="font-monteserrat mt-6 ml-5">
             <div className="flex">
-              <svg
-                className="w-9 h-12"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
-                ></path>
-              </svg>
+              <button onClick={() => {
+                nav(-1)
+              }}>
+                <svg
+                  className="w-9 h-12"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                  ></path>
+                </svg>
+              </button>
               <h1 className="text-4xl ml-4">Panier</h1>
             </div>
             <div className="grid grid-cols-2 gap-3">
-              <div className="col-span-1">
-                <label className=" text-xl mt-5">Nom</label>
-                <input
-                onChange={(e) => {setNom(e.target.value)}}
-                  type="text"
-                  placeholder="Entrer votre nom"
-                  className="py-1 px-2 text-xl border-2 rounded-xl md:text-lg"
-                />
-              </div>
-              <div className="col-span-1">
-                <label className=" text-xl mt-5 ">Prénom</label>
-                <input
-                onChange={(e) => {setPreNom(e.target.value)}}
-                type="text"
-                  placeholder="Entrer votre prénom"
-                  className="py-1 px-2 text-xl border-2 rounded-xl md:text-lg"
-                />
-                <br />
-              </div>
-              <label className=" text-xl mt-5">Phone</label> <br />
+              <label className=" text-xl mt-5 font-semibold">Nom</label>
+              <label className=" text-xl mt-5 font-semibold ">Prénom</label>
               <input
-                onChange={(e) => {setPhone(e.target.value)}}
+                onChange={(e) => {
+                  setNom(e.target.value);
+                }}
                 type="text"
-                placeholder="Entrer votre ville"
-                className="py-1 px-2 text-xl border-2 rounded-xl md:text-lg"
+                placeholder="Entrer votre nom"
+                className="py-1 px-2 text-xl bg-gri rounded-xl md:text-lg"
+              />
+              <input
+                onChange={(e) => {
+                  setPreNom(e.target.value);
+                }}
+                type="text"
+                placeholder="Entrer votre prénom"
+                className="py-1 px-2 text-xl bg-gri rounded-xl md:text-lg"
+              />
+              <label className=" text-xl mt-5 font-semibold">Telephone</label>{" "}
+              <br />
+              <input
+                onChange={(e) => {
+                  setPhone(e.target.value);
+                }}
+                type="text"
+                placeholder="Entrer votre Numéro de Tel "
+                className="py-1 px-2 text-xl bg-gri rounded-xl md:text-lg"
               />{" "}
               <br />
-              <label className=" text-xl mt-5">Adresse</label> <br />
+              <label className=" text-xl mt-5 font-semibold">Ville</label>{" "}
+              <label className=" text-xl mt-5 font-semibold">Commune</label>
               <input
-                onChange={(e) => {setAdress(e.target.value)}}
+                onChange={(e) => {
+                  setCommune(e.target.value);
+                }}
+                type="text"
+                placeholder="Entrer votre VILLE "
+                className="py-1 px-2 text-xl rounded-xl md:text-lg"
+              />{" "}
+              <input
+                onChange={(e) => {
+                  setVille(e.target.value);
+                }}
+                type="text"
+                placeholder="Entrer votre Commune "
+                className="py-1 px-2 text-xl  rounded-xl md:text-lg"
+              />{" "}
+              <label className=" text-xl mt-5 font-semibold">Adresse</label>{" "}
+              <br />
+              <input
+                onChange={(e) => {
+                  setAdress(e.target.value);
+                }}
                 type="text"
                 placeholder="Entrer votre Adresse"
-                className="py-1 px-2 text-xl border-2 rounded-xl md:text-lg"
+                className="py-1 px-2 text-xl rounded-xl md:text-lg"
               />{" "}
               <br />
             </div>
-            <label className=" text-xl">Type de livraison:</label> <br />
-            <div className="flex justify-around">
-              <label className="text-xl">
+            <label className=" text-xl font-semibold">Type de livraison:</label>{" "}
+            <br />
+            <div className="flex justify-around mt-4">
+              <label className="text-xl ">
                 <input
                   type="radio"
-                  className="h-3 w-3"
+                  className="h-5 w-6 checked:bg-sfar border-sfar "
                   checked={value === "maison"}
                   onChange={() => setvalue("maison")}
                   value="maison"
                 />
-                a la maison (550DA)
+                a la maison (1000DA)
               </label>
               <label className="text-xl">
                 <input
                   type="radio"
                   checked={value === "bureau"}
                   onChange={() => setvalue("bureau")}
-                  className=" "
+                  className="h-5 w-6 bg-sfar "
                 />
-                a le bureau (1000DA)
+                a le bureau (500DA)
               </label>
             </div>
             <div className="flex justify-center">
               <button
                 onClick={acheter}
-                className="mt-6 bg-royal text-palete text-2xl px-1 py-2 rounded-lg "
+                className="mt-6 bg-royal text-palete text-2xl px-8 font-semibold py-3 rounded-lg "
               >
                 Acheter
               </button>
@@ -282,51 +379,59 @@ const Checkout = () => {
           </div>
           <div className="font-monteserrat ml-3 ">
             <h1 className=" text-4xl mb-5">la commande</h1>
-            <div className="ring-1 ring-gray rounded-xl">
+            <div className="ring-1 ring-gray rounded-xl bg-gri">
               <div className=" rounded-xl divide-y divide-solid">
                 {cart &&
                   cart.map((product, i) => (
-                    <div key={i} className="grid grid-cols-2  mb-4">
+                    <div key={i} className="grid grid-cols-3  mb-4">
                       <img
-                        className="object-cover object-center w-full h-full overflow-hidden rounded-xl "
+                        className="object-cover object-center w-full h-full overflow-hidden rounded-xl col-span-1 "
                         src={`${ENDPOINT}/${product.main_image}`}
                         alt=""
                       />
-                      <div className="relative">
-                        <h1 className=" text-4xl mt-2 font-monteserrat md:text-2xl">
+                      <div className="relative col-span-2">
+                        <h1 className=" text-4xl font-semibold mt-2 font-monteserrat ">
                           {product.title}
                         </h1>
-                        <p className="text-xl mt-2 font-monteserrat md:text-lg">
+                        <p className="font-light"></p>
+                        <p className="text-3xl mt-2 font-monteserrat ">
                           {product.price} DA
                         </p>
                         {product.category === "Shoes" ? (
-                          <p className="text-xl mt-2 font-monteserrat md:text-lg">
+                          <p className="text-3xl mt-2 font-monteserrat ">
                             pointure: {product.taille}
                           </p>
                         ) : (
-                          <p className="text-xl mt-2 font-monteserrat md:text-lg">
+                          <p className="text-3xl mt-2 font-monteserrat ">
                             taille: {product.taille}
                           </p>
                         )}
-                        <svg
-                          className="w-6 h-6 absolute top-0 right-0 mt-2 mr-3"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
+                        <button
+                          onClick={() => {
+                            let c = cart.filter((t) => t._id !== product._id);
+                            setCart(c);
+                          }}
                         >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                          ></path>
-                        </svg>
+                          <svg
+                            className="w-6 h-6 absolute top-0 right-0 mt-2 mr-3"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                            ></path>
+                          </svg>
+                        </button>
                       </div>
                     </div>
                   ))}
 
-                <h1 className="text-3xl py-3 ">Prix Total:</h1>
+                <h1 className="text-3xl py-3 ">Prix Total: {total}</h1>
               </div>
             </div>
           </div>

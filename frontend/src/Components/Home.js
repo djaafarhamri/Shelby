@@ -1,32 +1,27 @@
 import { Link } from "react-router-dom";
 import hero from "../assets/home-img.png";
 import Navbar from "./Navbar";
+import Nav from "./Nav";
 const Home = () => {
   return (
-    <div>
-      {<Navbar />}
-      <div className="font-monteserrat">
-        <img
-          className="h-[calc(100vh-4rem)] w-[calc(100%)] relative object-cover"
-          src={hero}
-          alt=""
-        />
-        <h1 className="absolute top-1/3 left-1/2 transform -translate-x-1/2 text-3xl sm:hidden text-palete">
-          Bienvenue De Votre Boutique{" "}
-        </h1>
-        <h1 className="hidden sm:block sm:text-4xl lg:text-6xl  absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-palete">
-          Bienvenue{" "}
-        </h1>
-        <h1 className="hidden sm:block sm:text-4xl lg:text-5xl absolute  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-palete">
-          Dand Votre Boutique{" "}
-        </h1>
-        <Link to="/products">
-          <button className="absolute text-2xl sm:text-3xl bg-palete bottom-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-2xl py-2 px-2">
-            découvrir
+    <div className="bg-hero-pattern h-screen w-screen bg-no-repeat bg-center bg-cover">
+      {<Nav />}
+      <div  className="  font-mont">
+        <div className="text-center tracking-wide text-5xl md:text-6xl mt-44 lg:text-7xl xl:text-8xl  font-bold text-palete ">
+          <h1>Bienvenue</h1>
+        </div>
+        <div className="text-center tracking-wide text-5xl md:text-6xl mt-2 md:mt-6  lg:text-7xl xl:text-8xl  font-bold text-palete">
+          <h1 className="">Dans Votre Boutique</h1>
+        </div>
+
+       <div className="flex justify-center mt-10 md:mt-20">
+        <Link to='/products'>
+          <button className=" text-3xl font-bold  lg:text-5xl bg-palete  rounded-3xl py-3 px-5 lg:py-5 lg:px-10">
+          Savoir Plus
           </button>
         </Link>
+        </div>
       </div>
-      <div></div>
     </div>
   );
 };
