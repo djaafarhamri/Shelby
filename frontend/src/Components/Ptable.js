@@ -15,7 +15,7 @@ const Ptable = ({search}) => {
         setProducts(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [render]);
 
   const valider = (_id) => {
     axios

@@ -113,8 +113,8 @@ const Atable = ({search}) => {
             name={clients[0].username}
           />
         )}
-        {showPending && (
-          <>
+        {showPending && (products.length !== 0) && (
+          <div className='d-data'>
             <h2>Prix paye</h2>
             <input
               type="text"
@@ -130,7 +130,7 @@ const Atable = ({search}) => {
             >
               annuler
             </button>
-          </>
+          </div>
         )}
         {showAdd && (
           <AddVP code={code} setCode={setCode} setShowAdd={setShowAdd} />

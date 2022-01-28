@@ -19,7 +19,7 @@ module.exports.getCustomerByid = async (req, res) => {
 
 module.exports.getPending = async (req, res) => {
   try {
-    if (req.query.search !== "null") {
+    if (req.query.search) {
       const regex = new RegExp(escapeRegex(req.query.search), "gi");
       const client = await Customer.find({ ref: regex,status: "pending" });
       res.status(200).json(client);
@@ -50,7 +50,7 @@ module.exports.getVendre = async (req, res) => {
 module.exports.get24 = async (req, res) => {
   const response = [];
   try {
-    if (req.query.search !== "null") {
+    if (req.query.search) {
       const regex = new RegExp(escapeRegex(req.query.search), "gi");
       const clients = await Customer.find({ ref: regex, status: "24" });
       for (let client of clients) {
