@@ -117,7 +117,7 @@ module.exports.deleteProduct = async (req, res) => {
         if (prod.length > 1) {
           fs.unlinkSync(path);
         }
-        await Product.findOneAndDelete({ _id: id });
+        await Product.findOneAndUpdate({ _id: id }, { quantity: 0 });
         res.status(200).json("product deleted");
       }
     }

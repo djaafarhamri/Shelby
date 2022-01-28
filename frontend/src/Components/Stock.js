@@ -11,7 +11,7 @@ const Stock = () => {
   const [render, setRender] = useState(false);
   
   const del = (product) => {
-    axios.delete(`${ENDPOINT}/api/deleteProduct/${product._id}`, {withCredentials: true})
+    axios.post(`${ENDPOINT}/api/deleteProduct/${product._id}`, {withCredentials: true})
       .then((res) => {console.log(res.data)})
       .catch((err) => {console.log(err)})
     setRender(!false)
