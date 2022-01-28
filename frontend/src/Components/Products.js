@@ -109,7 +109,10 @@ const Products = () => {
   const [filter5, isfilter5] = useState(false);
   const [filter6, isfilter6] = useState(false);
   function pageScroll() {
-    window.scrollBy(0, -20);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
   }
 
   return (
