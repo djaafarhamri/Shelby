@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import hero from "../assets/home-img.png";
+import hero from "../assets/login.JPG";
 
 const ENDPOINT = "http://localhost:4000";
 
@@ -31,26 +31,26 @@ const Login = () => {
       <div className="hidden sm:block ">
         <img className="h-screen" src={hero} alt="" />
       </div>
-      <div className="col-span-2 text-monteserrat  h-screen justify-self-center flex flex-col sm:col-span-1 ">
-        <h1 className="text-center text-4xl mb-14  xl:text-5xl">
-          Bonjour
+      <div className="col-span-2   h-screen justify-self-center flex flex-col sm:col-span-1 font-mont ">
+        <h1 className="text-center  mb-14 font-medium text-6xl mt-6">
+          Bonjour,
         </h1>
-        <div className="my-4 text-xl lg:my-7 xl:my-9 xl:text-3xl">
+        <div className="my-4  lg:my-7 xl:my-9 text-3xl">
           <p className="py-2">Nom d'utilisateur</p>
           <input
             type="text"
-            className="h-8 lg:h-11 px-2 rounded-xl lg:w-80 "
+            className="py-2 px-2 rounded-xl lg:w-96 "
             placeholder="Nom dutilisateur"
             onChange={(e) => {
               setUsername(e.target.value);
             }}
           />
         </div>
-        <div className="mb-8 text-xl xl:mb-12 xl:text-3xl">
+        <div className="mb-8  xl:mb-12 text-3xl">
           <p className="py-2">Mot de pass</p>
           <input
             type="password"
-            className="h-8 lg:h-11  px-2 lg:w-80 rounded-xl"
+            className=" py-2 px-2 lg:w-96 rounded-xl"
             placeholder="Mot de pass"
             onChange={(e) => {
               setPassword(e.target.value);
@@ -59,7 +59,7 @@ const Login = () => {
         </div>
         <button
           onClick={login}
-          className="bg-royal py-2 text-palete self-center rounded-md px-4 lg:w-24 text-xl xl:text-3xl xl:"
+          className="bg-royal py-3 text-palete self-center rounded-xl px-6  text-3xl "
         >
           log-in
         </button>
