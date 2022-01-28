@@ -1,19 +1,64 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Atable from "./Atable";
 import Ptable from "./Ptable";
 import Otable from "./Otable";
 import "./Vendre.css";
 import Htable from "./Htable";
 import Progress from "./Progress";
+import axios from "axios";
 
-//! d -> Delivered
-//! p -> Pending
-//! o -> On Delivery
-//! i -> In Progress
+const ENDPOINT = "http://localhost:4000";
 
 const Vendre = () => {
   const [selected, setSelected] = useState("a");
   const [search, setSearch] = useState("");
+  const [plen, setPlen] = useState(0);
+  const [olen, setOlen] = useState(0);
+  const [ilen, setIlen] = useState(0);
+  const [hlen, setHlen] = useState(0);
+  //! p -> Pending
+
+  
+  useEffect(() => {
+    axios
+      .get(`${ENDPOINT}/api/getPending`, {withCredentials:true})
+      .then((res) => {
+        setPlen(res.data.length)
+      })
+      .catch((err) => console.log(err));
+  }, []);
+  
+  //! o -> On Delivery
+
+  useEffect(() => {
+    axios
+      .get(`${ENDPOINT}/api/getDelivery`, {withCredentials: true})
+      .then((res) => {
+        setOlen(res.data.length)
+      })
+      .catch((err) => console.log(err));
+  }, []);
+  //! h -> Htable
+  
+  
+  useEffect(() => {
+    axios
+    .get(`${ENDPOINT}/api/get24`, {withCredentials:true})
+    .then((res) => {
+      setHlen(res.data.length)
+    })
+    .catch((err) => console.log(err));
+  }, []);
+  //! i -> In Progress
+  
+  useEffect(() => {
+    axios
+      .get(`${ENDPOINT}/api/getProgress`, { withCredentials: true })
+      .then((res) => {
+        setIlen(res.data.length)
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <div className="vendre">
@@ -43,7 +88,7 @@ const Vendre = () => {
               : { backgroundColor: "white" }
           }
         >
-          Pending
+          Pending ({plen})
         </button>
         <button
           onClick={() => {
@@ -55,7 +100,7 @@ const Vendre = () => {
               : { backgroundColor: "white" }
           }
         >
-          On Delivery
+          On Delivery ({olen})
         </button>
         <button
           onClick={() => {
@@ -67,7 +112,7 @@ const Vendre = () => {
               : { backgroundColor: "white" }
           }
         >
-          In Progress
+          In Progress ({ilen})
         </button>
         <button
           onClick={() => {
@@ -79,7 +124,7 @@ const Vendre = () => {
               : { backgroundColor: "white" }
           }
         >
-          24 heurs
+          24 heurs ({hlen})
         </button>
       </div>
       <div className="table">

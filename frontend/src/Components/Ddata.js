@@ -8,6 +8,8 @@ const Ddata = ({ setShowDeliver, clients }) => {
   const [nom, setNom] = useState("");
   const [adress, setAdress] = useState("");
   const [phone, setPhone] = useState("");
+  const [ville, setVille] = useState("");
+  const [commune, setCommune] = useState("");
   const deliver = () => {
     let cid = v4();
     if (nom !== "" && adress !== "" && phone !== "") {
@@ -18,6 +20,8 @@ const Ddata = ({ setShowDeliver, clients }) => {
               client: cid,
               nom,
               adress,
+              ville,
+              commune,
               phone,
               status: "delivery",
             }, {withCredentials:true})
@@ -36,6 +40,18 @@ const Ddata = ({ setShowDeliver, clients }) => {
         type="text"
         placeholder="nom"
         onChange={(e) => [setNom(e.target.value)]}
+      />
+      <p>ville</p>
+      <input
+        type="text"
+        placeholder="ville"
+        onChange={(e) => [setVille(e.target.value)]}
+      />
+      <p>commune</p>
+      <input
+        type="text"
+        placeholder="commune"
+        onChange={(e) => [setCommune(e.target.value)]}
       />
       <p>adress</p>
       <input

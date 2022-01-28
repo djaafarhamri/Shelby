@@ -20,6 +20,12 @@ const customerSchema = mongoose.Schema(
     adress: {
       type: String,
     },
+    commune: {
+      type: String,
+    },
+    ville: {
+      type: String,
+    },
     livrason: {
       type: String,
     },

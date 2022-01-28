@@ -29,6 +29,8 @@ const ShowProducts = ({ cid, setShowProducts }) => {
             _id: client._id,
             nom: client.username,
             adress: client.adress,
+            ville: client.ville,
+            commune: client.commune,
             phone: client.phone,
             status: "delivery",
           },
@@ -67,6 +69,12 @@ const ShowProducts = ({ cid, setShowProducts }) => {
             <p className="show-price">{prod.price}</p>
           </div>
         ))}
+        <h3>Ville</h3>
+        <p>{clients[0].ville}</p>
+        <h3>Commune</h3>
+        <p>{clients[0].commune}</p>
+        <h3>Adress</h3>
+        <p>{clients[0].adress}</p>
       <button
         className="d-data-deliver"
         onClick={() => {

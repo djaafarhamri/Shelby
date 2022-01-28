@@ -34,6 +34,7 @@
   background: white;
   cursor: pointer;
   margin: 12px;
+  position: relative;
 }
 .table {
   align-self: center;
@@ -49,3 +50,6 @@
   text-align: left;
   margin-left: 17px;
 }
+/* .products-length {
+  position: absolute;
+} */

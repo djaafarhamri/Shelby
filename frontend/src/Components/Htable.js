@@ -13,6 +13,7 @@ const Htable = ({search}) => {
       .get(`${ENDPOINT}/api/get24`, {withCredentials:true})
       .then((res) => {
         setProducts(res.data);
+
       })
       .catch((err) => console.log(err));
   }, [render]);

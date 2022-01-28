@@ -21,7 +21,7 @@ module.exports.getPending = async (req, res) => {
   try {
     if (req.query.search) {
       const regex = new RegExp(escapeRegex(req.query.search), "gi");
-      const client = await Customer.find({ ref: regex,status: "pending" });
+      const client = await Customer.find({ ref: regex, status: "pending" });
       res.status(200).json(client);
     } else {
       const client = await Customer.find({ status: "pending" });
@@ -114,6 +114,8 @@ module.exports.getProgress = async (req, res) => {
         client: client.username,
         phone: client.phone,
         adress: client.adress,
+        ville: client.ville,
+        commune: client.commune,
         livraison: client.livrason,
         price: product.price,
       });
@@ -130,9 +132,10 @@ module.exports.getProgress = async (req, res) => {
 
 module.exports.getDelivery = async (req, res) => {
   const response = [];
-  console.log(req.query);
+  console.log(typeof req.query.search);
   try {
-    if (req.query.search !== "null") {
+    if (req.query.search) {
+      console.log("search");
       const regex = new RegExp(escapeRegex(req.query.search), "gi");
       const clients = await Customer.find({ ref: regex, status: "delivery" });
       for (let client of clients) {
@@ -147,6 +150,8 @@ module.exports.getDelivery = async (req, res) => {
           client: client.username,
           phone: client.phone,
           adress: client.adress,
+          ville: client.ville,
+          commune: client.commune,
           price: product.price,
         });
       }
@@ -154,6 +159,7 @@ module.exports.getDelivery = async (req, res) => {
     } else {
       const clients = await Customer.find({ status: "delivery" });
       for (let client of clients) {
+        console.log("p: ", client);
         const product = await Product.findOne({ _id: client.id });
         response.push({
           product_id: product._id,
@@ -165,6 +171,8 @@ module.exports.getDelivery = async (req, res) => {
           client: client.username,
           phone: client.phone,
           adress: client.adress,
+          ville: client.ville,
+          commune: client.commune,
           price: product.price,
         });
       }
@@ -177,8 +185,18 @@ module.exports.getDelivery = async (req, res) => {
 };
 
 module.exports.addCustomer = async (req, res) => {
-  const { id, client, username, phone, adress, livrason, ref, status } =
-    req.body;
+  const {
+    id,
+    client,
+    username,
+    phone,
+    adress,
+    ville,
+    commune,
+    livrason,
+    ref,
+    status,
+  } = req.body;
   const product = Product.find({ _id: id });
   try {
     if (product.quantity !== 0) {
@@ -188,6 +206,8 @@ module.exports.addCustomer = async (req, res) => {
         username,
         phone,
         adress,
+        ville,
+        commune,
         livrason,
         ref,
         status,
@@ -226,11 +246,11 @@ module.exports.updateToPending = async (req, res) => {
 };
 
 module.exports.updateToDelivery = async (req, res) => {
-  const { _id, client, nom, adress, phone, status } = req.body;
+  const { _id, client, nom, adress, ville, commune, phone, status } = req.body;
   try {
     await Customer.findOneAndUpdate(
       { _id },
-      { $set: { status, client, username: nom, phone, adress } }
+      { $set: { status, client, username: nom, phone, adress, ville, commune } }
     );
     res.status(200).json("updated");
   } catch (e) {

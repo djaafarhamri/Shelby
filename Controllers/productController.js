@@ -1,6 +1,6 @@
 const Product = require("../models/Product");
 const Customer = require("../models/Customer");
-const fs = require('fs')
+const fs = require("fs");
 
 module.exports.uploadMainImage = async (req, res) => {
   res.status(200).json(req.file.path);
@@ -40,7 +40,7 @@ module.exports.addProduct = async (req, res) => {
         title,
         description,
         marque: marque.toUpperCase(),
-        genre:  genre.toUpperCase(),
+        genre: genre.toUpperCase(),
         category: category.toUpperCase(),
         prixAch,
         price,
@@ -103,18 +103,23 @@ module.exports.updateProduct = async (req, res) => {
 
 module.exports.deleteProduct = async (req, res) => {
   const id = req.params.id;
-  const p = await Product.findOne({_id: id})
-  const prod = await Product.find({ref: p.ref})
+  const p = await Product.findOne({ _id: id });
+  const c = await Customer.find({ ref: p.ref });
+  const prod = await Product.find({ ref: p.ref });
   const path = p.main_image;
-  console.log('p:', p);
-  console.log('path:', path);
+  console.log("p:", p);
+  console.log("path:", path);
   try {
-    if (path) {
-      if (prod.length > 1) {
-        fs.unlinkSync(path);
+    if (c.length) {
+      res.status(400).json("produit sold");
+    } else {
+      if (path) {
+        if (prod.length > 1) {
+          fs.unlinkSync(path);
+        }
+        await Product.findOneAndDelete({ _id: id });
+        res.status(200).json("product deleted");
       }
-      await Product.findOneAndDelete({ _id: id });
-      res.status(200).json("product deleted");
     }
   } catch (e) {
     console.log(e);
@@ -246,7 +251,7 @@ module.exports.getAllProductsByCategory = async (req, res) => {
 
 module.exports.getAllMarques = async (req, res) => {
   try {
-    const products = await Product.find({quantity: {$ne: 0}});
+    const products = await Product.find({ quantity: { $ne: 0 } });
     let marques = [];
     for (let p of products) {
       let marque = p.marque.toUpperCase();
@@ -268,7 +273,7 @@ module.exports.getAllMarques = async (req, res) => {
 
 module.exports.getallGenres = async (req, res) => {
   try {
-    const products = await Product.find({quantity: {$ne: 0}});
+    const products = await Product.find({ quantity: { $ne: 0 } });
     let genres = [];
     for (let p of products) {
       let genre = p.genre.toUpperCase();
@@ -278,9 +283,7 @@ module.exports.getallGenres = async (req, res) => {
         genres.push(genre);
       }
     }
-    let product = genres.filter(
-      (v, i, a) => a.findIndex((t) => t === v) === i
-    );
+    let product = genres.filter((v, i, a) => a.findIndex((t) => t === v) === i);
     res.status(200).json(product);
   } catch (e) {
     console.log(e);
@@ -290,7 +293,7 @@ module.exports.getallGenres = async (req, res) => {
 
 module.exports.getallCategories = async (req, res) => {
   try {
-    const products = await Product.find({quantity: {$ne: 0}});
+    const products = await Product.find({ quantity: { $ne: 0 } });
     let categories = [];
     for (let p of products) {
       let category = p.category.toUpperCase();
@@ -312,7 +315,10 @@ module.exports.getallCategories = async (req, res) => {
 
 module.exports.getallTailles = async (req, res) => {
   try {
-    const products = await Product.find({ category: { $ne: "Shoes" }, quantity: {$ne: 0} });
+    const products = await Product.find({
+      category: { $ne: "Shoes" },
+      quantity: { $ne: 0 },
+    });
     let tailles = [];
     for (let p of products) {
       let taille = p.taille.toUpperCase();
@@ -334,7 +340,10 @@ module.exports.getallTailles = async (req, res) => {
 
 module.exports.getallPointure = async (req, res) => {
   try {
-    const products = await Product.find({ category: "Shoes" , quantity: {$ne: 0}});
+    const products = await Product.find({
+      category: "Shoes",
+      quantity: { $ne: 0 },
+    });
     let tailles = [];
     for (let p of products) {
       let taille = p.taille.toUpperCase();
