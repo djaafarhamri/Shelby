@@ -8,11 +8,13 @@ const ENDPOINT = "http://localhost:4000";
 const Stock = () => {
   const [products, setProducts] = useState([]);
   const [selected, setSelected] = useState("m");
+  const [render, setRender] = useState(false);
   
   const del = (product) => {
     axios.delete(`${ENDPOINT}/api/deleteProduct/${product._id}`, {withCredentials: true})
       .then((res) => {console.log(res.data)})
       .catch((err) => {console.log(err)})
+    setRender(!false)
   }
   
   useEffect(() => {
@@ -22,7 +24,7 @@ const Stock = () => {
         setProducts(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [render]);
   return (
     <>
       {selected === "m" && (

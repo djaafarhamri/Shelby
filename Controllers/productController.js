@@ -1,5 +1,6 @@
 const Product = require("../models/Product");
 const Customer = require("../models/Customer");
+const fs = require('fs')
 
 module.exports.uploadMainImage = async (req, res) => {
   res.status(200).json(req.file.path);
@@ -39,8 +40,8 @@ module.exports.addProduct = async (req, res) => {
         title,
         description,
         marque: marque.toUpperCase(),
-        genre,
-        category,
+        genre:  genre.toUpperCase(),
+        category: category.toUpperCase(),
         prixAch,
         price,
         taille,
@@ -102,9 +103,19 @@ module.exports.updateProduct = async (req, res) => {
 
 module.exports.deleteProduct = async (req, res) => {
   const id = req.params.id;
+  const p = await Product.findOne({_id: id})
+  const prod = await Product.find({ref: p.ref})
+  const path = p.main_image;
+  console.log('p:', p);
+  console.log('path:', path);
   try {
-    await Product.findOneAndDelete({ _id: id });
-    res.status(200).json("product deleted");
+    if (path) {
+      if (prod.length > 1) {
+        fs.unlinkSync(path);
+      }
+      await Product.findOneAndDelete({ _id: id });
+      res.status(200).json("product deleted");
+    }
   } catch (e) {
     console.log(e);
     res.status(400).json("error occured while deleting the product");
@@ -384,9 +395,7 @@ module.exports.getProductByrefF = async (req, res) => {
     let product = products.filter(
       (v, i, a) => a.findIndex((t) => t.ref === v.ref) === i
     );
-    let t = tailles.filter(
-      (v, i, a) => a.findIndex((t) => t.t === v.t) === i
-      );
+    let t = tailles.filter((v, i, a) => a.findIndex((t) => t.t === v.t) === i);
     res.status(200).json({ product, t });
   } catch (e) {
     console.log(e);
@@ -425,12 +434,12 @@ module.exports.getProductsByclient = async (req, res) => {
   if (cid) {
     const client = await Customer.find({ client: cid });
     try {
-      let products = []
-      for (let prod of client){
-        const p = await Product.findById(prod.id)
-        products.push(p)
-      } 
-      res.status(200).json({products, client});
+      let products = [];
+      for (let prod of client) {
+        const p = await Product.findById(prod.id);
+        products.push(p);
+      }
+      res.status(200).json({ products, client });
     } catch (e) {
       console.log(e);
       res.status(400).json("error");

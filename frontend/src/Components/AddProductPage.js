@@ -130,29 +130,19 @@ const AddProductPage = ({ setSelected }) => {
           }}
         />
         <p>Genre</p>
-        <select
-          id="Genre"
-          name="Genre"
+        <input
+          type="text"
           onChange={(e) => {
             setGenre(e.target.value);
           }}
-        >
-          <option value="Classic">Classic</option>
-          <option value="Sport">Sport</option>
-          <option value="Semi-classic">Semi-Classic</option>
-        </select>
+        />
         <p>Categorie</p>
-        <select
-          id="Categorie"
-          name="Categorie"
+        <input
+          type="text"
           onChange={(e) => {
             setCategorie(e.target.value);
           }}
-        >
-          <option value="Clothes">Clothes</option>
-          <option value="Shoes">Shoes</option>
-          <option value="Accessoires">Accessoire</option>
-        </select>
+         />
         <p>Taille/Color/Quantity</p>
         <TableData setTailleQte={setTailleQte} tailleQte={tailleQte} />
         <p>Reference</p>
