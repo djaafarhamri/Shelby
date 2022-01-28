@@ -2,5 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Yellowtail&display=swap');
+.btn-yel {
+    background-color: rgba(247, 233, 142, 1);
+  margin: 20px;
+  height: 30px;
+  width: 100px;
+  font-weight: bold;
+}
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@602&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat&family=Yellowtail&display=swap');
