@@ -70,37 +70,56 @@ const Products = () => {
       .catch((err) => console.log(err));
   }, []);
   useEffect(() => {
-    axios
-      .post(
-        `${ENDPOINT}/api/getfilteredProducts/?search=${search}`,
-        {
-          categories,
-          genres,
-          pointures,
-          tailles,
-          marques,
-          allMarques,
-          allPointure,
-          allTailles,
-        },
-        { withCredentials: true }
-      )
-      .then((res) => {
-        console.log(res.data);
-        setProducts(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, [
-    allMarques,
-    allPointure,
-    allTailles,
-    categories,
-    genres,
-    marques,
-    pointures,
-    search,
-    tailles,
-  ]);
+    if (!search){
+      console.log('no search');
+      axios
+        .post(
+          `${ENDPOINT}/api/getfilteredProducts`,
+          {
+            categories,
+            genres,
+            pointures,
+            tailles,
+            marques,
+            allMarques,
+            allPointure,
+            allTailles,
+            allCategories,
+            allGenres,
+          },
+          { withCredentials: true }
+        )
+        .then((res) => {
+          console.log('products: ', res.data);
+          setProducts(res.data);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      console.log('search');
+      axios
+        .post(
+          `${ENDPOINT}/api/getfilteredProducts/?search=${search}`,
+          {
+            categories,
+            genres,
+            pointures,
+            tailles,
+            marques,
+            allMarques,
+            allPointure,
+            allTailles,
+            allCategories,
+            allGenres,
+          },
+          { withCredentials: true }
+        )
+        .then((res) => {
+          console.log('products: ', res.data);
+          setProducts(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [allCategories, allGenres, allMarques, allPointure, allTailles, categories, genres, marques, pointures, search, tailles]);
   const [isopen, setopen] = useState(true);
   const [filter1, isfilter1] = useState(false);
   const [filter2, isfilter2] = useState(false);

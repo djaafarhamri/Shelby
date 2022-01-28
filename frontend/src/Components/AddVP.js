@@ -65,9 +65,9 @@ const AddVP = ({ code, setCode, setShowAdd }) => {
         type="text"
         onChange={(e) => {
           setCode(e.target.value);
-          ok(e.target.value);
         }}
       />
+      <button className="btn-yel" onClick={() => {ok(code)}}>search</button>
       <div className="prod">
         <h4 className="prod-title">title</h4>
         <h4 className="prod-taille">taille</h4>

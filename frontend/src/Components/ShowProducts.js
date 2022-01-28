@@ -15,6 +15,7 @@ const ShowProducts = ({ cid, setShowProducts }) => {
       })
       .then((res) => {
         setProducts(res.data.products);
+        console.log('res', res.data.client[0].commune);
         setClients(res.data.client);
       })
       .catch((err) => console.log(err));
@@ -70,15 +71,16 @@ const ShowProducts = ({ cid, setShowProducts }) => {
           </div>
         ))}
         <h3>Ville</h3>
-        <p>{clients[0].ville}</p>
+        <p>{clients.length && clients[0].ville}</p>
         <h3>Commune</h3>
-        <p>{clients[0].commune}</p>
+        <p>{clients.length && clients[0].commune}</p>
         <h3>Adress</h3>
-        <p>{clients[0].adress}</p>
+        <p>{clients.length && clients[0].adress}</p>
       <button
         className="d-data-deliver"
         onClick={() => {
           valider(products);
+          setShowProducts(false);
         }}
       >
         valider

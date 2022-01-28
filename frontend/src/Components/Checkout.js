@@ -74,7 +74,7 @@ const Checkout = () => {
             status: "progress",
           },
           { withCredentials: true }
-        );
+        ).then(res => {nav(-1)})
       }
     }
   };

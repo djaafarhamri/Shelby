@@ -76,6 +76,7 @@ const Otable = ({search}) => {
             onClick={() => {
               valider(client.client_id);
               setRender(!render)
+              setShowValid(false)
             }}
           >
             valider

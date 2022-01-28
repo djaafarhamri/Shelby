@@ -16,6 +16,7 @@ const Vendre = () => {
   const [olen, setOlen] = useState(0);
   const [ilen, setIlen] = useState(0);
   const [hlen, setHlen] = useState(0);
+  const [render, setRender] = useState(false);
   //! p -> Pending
 
   
@@ -26,7 +27,7 @@ const Vendre = () => {
         setPlen(res.data.length)
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [render]);
   
   //! o -> On Delivery
 
@@ -37,7 +38,7 @@ const Vendre = () => {
         setOlen(res.data.length)
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [render]);
   //! h -> Htable
   
   
@@ -48,7 +49,7 @@ const Vendre = () => {
       setHlen(res.data.length)
     })
     .catch((err) => console.log(err));
-  }, []);
+  }, [render]);
   //! i -> In Progress
   
   useEffect(() => {
@@ -58,7 +59,7 @@ const Vendre = () => {
         setIlen(res.data.length)
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [render]);
 
   return (
     <div className="vendre">

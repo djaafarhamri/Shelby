@@ -7,7 +7,7 @@ import Bon from "./Bon";
 
 const ENDPOINT = "http://localhost:4000";
 
-const Atable = ({search}) => {
+const Atable = ({ search }) => {
   const [products, setProducts] = useState([]);
   const [clients, setClients] = useState([]);
   const [code, setCode] = useState("");
@@ -20,7 +20,7 @@ const Atable = ({search}) => {
 
   useEffect(() => {
     axios
-      .get(`${ENDPOINT}/api/getVendre`, {withCredentials:true})
+      .get(`${ENDPOINT}/api/getVendre`, { withCredentials: true })
       .then((res) => {
         setProducts(res.data.products);
         setClients(res.data.clients);
@@ -33,27 +33,39 @@ const Atable = ({search}) => {
   const valider = () => {
     for (let client of clients) {
       axios
-        .post(`${ENDPOINT}/api/updateTo24`, {
-          _id: client._id,
-          status: "24",
-        }, {withCredentials:true})
+        .post(
+          `${ENDPOINT}/api/updateTo24`,
+          {
+            _id: client._id,
+            status: "24",
+          },
+          { withCredentials: true }
+        )
         .then((res) => {
           console.log(res.data);
         })
         .catch((err) => console.log(err));
       axios
-        .post(`${ENDPOINT}/api/addSold`, {
-          customer_id: client._id,
-        }, {withCredentials:true})
+        .post(
+          `${ENDPOINT}/api/addSold`,
+          {
+            customer_id: client._id,
+          },
+          { withCredentials: true }
+        )
         .then((res) => console.log(res.data))
         .catch((err) => {
           console.log(err);
         });
 
       axios
-        .post(`${ENDPOINT}/api/addToLaCaisse`, {
-          montant: products[clients.indexOf(client)].price,
-        }, {withCredentials:true})
+        .post(
+          `${ENDPOINT}/api/addToLaCaisse`,
+          {
+            montant: products[clients.indexOf(client)].price,
+          },
+          { withCredentials: true }
+        )
         .then((res) => console.log(res.data))
         .catch((err) => {
           console.log(err);
@@ -64,11 +76,15 @@ const Atable = ({search}) => {
   const pending = () => {
     for (let client of clients) {
       axios
-        .post(`${ENDPOINT}/api/updateToPending`, {
-          _id: client._id,
-          status: "pending",
-          prixPay,
-        }, {withCredentials:true})
+        .post(
+          `${ENDPOINT}/api/updateToPending`,
+          {
+            _id: client._id,
+            status: "pending",
+            prixPay,
+          },
+          { withCredentials: true }
+        )
         .then((res) => {
           console.log(res.data);
         })
@@ -79,24 +95,35 @@ const Atable = ({search}) => {
   };
   const returne = (product, client) => {
     axios
-      .post(`${ENDPOINT}/api/return`, {
-        product,
-      }, {withCredentials:true})
+      .post(
+        `${ENDPOINT}/api/return`,
+        {
+          product,
+        },
+        { withCredentials: true }
+      )
       .then((res) => {
         console.log(res.data);
       })
       .catch((err) => console.log(err));
     axios
-      .delete(`${ENDPOINT}/api/deleteCustomer/${client._id}`, {withCredentials:true})
+      .delete(`${ENDPOINT}/api/deleteCustomer/${client._id}`, {
+        withCredentials: true,
+      })
       .then((res) => {
         console.log(res.data);
       })
       .catch((err) => console.log(err));
     axios
-      .delete(`${ENDPOINT}/api/deleteSold/${client._id}`, {withCredentials:true})
-      .then((res) => {
-        console.log(res.data);
-      }, {withCredentials:true})
+      .delete(`${ENDPOINT}/api/deleteSold/${client._id}`, {
+        withCredentials: true,
+      })
+      .then(
+        (res) => {
+          console.log(res.data);
+        },
+        { withCredentials: true }
+      )
       .catch((err) => console.log(err));
     setRender(!render);
   };
@@ -113,13 +140,14 @@ const Atable = ({search}) => {
             name={clients[0].username}
           />
         )}
-        {showPending && (products.length !== 0) && (
-          <div className='d-data'>
+        {showPending && products.length !== 0 && (
+          <div className="d-data">
             <h2>Prix paye</h2>
             <input
               type="text"
               onChange={(e) => {
                 setPrixPay(e.target.value);
+                setShowPending(false);
               }}
             />
             <button onClick={pending}>pending</button>
@@ -150,7 +178,15 @@ const Atable = ({search}) => {
               <p className="atable-name">{product.title}</p>
               <p className="atable-code">{product.ref}</p>
               <p className="atable-taille">{product.taille}</p>
-              <p style={{ color: product.color, height: '40px', width: '40px', border: '2px solid' }} className="atable-color"></p>
+              <p
+                style={{
+                  color: product.color,
+                  height: "40px",
+                  width: "40px",
+                  border: "2px solid",
+                }}
+                className="atable-color"
+              ></p>
               <p className="atable-prix">{product.price}</p>
               <button
                 className="atable-status"

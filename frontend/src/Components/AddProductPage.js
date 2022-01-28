@@ -64,7 +64,7 @@ const AddProductPage = ({ setSelected }) => {
                   withCredentials: true
                 })
                 .then((res) => {
-                  nav('/admin')
+                  setSelected("m");
                 })
                 .catch((err) => alert('err'));
             }

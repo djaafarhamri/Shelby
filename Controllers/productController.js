@@ -160,13 +160,16 @@ module.exports.getfilteredProducts = async (req, res) => {
     allMarques,
     allPointure,
     allTailles,
+    allCategories,
+    allGenres,
   } = req.body;
+  console.log('allGenres: ', allGenres);
   let Rtailles = tailles.concat(pointures);
   if (genres.length === 0) {
-    genres = ["Classic", "Sport", "Semi-classic"];
+    genres = allGenres;
   }
   if (categories.length === 0) {
-    categories = ["Clothes", "Shoes", "Accessoires"];
+    categories = allCategories;
   }
   if (Rtailles.length === 0) {
     Rtailles = allTailles.concat(allPointure);
@@ -175,7 +178,8 @@ module.exports.getfilteredProducts = async (req, res) => {
     marques = allMarques;
   }
   try {
-    if (req.query.search !== "null") {
+    if (req.query.search !== null && req.query.search !== '' && req.query.search !== undefined && req.query.search !== 'null') {
+      console.log(req.query.search);
       const regex = new RegExp(escapeRegex(req.query.search), "gi");
       let products = await Product.find({
         title: regex,
@@ -190,6 +194,7 @@ module.exports.getfilteredProducts = async (req, res) => {
       let prod = product.filter((p) => p.quantity !== 0);
       res.status(200).json(prod);
     } else {
+      console.log('not search');
       let products = await Product.find({
         category: { $in: categories },
         genre: { $in: genres },
@@ -422,7 +427,7 @@ module.exports.getProductByref = async (req, res) => {
     res.status(200).json(product);
   } catch (e) {
     console.log(e);
-    res.status(404).json("no products found");
+    res.status(400).json("no products found");
   }
 };
 
@@ -492,6 +497,7 @@ module.exports.getProductsByclient = async (req, res) => {
         const p = await Product.findById(prod.id);
         products.push(p);
       }
+      console.log('client:', client);
       res.status(200).json({ products, client });
     } catch (e) {
       console.log(e);
