@@ -283,9 +283,9 @@ const Checkout = () => {
                   ></path>
                 </svg>
               </button>
-              <h1 className="text-4xl ml-4">Panier</h1>
+              <h1 className="text-4xl ml-4 font-semibold font-mont">Panier</h1>
             </div>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-3 font-medium font-mont">
               <label className=" text-xl mt-5 font-semibold">Nom</label>
               <label className=" text-xl mt-5 font-semibold ">Prénom</label>
               <input
@@ -345,27 +345,27 @@ const Checkout = () => {
               />{" "}
               <br />
             </div>
-            <label className=" text-xl font-semibold">Type de livraison:</label>{" "}
+            <label className=" text-2xl font-semibold font-mont">Type de livraison:</label>{" "}
             <br />
-            <div className="flex justify-around mt-4">
-              <label className="text-xl ">
+            <div className="flex justify-around mt-4 font-mont">
+              <label className="text-xl font-medium">
                 <input
                   type="radio"
-                  className="h-5 w-6 checked:bg-sfar border-sfar "
+                  className="h-5 w-6 checked:bg-sfar border-sfar mx-1 "
                   checked={value === "maison"}
                   onChange={() => setvalue("maison")}
                   value="maison"
                 />
-                a la maison (1000DA)
+               A la maison 
               </label>
-              <label className="text-xl">
+              <label className="text-xl font-medium">
                 <input
                   type="radio"
                   checked={value === "bureau"}
                   onChange={() => setvalue("bureau")}
-                  className="h-5 w-6 bg-sfar "
+                  className="h-5 w-6 mx-1 bg-sfar "
                 />
-                a le bureau (500DA)
+                Au Bureau (Yalidine) 
               </label>
             </div>
             <div className="flex justify-center">
@@ -377,8 +377,8 @@ const Checkout = () => {
               </button>
             </div>
           </div>
-          <div className="font-monteserrat ml-3 ">
-            <h1 className=" text-4xl mb-5">la commande</h1>
+          <div className="font-mont ml-3 ">
+            <h1 className=" text-4xl mb-5 mt-6 font-semibold">La Commande</h1>
             <div className="ring-1 ring-gray rounded-xl bg-gri">
               <div className=" rounded-xl divide-y divide-solid">
                 {cart &&
@@ -389,23 +389,27 @@ const Checkout = () => {
                         src={`${ENDPOINT}/${product.main_image}`}
                         alt=""
                       />
-                      <div className="relative col-span-2">
-                        <h1 className=" text-4xl font-semibold mt-2 font-monteserrat ">
+                      <div className="relative col-span-2 ml-4">
+                        <h1 className=" text-3xl font-semibold mt-2 font-mont ">
                           {product.title}
                         </h1>
-                        <p className="font-light"></p>
-                        <p className="text-3xl mt-2 font-monteserrat ">
-                          {product.price} DA
-                        </p>
+                        <h1 className=" text-3xl font-light mt-2 font-mont ">
+                          {product.title}
+                        </h1>
+                        
                         {product.category === "Shoes" ? (
-                          <p className="text-3xl mt-2 font-monteserrat ">
-                            pointure: {product.taille}
+                          <p className="text-2xl mt-2 font-mont ">
+                            Pointure {product.taille}
                           </p>
                         ) : (
-                          <p className="text-3xl mt-2 font-monteserrat ">
-                            taille: {product.taille}
+                          <p className="text-2xl mt-2 font-mont font-normal">
+                            Taille {product.taille}
                           </p>
                         )}
+                        
+                        <p className="text-2xl mt-2 font-mont font-semibold">
+                          {product.price} DA
+                        </p>
                         <button
                           onClick={() => {
                             let c = cart.filter((t) => t._id !== product._id);
@@ -431,7 +435,7 @@ const Checkout = () => {
                     </div>
                   ))}
 
-                <h1 className="text-3xl py-3 ">Prix Total: {total}</h1>
+                <h1 className="text-3xl py-3 font-bold ml-5">Total &nbsp; {total} DA</h1>
               </div>
             </div>
           </div>
