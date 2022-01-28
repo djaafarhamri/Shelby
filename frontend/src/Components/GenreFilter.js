@@ -1,9 +1,9 @@
 const GenreFilter = ({ genres, setGenres }) => {
   return (
-    <div className="genres border-b-2 border-black opacity-100 z-40 ">
-      <div className="flex mb-1 ml-2">
+    <div className="genres border-b-2 border-black opacity-100 z-40 font-mont">
+      <div className="flex mb-1 ml-5">
         <input
-          className="mt-2"
+          className="mt-1  h-6 w-5"
           type="checkbox"
           onChange={(e) => {
             if (e.target.checked) {
@@ -21,9 +21,9 @@ const GenreFilter = ({ genres, setGenres }) => {
         />
         <p className=" text-xl md:text-2xl">Classic</p>
       </div>
-      <div className="flex mb-1 ml-2">
+      <div className="flex mb-1 ml-5">
         <input
-          className="mt-2"
+          className="mt-1  h-6 w-5"
           type="checkbox"
           onChange={(e) => {
             if (e.target.checked) {
@@ -41,9 +41,9 @@ const GenreFilter = ({ genres, setGenres }) => {
         />
         <p className=" text-xl md:text-2xl">Sport</p>
       </div>
-      <div className="flex mb-1 ml-2">
+      <div className="flex mb-1 ml-5">
         <input
-          className="mt-2"
+          className="mt-1  h-6 w-5"
           type="checkbox"
           onChange={(e) => {
             if (e.target.checked) {

@@ -79,7 +79,7 @@ const Products = () => {
   function pageScroll() {
     window.scrollBy(0,-20);
     
-    setInterval(scrolldelay = setTimeout(pageScroll,10),20 );
+    scrolldelay = setTimeout(pageScroll,10)
 
 }
   return (
@@ -113,7 +113,7 @@ const Products = () => {
             </svg>
           </div>
           <svg
-            className="w-6 h-8 "
+            className="w-8 h-9 "
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -137,7 +137,7 @@ const Products = () => {
                 onClick={() => {
                   setopen(!isopen);
                 }}
-                className="w-6 h-6 cursor-pointer"
+                className="w-8 h-9 cursor-pointer"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -151,12 +151,12 @@ const Products = () => {
                 ></path>
               </svg>
             </div>
-            <div className="flex mb-2 ml-2" 
+            <div className="flex mb-6 ml-5" 
             onClick={()=>{isfilter1(!filter1)}}
             >
-              <p className="font-monteserrat text-3xl font-semibold"> Genres</p>
+              <p className="font-mont text-3xl font-semibold"> Genres</p>
               <svg
-                className="w-6 h-8"
+                className="w-8 h-9"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -173,11 +173,11 @@ const Products = () => {
             {filter1 && <GenreFilter genres={genres} setGenres={setGenres} />}
           </div>
           <div className="relative ">
-            <div className="flex mb-2 ml-2" 
+            <div className="flex mb-6 ml-5" 
             onClick={()=>{isfilter2(!filter2)}}>
-              <p className="font-monteserrat text-3xl font-semibold"> Categorie</p>
+              <p className="font-mont text-3xl font-semibold"> Categorie</p>
               <svg
-                className="w-6 h-8"
+                className="w-8 h-9"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -197,11 +197,11 @@ const Products = () => {
             />}
           </div>
           <div className="relative">
-            <div className="flex mb-2 ml-2"
+            <div className="flex mb-6 ml-5"
              onClick={()=>{isfilter3(!filter3)}}>
-              <p className="font-monteserrat text-3xl font-semibold"> Marques</p>
+              <p className="font-mont text-3xl font-semibold"> Marques</p>
               <svg
-                className="w-6 h-8"
+                className="w-8 h-9"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -222,11 +222,11 @@ const Products = () => {
             />}
           </div>
           <div className="relative">
-            <div className="flex mb-2 ml-2"
+            <div className="flex mb-6 ml-5"
              onClick={()=>{isfilter4(!filter4)}}>
-              <p className="font-monteserrat text-3xl font-semibold"> Tailles</p>
+              <p className="font-mont text-3xl font-semibold"> Tailles</p>
               <svg
-                className="w-6 h-8"
+                className="w-8 h-9"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -247,11 +247,11 @@ const Products = () => {
             />}
           </div>
           <div className="relative">
-            <div className="flex mb-2 ml-2"
+            <div className="flex mb-6 ml-5"
              onClick={()=>{isfilter5(!filter5)}}>
-              <p className="font-monteserrat text-3xl font-semibold"> Pointures</p>
+              <p className="font-mont text-3xl font-semibold"> Pointures</p>
               <svg
-                className="w-6 h-8"
+                className="w-8 h-9"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -290,11 +290,11 @@ const Products = () => {
               </div>
               <div className="mt-4  ">
                 <div>
-                  <h3 className="text-xl md:text-3xl font-semibold text-center font-monteserrat">
+                  <h3 className="text-xl md:text-3xl font-semibold text-center font-mont">
                     {product.title}
                   </h3>
                   <p className="text-xl md:text-3xl font-light text-center">grey red jordan </p>
-                  <p className="text-xl md:text-2xl font-semibold text-center font-monteserrat">
+                  <p className="text-xl md:text-2xl font-semibold text-center font-mont">
                     {product.price } DA
                   </p>
                 </div>

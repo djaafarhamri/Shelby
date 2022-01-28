@@ -4,9 +4,9 @@ const PointureFilter = ({ pointures, setPointures, allPointure }) => {
       {allPointure &&
         allPointure.map((pointure, i) => (
           <div key={i}>
-            <div className="flex mb-2 ml-2">
+            <div className="flex mb-2 ml-5">
               <input
-              className="mt-2"
+              className="mt-1  h-6 w-5"
                 type="checkbox"
                 onChange={(e) => {
                   if (e.target.checked) {
