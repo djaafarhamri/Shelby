@@ -9,7 +9,7 @@ import PointureFilter from "./PointureFilter";
 import CategorieFilter from "./CategorieFilter";
 import { useSearchParams } from "react-router-dom";
 
-const ENDPOINT = "http://localhost:4000";
+const ENDPOINT = "https://shelbyboutique.herokuapp.com";
 
 const Products = () => {
   const [allMarques, setAllMarques] = useState([]);

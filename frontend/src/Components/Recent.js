@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "./Recent.css";
 
-const ENDPOINT = "http://localhost:4000";
+const ENDPOINT = "https://shelbyboutique.herokuapp.com";
 
 const Recent = () => {
   const [products, setProducts] = useState([]);

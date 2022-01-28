@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import hero from "../assets/login.JPG";
 
-const ENDPOINT = "http://localhost:4000";
+const ENDPOINT = "https://shelbyboutique.herokuapp.com";
 
 const Login = () => {
   const nav = useNavigate();

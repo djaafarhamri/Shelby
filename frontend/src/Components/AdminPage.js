@@ -8,7 +8,7 @@ import Stock from "./Stock";
 import Dashboard from "./Dashboard";
 import axios from "axios";
 import { useNavigate } from "react-router";
-const ENDPOINT = "http://localhost:4000";
+const ENDPOINT = "https://shelbyboutique.herokuapp.com";
 
 const AdminPage = () => {
   const nav = useNavigate();

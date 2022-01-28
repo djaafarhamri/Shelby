@@ -7,7 +7,7 @@ import Htable from "./Htable";
 import Progress from "./Progress";
 import axios from "axios";
 
-const ENDPOINT = "http://localhost:4000";
+const ENDPOINT = "https://shelbyboutique.herokuapp.com";
 
 const Vendre = () => {
   const [selected, setSelected] = useState("a");

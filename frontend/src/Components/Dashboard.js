@@ -3,7 +3,7 @@ import axios from "axios";
 import "./Dashboard.css";
 import Recent from "./Recent";
 
-const ENDPOINT = "http://localhost:4000";
+const ENDPOINT = "https://shelbyboutique.herokuapp.com";
 
 const Dashboard = () => {
   const [dateStart, setDateStart] = useState();

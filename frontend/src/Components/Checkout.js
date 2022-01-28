@@ -5,7 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 const { v4 } = require("uuid");
 
-const ENDPOINT = "http://localhost:4000";
+const ENDPOINT = "https://shelbyboutique.herokuapp.com";
 
 const Checkout = () => {
   const nav = useNavigate()

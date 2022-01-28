@@ -5,7 +5,7 @@ import AddVP from "./AddVP";
 import Ddata from "./Ddata";
 import Bon from "./Bon";
 
-const ENDPOINT = "http://localhost:4000";
+const ENDPOINT = "https://shelbyboutique.herokuapp.com";
 
 const Atable = ({ search }) => {
   const [products, setProducts] = useState([]);

@@ -4,7 +4,7 @@ import axios from "axios";
 import valid from "../assets/valid.png";
 import nonValid from "../assets/nonValid.png";
 
-const ENDPOINT = "http://localhost:4000";
+const ENDPOINT = "https://shelbyboutique.herokuapp.com";
 
 const Otable = ({search}) => {
   const [products, setProducts] = useState([]);

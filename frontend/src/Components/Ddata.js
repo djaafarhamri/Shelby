@@ -3,7 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 const { v4 } = require('uuid')
 
-const ENDPOINT = 'http://localhost:4000'
+const ENDPOINT = 'https://shelbyboutique.herokuapp.com'
 const Ddata = ({ setShowDeliver, clients }) => {
   const [nom, setNom] = useState("");
   const [adress, setAdress] = useState("");

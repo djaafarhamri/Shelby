@@ -5,7 +5,7 @@ import TableData from "./TableData";
 import axios from "axios";
 import { useNavigate } from "react-router";
 const Barcode = require("react-barcode");
-const ENDPOINT = "http://localhost:4000";
+const ENDPOINT = "https://shelbyboutique.herokuapp.com";
 
 const AddProductPage = ({ setSelected }) => {
   const nav = useNavigate()
