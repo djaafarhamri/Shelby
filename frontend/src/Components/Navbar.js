@@ -9,6 +9,7 @@ import instagram from "../assets/instagram.svg";
 import { useContext, useState } from "react";
 import { CartContext } from "../contexts/panier";
 
+
 const Navbar = () => {
   const [cart, setCart] = useContext(CartContext);
   const [open, isopen] = useState(false);
@@ -86,10 +87,12 @@ const Navbar = () => {
             </div>
           )}
         </div>
+        <div>
+        <svg  className="w-8 h-8 absolute top-0 left-0 mt-4 ml-12 hidden md:block"  fill="none" stroke="black" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
         <input
-            className="hidden h-10 mt-3 ml-4 md:block rounded-xl  font-monteserrat text-black text-xl py-1 px-1 bg-gray"
+            className="hidden h-10 mt-3 ml-4 md:block rounded-xl  font-mont text-black text-xl py-1 px-1 pl-8 bg-search"
             type="text"
-            placeholder="Recherche2x..."
+            placeholder="Recherche..."
             onChange={(e) => {
               setSearch(e.target.value);
             }}
@@ -99,8 +102,9 @@ const Navbar = () => {
                 nav(`/products/?s=${s}`);
               }
             }}
-          />
-        <div className="flex-auto flex place-content-center md:mr-5 lg:mr-16 ">
+            />
+            </div>
+        <div className="flex-auto flex place-content-center md:mr-5 lg:mr-16 lg:-translate-x-6 ">
           <p className="shelby-logo-123 py-3 px-3 text-4xl hidden md:block">
             Shelby
           </p>
@@ -127,7 +131,7 @@ const Navbar = () => {
       </div>
       <div className="flex  md:hidden">
         <input
-          className="w-full rounded-xl font-monteserrat text-black text-xl py-1 px-1 bg-gray "
+          className="w-full rounded-xl font-monte text-black text-xl py-1 px-1 bg-search "
           type="text"
           placeholder="Recherche..."
           onChange={(e) => {

@@ -16,12 +16,16 @@ const Dashboard = () => {
   const [showDate, setShowDate] = useState(false);
   const take = () => {
     axios
-      .post(`${ENDPOINT}/api/takeFromLaCaisse`, {
-        montant,
-      }, {withCredentials:true})
+      .post(
+        `${ENDPOINT}/api/takeFromLaCaisse`,
+        {
+          montant,
+        },
+        { withCredentials: true }
+      )
       .then((res) => {
         axios
-          .get(`${ENDPOINT}/api/getLacaisse`, {withCredentials:true})
+          .get(`${ENDPOINT}/api/getLacaisse`, { withCredentials: true })
           .then((res) => setCaisse(res.data.montant))
           .catch((err) => console.log(err));
       })
@@ -29,43 +33,55 @@ const Dashboard = () => {
   };
   const getProfit = () => {
     axios
-      .post(`${ENDPOINT}/api/getProfitByDate`, {
-        dateStart,
-        dateEnd,
-      }, {withCredentials:true})
+      .post(
+        `${ENDPOINT}/api/getProfitByDate`,
+        {
+          dateStart,
+          dateEnd,
+        },
+        { withCredentials: true }
+      )
       .then((res) => setCustomProfit(res.data))
       .catch((err) => console.log(err));
   };
   useEffect(() => {
     axios
-      .post(`${ENDPOINT}/api/getProfitByDate`, {
-        dateStart: new Date(
-          new Date().getFullYear() - 1,
-          new Date().getMonth(),
-          new Date().getDate()
-        ),
-        dateEnd: new Date(Date.now()),
-      }, {withCredentials:true})
+      .post(
+        `${ENDPOINT}/api/getProfitByDate`,
+        {
+          dateStart: new Date(
+            new Date().getFullYear() - 1,
+            new Date().getMonth(),
+            new Date().getDate()
+          ),
+          dateEnd: new Date(Date.now()),
+        },
+        { withCredentials: true }
+      )
       .then((res) => setYearlyProfit(res.data))
       .catch((err) => console.log(err));
   }, []);
   useEffect(() => {
     axios
-      .get(`${ENDPOINT}/api/getLacaisse`, {withCredentials:true})
+      .get(`${ENDPOINT}/api/getLacaisse`, { withCredentials: true })
       .then((res) => setCaisse(res.data.montant))
       .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
     axios
-      .post(`${ENDPOINT}/api/getProfitByDate`, {
-        dateStart: new Date(
-          new Date().getFullYear(),
-          new Date().getMonth() - 1,
-          new Date().getDate()
-        ),
-        dateEnd: new Date(Date.now()),
-      }, {withCredentials:true})
+      .post(
+        `${ENDPOINT}/api/getProfitByDate`,
+        {
+          dateStart: new Date(
+            new Date().getFullYear(),
+            new Date().getMonth() - 1,
+            new Date().getDate()
+          ),
+          dateEnd: new Date(Date.now()),
+        },
+        { withCredentials: true }
+      )
       .then((res) => setMonthlyProfit(res.data))
       .catch((err) => console.log(err));
   }, []);

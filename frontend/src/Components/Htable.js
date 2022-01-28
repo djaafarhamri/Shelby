@@ -37,6 +37,14 @@ const Htable = ({search}) => {
         console.log(res.data);
       }, {withCredentials:true})
       .catch((err) => console.log(err));
+      axios
+      .post(
+        `${ENDPOINT}/api/takeFromLaCaisse`,
+        {
+          montant: product.price,
+        },
+        { withCredentials: true }
+      )
     setRender(!render)
   };
   return (

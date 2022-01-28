@@ -90,11 +90,18 @@ const Products = () => {
   const [filter4, isfilter4] = useState(false);
   const [filter5, isfilter5] = useState(false);
   const [filter6, isfilter6] = useState(false);
+  function pageScroll() {
+    window.scrollBy(0, -20);
+    
+  }
   return (
     <div className="">
       <Navbar />
       <div>
-        <button className="rounded-full fixed bottom-0 right-0 mr-4 mb-4">
+        <button
+          onClick={() => pageScroll()}
+          className="rounded-full fixed bottom-0 right-0 mr-4 mb-4"
+        >
           <svg
             className="w-10 h-12"
             fill="none"
@@ -336,7 +343,7 @@ const Products = () => {
         </div>
       </div>
 
-      <div className="mt-12 grid grid-cols-2 md:grid-cols-3  gap-x-3 gap-y-5">
+      <div className="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-x-3 gap-y-5">
         {products &&
           products.map((product, i) => (
             <div
@@ -347,11 +354,11 @@ const Products = () => {
               className="group relative rounded-md  cursor-pointer "
             >
               <div className="w-full min-h-60  bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 ">
-                  <img
-                    src={`${ENDPOINT}/${product.main_image}`}
-                    alt=""
-                    className="w-full h-full  object-center object-cover lg:w-full lg:h-full xl:w-full xl:h-full"
-                  />
+                <img
+                  src={`${ENDPOINT}/${product.main_image}`}
+                  alt=""
+                  className="w-full h-full  object-center object-cover lg:w-full lg:h-full xl:w-full xl:h-full"
+                />
               </div>
               <div className="mt-4  ">
                 <div>
