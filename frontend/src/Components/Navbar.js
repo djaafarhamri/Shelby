@@ -1,19 +1,16 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import logo from "../assets/logo.png";
 import panier from "../assets/panier.svg";
-import userImg from "../assets/user.svg";
 import "./Navbar.css";
-import tiktok from "../assets/tiktok.svg";
-import facebook from "../assets/facebook.svg";
-import instagram from "../assets/instagram.svg";
 import { useContext, useState } from "react";
 import { CartContext } from "../contexts/panier";
 
 
 const Navbar = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [cart, setCart] = useContext(CartContext);
   const [open, isopen] = useState(false);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(searchParams.get('s'));
   const nav = useNavigate();
   return (
     <div className="bg-royal">
@@ -24,6 +21,7 @@ const Navbar = () => {
         <input
             className="hidden h-10 mt-3 ml-4 md:block rounded-3xl  font-mont text-black text-xl py-1 px-1 pl-9 bg-search"
             type="text"
+            value={search}
             placeholder="Recherche..."
             onChange={(e) => {
               setSearch(e.target.value);
@@ -49,15 +47,11 @@ const Navbar = () => {
          
           <img
             onClick={() => {
-              if (cart.length === 0) {
-                alert("there is nohing in the cart");
-              } else {
-              }
               nav("/checkout");
             }}
             src={panier}
             alt=""
-            className="h-6 sm:h-8 mt-4  mb-4 mr-2"
+            className="h-6 sm:h-8 mt-4  mb-4 mr-2 cursor-pointer"
           />
            <p className="mr-1 lg:mr-6">{cart.length}</p>
         </div>
@@ -67,6 +61,7 @@ const Navbar = () => {
           className="w-full rounded-xl font-monte text-black text-xl py-1 px-1 bg-search "
           type="text"
           placeholder="Recherche..."
+          value={search}
           onChange={(e) => {
             setSearch(e.target.value);
           }}

@@ -37,6 +37,8 @@ router.post("/api/getfilteredProducts", productController.getfilteredProducts);
 router.get("/api/getAllMarques", productController.getAllMarques);
 router.get("/api/getallTailles", productController.getallTailles);
 router.get("/api/getallPointure", productController.getallPointure);
+router.get("/api/getallGenres", productController.getallGenres);
+router.get("/api/getallCategories", productController.getallCategories);
 router.get("/api/getProductByTitle/:title", productController.getProductByTitle);
 router.get("/api/getProductByref/:ref", productController.getProductByref);
 router.post("/api/getProductByrefAndTaille", productController.getProductByrefAndTaille);

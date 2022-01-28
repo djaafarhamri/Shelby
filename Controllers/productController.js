@@ -246,7 +246,7 @@ module.exports.getAllProductsByCategory = async (req, res) => {
 
 module.exports.getAllMarques = async (req, res) => {
   try {
-    const products = await Product.find();
+    const products = await Product.find({quantity: {$ne: 0}});
     let marques = [];
     for (let p of products) {
       let marque = p.marque.toUpperCase();
@@ -266,9 +266,53 @@ module.exports.getAllMarques = async (req, res) => {
   }
 };
 
+module.exports.getallGenres = async (req, res) => {
+  try {
+    const products = await Product.find({quantity: {$ne: 0}});
+    let genres = [];
+    for (let p of products) {
+      let genre = p.genre.toUpperCase();
+      if (genre in genres) {
+        continue;
+      } else {
+        genres.push(genre);
+      }
+    }
+    let product = genres.filter(
+      (v, i, a) => a.findIndex((t) => t === v) === i
+    );
+    res.status(200).json(product);
+  } catch (e) {
+    console.log(e);
+    res.status(404).json("no products found");
+  }
+};
+
+module.exports.getallCategories = async (req, res) => {
+  try {
+    const products = await Product.find({quantity: {$ne: 0}});
+    let categories = [];
+    for (let p of products) {
+      let category = p.category.toUpperCase();
+      if (category in categories) {
+        continue;
+      } else {
+        categories.push(category);
+      }
+    }
+    let product = categories.filter(
+      (v, i, a) => a.findIndex((t) => t === v) === i
+    );
+    res.status(200).json(product);
+  } catch (e) {
+    console.log(e);
+    res.status(404).json("no products found");
+  }
+};
+
 module.exports.getallTailles = async (req, res) => {
   try {
-    const products = await Product.find({ category: { $ne: "Shoes" } });
+    const products = await Product.find({ category: { $ne: "Shoes" }, quantity: {$ne: 0} });
     let tailles = [];
     for (let p of products) {
       let taille = p.taille.toUpperCase();
@@ -290,7 +334,7 @@ module.exports.getallTailles = async (req, res) => {
 
 module.exports.getallPointure = async (req, res) => {
   try {
-    const products = await Product.find({ category: "Shoes" });
+    const products = await Product.find({ category: "Shoes" , quantity: {$ne: 0}});
     let tailles = [];
     for (let p of products) {
       let taille = p.taille.toUpperCase();

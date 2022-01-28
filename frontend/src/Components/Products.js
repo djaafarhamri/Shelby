@@ -20,10 +20,28 @@ const Products = () => {
   const [pointures, setPointures] = useState([]);
   const [allTailles, setAllTailles] = useState([]);
   const [allPointure, setAllPointure] = useState([]);
+  const [allCategories, setAllCategories] = useState([]);
+  const [allGenres, setAllGenres] = useState([]);
   const [categories, setCategories] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const nav = useNavigate();
   let search = searchParams.get("s");
+  useEffect(() => {
+    axios
+      .get(`${ENDPOINT}/api/getallCategories`, { withCredentials: true })
+      .then((res) => {
+        setAllCategories(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+  useEffect(() => {
+    axios
+      .get(`${ENDPOINT}/api/getallGenres`, { withCredentials: true })
+      .then((res) => {
+        setAllGenres(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
   useEffect(() => {
     axios
       .get(`${ENDPOINT}/api/getallTailles`, { withCredentials: true })
@@ -92,11 +110,8 @@ const Products = () => {
   const [filter6, isfilter6] = useState(false);
   function pageScroll() {
     window.scrollBy(0, -20);
-    
-    scrolldelay = setTimeout(pageScroll,10)
+  }
 
-}
-  
   return (
     <div className="">
       <Navbar />
@@ -184,10 +199,13 @@ const Products = () => {
                 ></path>
               </svg>
             </div>
-            <div className="flex mb-6 ml-5" 
-            onClick={()=>{isfilter1(!filter1)}}
+            <div
+              className="flex mb-6 ml-5"
+              onClick={() => {
+                isfilter1(!filter1);
+              }}
             >
-              <p className="font-mont text-3xl font-semibold"> Genres</p>
+              <p className="font-mont text-3xl font-semibold cursor-pointer"> Genres</p>
               <svg
                 className="w-8 h-9"
                 fill="none"
@@ -203,12 +221,16 @@ const Products = () => {
                 ></path>
               </svg>
             </div>
-            {filter1 && <GenreFilter genres={genres} setGenres={setGenres} />}
+            {filter1 && <GenreFilter allGenres={allGenres} genres={genres} setGenres={setGenres} />}
           </div>
           <div className="relative ">
-            <div className="flex mb-6 ml-5" 
-            onClick={()=>{isfilter2(!filter2)}}>
-              <p className="font-mont text-3xl font-semibold"> Categorie</p>
+            <div
+              className="flex mb-6 ml-5"
+              onClick={() => {
+                isfilter2(!filter2);
+              }}
+            >
+              <p className="font-mont text-3xl font-semibold cursor-pointer"> Categorie</p>
               <svg
                 className="w-8 h-9"
                 fill="none"
@@ -226,15 +248,20 @@ const Products = () => {
             </div>
             {filter2 && (
               <CategorieFilter
+              allCategories={allCategories}
                 categories={categories}
                 setCategories={setCategories}
               />
             )}
           </div>
           <div className="relative">
-            <div className="flex mb-6 ml-5"
-             onClick={()=>{isfilter3(!filter3)}}>
-              <p className="font-mont text-3xl font-semibold"> Marques</p>
+            <div
+              className="flex mb-6 ml-5"
+              onClick={() => {
+                isfilter3(!filter3);
+              }}
+            >
+              <p className="font-mont text-3xl font-semibold" cursor-pointer> Marques</p>
               <svg
                 className="w-8 h-9"
                 fill="none"
@@ -259,9 +286,13 @@ const Products = () => {
             )}
           </div>
           <div className="relative">
-            <div className="flex mb-6 ml-5"
-             onClick={()=>{isfilter4(!filter4)}}>
-              <p className="font-mont text-3xl font-semibold"> Tailles</p>
+            <div
+              className="flex mb-6 ml-5"
+              onClick={() => {
+                isfilter4(!filter4);
+              }}
+            >
+              <p className="font-mont text-3xl font-semibold cursor-pointer"> Tailles</p>
               <svg
                 className="w-8 h-9"
                 fill="none"
@@ -286,9 +317,13 @@ const Products = () => {
             )}
           </div>
           <div className="relative">
-            <div className="flex mb-6 ml-5"
-             onClick={()=>{isfilter5(!filter5)}}>
-              <p className="font-mont text-3xl font-semibold"> Pointures</p>
+            <div
+              className="flex mb-6 ml-5"
+              onClick={() => {
+                isfilter5(!filter5);
+              }}
+            >
+              <p className="font-mont text-3xl font-semibold cursor-pointer"> Pointures</p>
               <svg
                 className="w-8 h-9"
                 fill="none"
@@ -315,7 +350,7 @@ const Products = () => {
         </div>
       </div>
 
-      <div className="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-x-3 gap-y-5">
+      <div className="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 h-screen gap-x-3 gap-y-5">
         {products &&
           products.map((product, i) => (
             <div
@@ -335,11 +370,13 @@ const Products = () => {
               <div className="mt-4  ">
                 <div>
                   <h3 className="text-xl md:text-3xl font-semibold text-center font-mont">
-                    {product.title}
+                    {product.marque}
                   </h3>
-                  <p className="text-xl md:text-3xl font-light text-center">grey red jordan </p>
+                  <p className="text-xl md:text-3xl font-light text-center">
+                    {product.title}
+                  </p>
                   <p className="text-xl md:text-2xl font-semibold text-center font-mont">
-                    {product.price } DA
+                    {product.price} DA
                   </p>
                 </div>
               </div>
