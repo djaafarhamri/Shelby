@@ -8,6 +8,7 @@ import facebook from "../assets/facebook.svg";
 import instagram from "../assets/instagram.svg";
 import { useContext, useState } from "react";
 import { CartContext } from "../contexts/panier";
+import { Link } from "react-router-dom";
 
 
 const Navbar = () => {
@@ -37,13 +38,17 @@ const Navbar = () => {
             />
             </div>
         <div className="flex-auto flex place-content-center ml-7 md:mr-5 lg:mr-16 lg:-translate-x-6 ">
+         
           <p className="shelby-logo-123 py-3 px-3 text-4xl hidden md:block">
             Shelby
           </p>
+          <Link to='/'>
           <img src={logo} alt="" />
+          </Link>
           <p className="shelby-logo-123 px-3 py-3 text-4xl hidden md:block ">
             Boutique
           </p>
+          
         </div>
         <div className="md:flex-initial md:w-32 flex justify-end sm:ml-6">
          
