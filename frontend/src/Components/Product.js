@@ -103,50 +103,23 @@ const Product = () => {
                 />
               ))}
           </div>
-          <div className="order-1 sm:order-2 h-screen overflow-hidden">
-            <h1 className="text-3xl font-monteserrat font-normal sm:text-6xl">
+          <div className="order-1 calc[(100vh-8vh)] sm:order-2 sm:h-screen overflow-hidden ml-5 tracking-wide">
+            <h1 className="text-3xl font-mont font-semibold sm:text-5xl pt-5 ">
               {product.marque}
             </h1>
             <br />
-            <h1 className="text-3xl font-monteserrat font-normal font-light sm:text-6xl">
+            <h1 className="text-3xl font-mont font-medium sm:text-4xl ">
               {product.title}
             </h1>
             <br />
-            <h3 className="text-2xl font-monteserrat font-normal sm:text-4xl">
+            <h3 className="text-2xl font-mont font-medium sm:text-4xl">
               {product.price} DA
             </h3>
             <br />
-            <p className="font-monteserrat font-normal text-xl sm:text-2xl mt-2">
+            <p className="font-mont font-normal text-xl sm:text-2xl mt-2">
               {product.description}
             </p>
             <br />
-            <div className="flex flex-wrap mt-3 h-auto">
-              {tailles &&
-                tailles.map(
-                  (t, i) =>
-                    t.q !== 0 && (
-                      <button
-                        key={i}
-                        onClick={() => {
-                          setTaille(t.t);
-                          setChosenT(t.t);
-                        }}
-                        type="button"
-                        style={
-                          chosenT === t.t
-                            ? {
-                                backgroundColor: "#061701",
-                                color: "rgb(248 250 252)",
-                              }
-                            : { backgroundColor: "#fff", color: "#000" }
-                        }
-                        className="ring-1 ring-black  text-xl px-1 mx-3 "
-                      >
-                        {t.t}
-                      </button>
-                    )
-                )}
-            </div>
             <div className="flex flex-wrap mt-3 h-auto">
               {colors &&
                 colors.map((c, i) => (
@@ -172,8 +145,36 @@ const Product = () => {
                   </button>
                 ))}
             </div>
+            <div className="flex flex-wrap mt-5 h-auto">
+              {tailles &&
+                tailles.map(
+                  (t, i) =>
+                    t.q !== 0 && (
+                      <button
+                        key={i}
+                        onClick={() => {
+                          setTaille(t.t);
+                          setChosenT(t.t);
+                        }}
+                        type="button"
+                        style={
+                          chosenT === t.t
+                            ? {
+                                backgroundColor: "#061701",
+                                color: "rgb(248 250 252)",
+                              }
+                            : { backgroundColor: "#fff", color: "#000" }
+                        }
+                        className="ring-1 ring-black px-3 py-2 mx-2 text-2xl font-medium "
+                      >
+                        {t.t}
+                      </button>
+                    )
+                )}
+            </div>
+            
             <br />
-            <div className="flex justify-evenly my-6">
+            <div className="flex justify-evenly lg:mt-12">
               <button
                 onClick={() => {
                   ajouterPanier();
@@ -181,7 +182,7 @@ const Product = () => {
                     nav("/checkout");
                   }
                 }}
-                className="bg-royal text-palete text-xl sm:text-2xl  rounded-lg py-2 px-3"
+                className="bg-royal text-palete text-xl sm:text-3xl font-semibold rounded-2xl py-3 px-6"
               >
                 Acheter
               </button>
@@ -189,7 +190,7 @@ const Product = () => {
                 onClick={() => {
                   ajouterPanier();
                 }}
-                className="bg-royal text-palete text-xl sm:text-2xl  rounded-lg py-2 px-3"
+                className="bg-royal text-palete text-xl sm:text-3xl font-semibold  rounded-2xl py-3 px-6"
               >
                 Ajouter au panier
               </button>

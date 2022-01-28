@@ -3,10 +3,10 @@ import { useEffect } from "react";
 const CategorieFilter = ({ categories, setCategories }) => {
 
     return (
-      <div className="categories border-b-2 border-black opacity-100 z-40 ">
-        <div className="flex mb-1 ml-2">
+      <div className="categories border-b-2 border-black opacity-100 z-40 font-mont ">
+        <div className="flex mb-1 ml-5">
           <input
-          className="mt-2"
+          className="mt-1 h-6 w-5"
             type="checkbox"
             onChange={(e) => {
               if (e.target.checked) {
@@ -23,9 +23,9 @@ const CategorieFilter = ({ categories, setCategories }) => {
           />
           <p className=" text-xl md:text-2xl">Shoes</p>
         </div>
-        <div className="flex mb-1 ml-2">
+        <div className="flex mb-1 ml-5">
           <input
-          className="mt-2"
+          className="mt-1  h-6 w-5"
             type="checkbox"
             onChange={(e) => {
               if (e.target.checked) {
@@ -42,9 +42,9 @@ const CategorieFilter = ({ categories, setCategories }) => {
           />
           <p className=" text-xl md:text-2xl">Clothes</p>
         </div>
-        <div className="flex mb-1 ml-2">
+        <div className="flex mb-1 ml-5">
           <input
-          className="mt-2"
+          className="mt-1  h-6 w-5"
             type="checkbox"
             onChange={(e) => {
               if (e.target.checked) {

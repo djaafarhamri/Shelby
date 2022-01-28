@@ -1,12 +1,12 @@
 const MarqueFilter = ({ marques, setMarques, allMarques }) => {
   return (
-    <div className="genres border-b-2 border-black opacity-100 z-40 ">
+    <div className="genres border-b-2 border-black opacity-100 z-40 font-mont">
       {allMarques &&
         allMarques.map((marque, i) => (
           <div key={i}>
-            <div className="flex ml-2 mb-1">
+            <div className="flex ml-5 mb-1">
               <input
-              className="mt-2"
+              className="mt-1  h-6 w-5"
                 type="checkbox"
                 onChange={(e) => {
                   if (e.target.checked) {
