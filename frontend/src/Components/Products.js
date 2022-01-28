@@ -350,7 +350,7 @@ const Products = () => {
         </div>
       </div>
 
-      <div className="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 min-p-hei gap-x-3 gap-y-5">
+      <div className="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 overflow-hidden min-p-hei gap-x-3 gap-y-5">
         {products &&
           products.map((product, i) => (
             <div

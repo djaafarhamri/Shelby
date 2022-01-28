@@ -14,7 +14,7 @@ const Navbar = () => {
   const [search, setSearch] = useState(searchParams.get('s'));
   const nav = useNavigate();
   return (
-    <div className="bg-royal">
+    <div className="bg-royal sticky">
       <div className="flex md:flex-auto bg-royal justify-around text-palete ">
                   
         <div>

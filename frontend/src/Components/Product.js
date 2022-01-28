@@ -103,7 +103,7 @@ const Product = () => {
                 />
               ))}
           </div>
-          <div className="order-1 calc[(100vh-8vh)] sm:order-2 sm:h-screen overflow-hidden ml-5 tracking-wide">
+          <div className="order-1 sm:order-2 relative overflow-hidden ml-5 tracking-wide">
             <h1 className="text-3xl font-mont font-semibold sm:text-5xl pt-5 ">
               {product.marque}
             </h1>
