@@ -25,15 +25,15 @@ const Nav = () => {
               
             
             <div className="flex mt-24">
-              <img className="w-7 h-9" src={tiktok} alt="" />
+              <img className="w-7 h-9 cursor-pointer" src={tiktok} alt="" />
               
             </div>
             <div className="flex mt-4">
-              <img className="w-7 h-9" src={facebook} alt="" />
+              <img className="w-7 h-9 cursor-pointer" src={facebook} alt="" />
               
             </div>
             <div className="flex mt-4">
-              <img className="w-7 h-9" src={instagram} alt="" />
+              <img className="w-7 h-9 cursor-pointer" src={instagram} alt="" />
               
             </div>
           </div>

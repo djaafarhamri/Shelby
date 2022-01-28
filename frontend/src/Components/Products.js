@@ -75,11 +75,17 @@ const Products = () => {
   const [filter4, isfilter4] = useState(false);
   const [filter5, isfilter5] = useState(false);
   const [filter6, isfilter6] = useState(false);
+  function pageScroll() {
+    window.scrollBy(0,-20);
+    
+    setInterval(scrolldelay = setTimeout(pageScroll,10),20 );
+
+}
   return (
     <div className="">
       <Navbar />
       <div>
-        <button className="rounded-full fixed bottom-0 right-0 mr-4 mb-4"><svg className="w-10 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 11l3-3m0 0l3 3m-3-3v8m0-13a9 9 0 110 18 9 9 0 010-18z"></path></svg></button>
+        <button onClick={()=>pageScroll()} className="rounded-full fixed bottom-0 right-0 mr-4 mb-4"><svg className="w-10 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 11l3-3m0 0l3 3m-3-3v8m0-13a9 9 0 110 18 9 9 0 010-18z"></path></svg></button>
       </div>
       <div className="relative w-1/4  ">
         <div
@@ -267,14 +273,14 @@ const Products = () => {
         </div>
       </div>
 
-      <div className="mt-12 grid grid-cols-2 md:grid-cols-3  gap-x-3 gap-y-5">
+      <div className="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-x-3 gap-y-5">
         {products &&
           products.map((product, index) => (
             <div 
             onClick={() => {nav(`/product/${product.ref}`)}}
             className="group relative rounded-md  cursor-pointer ">
               <div className="w-full min-h-60  bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 ">
-                <img
+                <img 
                   src={`${ENDPOINT}/${product.main_image}`}
                   alt=""
                   className="w-full h-full  object-center object-cover lg:w-full lg:h-full xl:w-full xl:h-full"
