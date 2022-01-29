@@ -4,7 +4,7 @@ import { useReactToPrint } from "react-to-print";
 import TableData from "./TableData";
 import axios from "axios";
 const Barcode = require("react-barcode");
-const ENDPOINT = "https://shelbyboutique.herokuapp.com";
+const ENDPOINT = "https://shelby-tau.vercel.app";
 
 const AddProductPage = ({ setSelected }) => {
   const [nom, setNom] = useState("");

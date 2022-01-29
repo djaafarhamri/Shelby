@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router";
 import axios from "axios";
 import Navbar from "./Navbar";
 import { CartContext } from "../contexts/panier";
-const ENDPOINT = "https://shelbyboutique.herokuapp.com";
+const ENDPOINT = "https://shelby-tau.vercel.app";
 
 const Product = () => {
   const nav = useNavigate();

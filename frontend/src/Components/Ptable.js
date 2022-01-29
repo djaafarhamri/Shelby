@@ -2,7 +2,7 @@ import "./Ptable.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const ENDPOINT = "https://shelbyboutique.herokuapp.com";
+const ENDPOINT = "https://shelby-tau.vercel.app";
 
 const Ptable = ({setRender, search}) => {
   const [products, setProducts] = useState([]);

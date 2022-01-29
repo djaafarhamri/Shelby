@@ -3,7 +3,7 @@ import BarcodeReader from "react-barcode-reader";
 import axios from "axios";
 import "./AddVP.css";
 
-const ENDPOINT = "https://shelbyboutique.herokuapp.com";
+const ENDPOINT = "https://shelby-tau.vercel.app";
 
 const AddVP = ({ code, setCode, setShowAdd }) => {
   const [product, setProduct] = useState([]);

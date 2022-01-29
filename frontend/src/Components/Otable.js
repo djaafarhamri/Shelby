@@ -4,7 +4,7 @@ import axios from "axios";
 import valid from "../assets/valid.png";
 import nonValid from "../assets/nonValid.png";
 
-const ENDPOINT = "https://shelbyboutique.herokuapp.com";
+const ENDPOINT = "https://shelby-tau.vercel.app";
 
 const Otable = ({ setRender, search }) => {
   const [products, setProducts] = useState([]);

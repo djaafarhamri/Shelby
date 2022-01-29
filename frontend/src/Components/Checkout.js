@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 const { v4 } = require("uuid");
 
-const ENDPOINT = "https://shelbyboutique.herokuapp.com";
+const ENDPOINT = "https://shelby-tau.vercel.app";
 
 const Checkout = () => {
   const nav = useNavigate()
@@ -41,7 +41,7 @@ const Checkout = () => {
       adress === "" ||
       value === ""
     ) {
-      
+
     } else {
       var cid = v4();
       for (let product of cart) {

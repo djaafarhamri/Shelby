@@ -3,7 +3,7 @@ import axios from "axios";
 import "./Stock.css";
 import AddProductPage from "./AddProductPage";
 
-const ENDPOINT = "https://shelbyboutique.herokuapp.com";
+const ENDPOINT = "https://shelby-tau.vercel.app";
 
 const Stock = () => {
   const [products, setProducts] = useState([]);

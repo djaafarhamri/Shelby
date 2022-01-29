@@ -5,7 +5,7 @@ import AddVP from "./AddVP";
 import Ddata from "./Ddata";
 import Bon from "./Bon";
 
-const ENDPOINT = "https://shelbyboutique.herokuapp.com";
+const ENDPOINT = "https://shelby-tau.vercel.app";
 
 const Atable = ({ setRender, search }) => {
   const [products, setProducts] = useState([]);

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./ShowProducts.css";
 
-const ENDPOINT = "https://shelbyboutique.herokuapp.com";
+const ENDPOINT = "https://shelby-tau.vercel.app";
 
 const ShowProducts = ({ cid, setShowProducts }) => {
   const [products, setProducts] = useState([]);

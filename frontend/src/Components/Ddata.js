@@ -3,7 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 const { v4 } = require('uuid')
 
-const ENDPOINT = 'https://shelbyboutique.herokuapp.com'
+const ENDPOINT = 'https://shelby-tau.vercel.app'
 const Ddata = ({ setRender1, setShowDeliver, clients }) => {
   const [nom, setNom] = useState("");
   const [adress, setAdress] = useState("");

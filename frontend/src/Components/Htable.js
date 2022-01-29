@@ -2,7 +2,7 @@ import "./Htable.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const ENDPOINT = "https://shelbyboutique.herokuapp.com";
+const ENDPOINT = "https://shelby-tau.vercel.app";
 
 const Htable = ({setRender, search}) => {
   const [products, setProducts] = useState([]);

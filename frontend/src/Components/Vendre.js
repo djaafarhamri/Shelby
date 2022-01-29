@@ -7,7 +7,7 @@ import Htable from "./Htable";
 import Progress from "./Progress";
 import axios from "axios";
 
-const ENDPOINT = "https://shelbyboutique.herokuapp.com";
+const ENDPOINT = "https://shelby-tau.vercel.app";
 
 const Vendre = () => {
   const [selected, setSelected] = useState("a");

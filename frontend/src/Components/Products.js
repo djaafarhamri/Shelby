@@ -9,7 +9,7 @@ import PointureFilter from "./PointureFilter";
 import CategorieFilter from "./CategorieFilter";
 import { useSearchParams } from "react-router-dom";
 
-const ENDPOINT = "https://shelbyboutique.herokuapp.com";
+const ENDPOINT = "https://shelby-tau.vercel.app";
 
 const Products = () => {
   const [allMarques, setAllMarques] = useState([]);
