@@ -148,7 +148,6 @@ const Atable = ({ setRender, search }) => {
               type="text"
               onChange={(e) => {
                 setPrixPay(e.target.value);
-                setShowPending(false);
               }}
             />
             <button onClick={pending}>pending</button>
