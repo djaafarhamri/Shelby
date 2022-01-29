@@ -7,7 +7,7 @@ const cors = require("cors");
 const server = http.createServer(app);
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
-const path = require('path')
+const path = require("path");
 const PORT = process.env.PORT || 4000;
 const authRoute = require("./Routes/authRoute");
 const productRoute = require("./Routes/productRoute");
@@ -46,7 +46,7 @@ app.use((req, res, next) => {
 app.use(cookieParser());
 app.use(express.static("public"));
 
-app.use(express.static(path.resolve('uploads')));
+app.use(express.static(path.resolve("uploads")));
 app.use("/uploads", express.static("/uploads/"));
 app.use(express.json());
 // const corsOptions = {
@@ -63,11 +63,12 @@ app.use(soldRoute);
 app.use(caisseRoute);
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "frontend/build")));
+  app.use(express.static(path.join(__dirname, "frontend", "build")));
 
-  app.get("*", (req, res) =>
-    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"))
-  );
+  app.get("*", (req, res) => {
+    console.log("ddddddddddddddddd");
+    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
+  });
 }
 server.listen(PORT, () => {
   console.log("listening on PORT : ", PORT);
