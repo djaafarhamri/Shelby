@@ -29,7 +29,7 @@ const fileFilter = (req, file, cb) => {
 };
 const pre = () => {
   try {
-    fs.mkdirSync(path.join(__dirname, "/static/uploads/"));
+    fs.mkdirSync(path.join(__dirname, "/uploads/"));
   } catch (err) {
     if (err.code !== "EXIST") throw err;
   }
