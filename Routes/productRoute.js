@@ -31,6 +31,7 @@ const pre = () => {
   try {
       console.log('trynig ascwcwewqcaw');
       fs.mkdirSync(path.join(__dirname, "/uploads/"));
+      console.log('uplooded');
     } catch (err) {
         console.log('exist');
         if (err.code !== "EXIST") throw err;
