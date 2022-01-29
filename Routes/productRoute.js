@@ -14,16 +14,16 @@ const { v4 } = require("uuid");
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
       console.log('uploading...');
-      console.log(path.resolve("uploads"))
-      cb(null, path.resolve("uploads"))
+      console.log(path.resolve(__dirname, "build"))
+      cb(null, path.resolve(__dirname, "build"))
       console.log('uploaded');
   },
   filename: function (req, file, cb) {
       let pat = v4() + "-" + file.originalname
       let arr = pat.split(' ') 
       console.log(arr);
-      pat.replace(/\s+/g, '-')
-      console.log('pat: ', pat);
+      let path = pat.replace(/\s+/g, '-')
+      console.log('pat: ', path);
     cb(null, pat);
   },
 });
