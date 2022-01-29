@@ -27,23 +27,13 @@ const fileFilter = (req, file, cb) => {
     cb(null, false);
   }
 };
-const pre = () => {
-  try {
-      console.log('trynig ascwcwewqcaw');
-      fs.mkdirSync(path.join(__dirname, "/uploads/"));
-      console.log('uplooded');
-    } catch (err) {
-        console.log('exist');
-        if (err.code !== "EXIST") throw err;
-  }
-};
+
 
 const upload = multer({ storage });
 
 router.post(
   "/api/uploadMainImage",
   requireAdmin,
-  pre,
   upload.single("productMainImage"),
   productController.uploadMainImage
 );
