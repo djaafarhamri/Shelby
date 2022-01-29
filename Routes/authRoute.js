@@ -5,6 +5,5 @@ const router = Router();
 
 router.post("/api/login", authController.login);
 router.get("/api/logout", authController.logout);
-router.get("/api/checkuser", requireAdmin, authController.checkuser);
 
 module.exports = router;

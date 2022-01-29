@@ -27,6 +27,3 @@ module.exports.logout = (req, res) => {
   return res.status(202).clearCookie("jwt").send("cookie cleared");
 };
 
-module.exports.checkuser = (req, res) => {
-  res.status(200);
-};

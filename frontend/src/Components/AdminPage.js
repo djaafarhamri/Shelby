@@ -6,25 +6,8 @@ import { useEffect, useState } from "react";
 import Vendre from "./Vendre";
 import Stock from "./Stock";
 import Dashboard from "./Dashboard";
-import axios from "axios";
-import { useNavigate } from "react-router";
-const ENDPOINT = "https://shelbyboutique.herokuapp.com";
 
 const AdminPage = () => {
-  const nav = useNavigate();
-  useEffect(() => {
-    axios
-      .get(`${ENDPOINT}/api/checkuser`, {withCredentials: true})
-      .then((res) => {
-        console.log(res.status);
-        if (res.status !== 200) {
-          nav("/login");
-        }
-      })
-      .catch((err) => nav("/login"));
-
-    // eslint-disable-next-line
-  }, []);
   const [selected, setSelected] = useState("d");
   const selectD = () => {
     setSelected("d");
