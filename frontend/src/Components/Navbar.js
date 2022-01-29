@@ -8,9 +8,8 @@ import { Link } from "react-router-dom";
 
 
 const Navbar = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [cart, setCart] = useContext(CartContext);
-  const [open, isopen] = useState(false);
+  const [searchParams] = useSearchParams();
+  const [cart] = useContext(CartContext);
   const [search, setSearch] = useState(searchParams.get('s'));
   const nav = useNavigate();
   return (

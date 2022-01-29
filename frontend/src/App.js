@@ -7,7 +7,7 @@ import Login from "./Components/Login";
 import AdminPage from "./Components/AdminPage";
 import AddProductPage from "./Components/AddProductPage";
 import Checkout from "./Components/Checkout";
-import { CartContext, CartProvider } from "./contexts/panier";
+import { CartProvider } from "./contexts/panier";
 import Vendre from "./Components/Vendre";
 function App() {
   return (
