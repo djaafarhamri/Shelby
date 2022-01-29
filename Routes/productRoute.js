@@ -19,7 +19,10 @@ const storage = multer.diskStorage({
       console.log('uploaded');
   },
   filename: function (req, file, cb) {
-    cb(null, v4() + "-" + file.originalname);
+      let pat = v4() + "-" + file.originalname 
+      pat.replace(/\s+/g, '')
+      console.log('pat: ', pat);
+    cb(null, pat);
   },
 });
 
