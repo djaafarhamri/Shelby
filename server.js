@@ -56,20 +56,21 @@ app.use(express.json());
 // };
 // app.use(cors(corsOptions));
 
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "frontend", "build")));
+  
+  app.get("*", (req, res) => {
+    console.log("ddddddddddddddddd");
+    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
+  });
+}
 app.use(authRoute);
 app.use(productRoute);
 app.use(customerRoute);
 app.use(soldRoute);
 app.use(caisseRoute);
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "frontend", "build")));
-
-  app.get("*", (req, res) => {
-    console.log("ddddddddddddddddd");
-    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
-  });
-}
 server.listen(PORT, () => {
   console.log("listening on PORT : ", PORT);
 });
