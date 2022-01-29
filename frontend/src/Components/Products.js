@@ -23,7 +23,7 @@ const Products = () => {
   const [allCategories, setAllCategories] = useState([]);
   const [allGenres, setAllGenres] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const nav = useNavigate();
   let search = searchParams.get("s");
   useEffect(() => {
@@ -126,7 +126,6 @@ const Products = () => {
   const [filter3, isfilter3] = useState(false);
   const [filter4, isfilter4] = useState(false);
   const [filter5, isfilter5] = useState(false);
-  const [filter6, isfilter6] = useState(false);
   function pageScroll() {
     window.scrollTo({
       top: 0,

@@ -2,7 +2,7 @@ import logo from "../assets/logo.png";
 import dashboard from "../assets/dashboard.png";
 import warehouse from "../assets/warehouse.png";
 import "./AdminPage.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Vendre from "./Vendre";
 import Stock from "./Stock";
 import Dashboard from "./Dashboard";

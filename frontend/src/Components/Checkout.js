@@ -1,4 +1,3 @@
-import Navbar from "./Navbar";
 import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../contexts/panier";
 import axios from "axios";
@@ -18,7 +17,6 @@ const Checkout = () => {
   const [commune, setCommune] = useState("");
   const [ville, setVille] = useState("");
   const [total, setTotal] = useState();
-  const [err, setErr] = useState(false);
   const [cart, setCart] = useContext(CartContext);
   useEffect(() => {
     setTotal(0);
@@ -43,7 +41,7 @@ const Checkout = () => {
       adress === "" ||
       value === ""
     ) {
-      setErr(true);
+      
     } else {
       var cid = v4();
       for (let product of cart) {

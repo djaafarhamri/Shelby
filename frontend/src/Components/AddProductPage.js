@@ -3,12 +3,10 @@ import { useState, useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import TableData from "./TableData";
 import axios from "axios";
-import { useNavigate } from "react-router";
 const Barcode = require("react-barcode");
 const ENDPOINT = "https://shelbyboutique.herokuapp.com";
 
 const AddProductPage = ({ setSelected }) => {
-  const nav = useNavigate()
   const [nom, setNom] = useState("");
   const [descr, setDescr] = useState("");
   const [prixAch, setPrixAch] = useState(0);

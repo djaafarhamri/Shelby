@@ -1,19 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo-tra.png";
-import panier from "../assets/panier.svg";
-import userImg from "../assets/user.svg";
 import "./Navbar.css";
 import tiktok from "../assets/tiktok.svg";
 import facebook from "../assets/facebook.svg";
 import instagram from "../assets/instagram.svg";
-import { useContext, useState } from "react";
-import { CartContext } from "../contexts/panier";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 
 
 const Nav = () => {
-    const [cart, setCart] = useContext(CartContext);
-    const [open, isopen] = useState(false);
     const [search, setSearch] = useState("");
     const nav = useNavigate();
 

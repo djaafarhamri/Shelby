@@ -9,7 +9,6 @@ const Progress = ({setRender, search}) => {
   const [products, setProducts] = useState([]);
   const [prod, setProd] = useState([]);
   const [showProducts, setShowProducts] = useState(false);
-  const [render1, setRender1] = useState(false);
 
   useEffect(() => {
     axios
@@ -18,7 +17,7 @@ const Progress = ({setRender, search}) => {
         setProducts(res.data);
       })
       .catch((err) => console.log(err));
-  }, [render1]);
+  }, []);
 
   
   return (

@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext, useRef } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router";
 import axios from "axios";
 import Navbar from "./Navbar";
@@ -7,7 +7,6 @@ const ENDPOINT = "https://shelbyboutique.herokuapp.com";
 
 const Product = () => {
   const nav = useNavigate();
-  let tRef = useRef([]);
   const [cart, setCart] = useContext(CartContext);
   const [images, setImages] = useState([]);
   const [product, setProduct] = useState([]);
