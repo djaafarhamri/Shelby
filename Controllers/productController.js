@@ -3,7 +3,7 @@ const Customer = require("../models/Customer");
 const fs = require("fs");
 
 module.exports.uploadMainImage = async (req, res) => {
-  console.log("image");
+  console.log(req.file.path);
   res.status(200).json(req.file.path);
 };
 module.exports.uploadSecondImages = async (req, res) => {
