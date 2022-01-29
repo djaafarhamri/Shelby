@@ -4,7 +4,7 @@ import axios from "axios";
 const { v4 } = require('uuid')
 
 const ENDPOINT = 'https://shelbyboutique.herokuapp.com'
-const Ddata = ({ setShowDeliver, clients }) => {
+const Ddata = ({ setRender1, setShowDeliver, clients }) => {
   const [nom, setNom] = useState("");
   const [adress, setAdress] = useState("");
   const [phone, setPhone] = useState("");
@@ -30,6 +30,8 @@ const Ddata = ({ setShowDeliver, clients }) => {
             })
             .catch((err) => console.log(err));
       }  
+      setRender1(p => !p)
+      setShowDeliver(false)
     }
   };
   return (

@@ -28,7 +28,7 @@ router.post("/api/uploadMainImage", requireAdmin, upload.single('productMainImag
 router.post("/api/uploadSecondImages", requireAdmin, upload.array('productSecondImages', 4), productController.uploadSecondImages);
 router.post("/api/addProduct", requireAdmin, productController.addProduct);
 router.post("/api/updateProduct/:id", requireAdmin, productController.updateProduct);
-router.post("/api/deleteProduct/:id", requireAdmin, productController.deleteProduct);
+router.get("/api/deleteProduct/:id", requireAdmin, productController.deleteProduct);
 router.get("/api/getAllNoDuplProducts", productController.getAllNoDuplProducts);
 router.get("/api/getAllProducts", productController.getAllProducts);
 router.get("/api/getAllProductsByCategory/:category", productController.getAllProductsByCategory);

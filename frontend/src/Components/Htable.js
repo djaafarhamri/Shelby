@@ -4,19 +4,18 @@ import axios from "axios";
 
 const ENDPOINT = "https://shelbyboutique.herokuapp.com";
 
-const Htable = ({search}) => {
+const Htable = ({setRender, search}) => {
   const [products, setProducts] = useState([]);
-  const [render, setRender] = useState(false);
+  const [render1, setRender1] = useState(false);
 
   useEffect(() => {
     axios
       .get(`${ENDPOINT}/api/get24`, {withCredentials:true})
       .then((res) => {
         setProducts(res.data);
-
       })
       .catch((err) => console.log(err));
-  }, [render]);
+  }, [render1]);
   const returne = (product) => {
     axios
       .post(`${ENDPOINT}/api/returne`, {
@@ -46,7 +45,8 @@ const Htable = ({search}) => {
         },
         { withCredentials: true }
       )
-    setRender(!render)
+    setRender1(!render1)
+    setRender(p => !p)
   };
   return (
     <div className="htable">

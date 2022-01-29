@@ -3,6 +3,7 @@ const Customer = require("../models/Customer");
 const fs = require("fs");
 
 module.exports.uploadMainImage = async (req, res) => {
+  console.log("image");
   res.status(200).json(req.file.path);
 };
 module.exports.uploadSecondImages = async (req, res) => {
@@ -44,7 +45,7 @@ module.exports.addProduct = async (req, res) => {
         category: category.toUpperCase(),
         prixAch,
         price,
-        taille,
+        taille: taille.toUpperCase(),
         color,
         quantity,
         main_image,
@@ -103,24 +104,10 @@ module.exports.updateProduct = async (req, res) => {
 
 module.exports.deleteProduct = async (req, res) => {
   const id = req.params.id;
-  const p = await Product.findOne({ _id: id });
-  const c = await Customer.find({ ref: p.ref });
-  const prod = await Product.find({ ref: p.ref });
-  const path = p.main_image;
-  console.log("p:", p);
-  console.log("path:", path);
+  console.log('id:', id);
   try {
-    if (c.length) {
-      res.status(400).json("produit sold");
-    } else {
-      if (path) {
-        if (prod.length > 1) {
-          fs.unlinkSync(path);
-        }
-        await Product.findOneAndUpdate({ _id: id }, { quantity: 0 });
-        res.status(200).json("product deleted");
-      }
-    }
+    await Product.findOneAndUpdate({ _id: id }, { quantity: 0 });
+    res.status(200).json("product deleted");
   } catch (e) {
     console.log(e);
     res.status(400).json("error occured while deleting the product");
@@ -141,6 +128,7 @@ module.exports.getAllNoDuplProducts = async (req, res) => {
 };
 
 module.exports.getAllProducts = async (req, res) => {
+  console.log('treeee');
   try {
     const products = await Product.find();
     let prod = products.filter((p) => p.quantity !== 0);
@@ -163,7 +151,7 @@ module.exports.getfilteredProducts = async (req, res) => {
     allCategories,
     allGenres,
   } = req.body;
-  console.log('allGenres: ', allGenres);
+  console.log("allGenres: ", allGenres);
   let Rtailles = tailles.concat(pointures);
   if (genres.length === 0) {
     genres = allGenres;
@@ -178,7 +166,12 @@ module.exports.getfilteredProducts = async (req, res) => {
     marques = allMarques;
   }
   try {
-    if (req.query.search !== null && req.query.search !== '' && req.query.search !== undefined && req.query.search !== 'null') {
+    if (
+      req.query.search !== null &&
+      req.query.search !== "" &&
+      req.query.search !== undefined &&
+      req.query.search !== "null"
+    ) {
       console.log(req.query.search);
       const regex = new RegExp(escapeRegex(req.query.search), "gi");
       let products = await Product.find({
@@ -194,18 +187,24 @@ module.exports.getfilteredProducts = async (req, res) => {
       let prod = product.filter((p) => p.quantity !== 0);
       res.status(200).json(prod);
     } else {
-      console.log('not search');
-      let products = await Product.find({
-        category: { $in: categories },
-        genre: { $in: genres },
-        taille: { $in: Rtailles },
-        marque: { $in: marques },
-      });
-      let product = products.filter(
-        (v, i, a) => a.findIndex((t) => t.ref === v.ref) === i
-      );
-      let prod = product.filter((p) => p.quantity !== 0);
-      res.status(200).json(prod);
+      console.log("not search");
+      if (genres.length !== 0 && marques.length !== 0 && Rtailles.length !== 0 && categories.length !== 0 ) {
+        console.log(genres, categories, marques, Rtailles);
+        let products = await Product.find({
+          category: { $in: categories },
+          genre: { $in: genres },
+          taille: { $in: Rtailles },
+          marque: { $in: marques },
+        });
+        console.log(products);
+        let product = products.filter(
+          (v, i, a) => a.findIndex((t) => t.ref === v.ref) === i
+        );
+        let prod = product.filter((p) => p.quantity !== 0);
+        res.status(200).json(prod);
+      } else {
+        res.status(401);
+      }
     }
   } catch (e) {
     console.log(e);
@@ -497,7 +496,7 @@ module.exports.getProductsByclient = async (req, res) => {
         const p = await Product.findById(prod.id);
         products.push(p);
       }
-      console.log('client:', client);
+      console.log("client:", client);
       res.status(200).json({ products, client });
     } catch (e) {
       console.log(e);

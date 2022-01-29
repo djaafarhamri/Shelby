@@ -4,9 +4,9 @@ import axios from "axios";
 
 const ENDPOINT = "https://shelbyboutique.herokuapp.com";
 
-const Ptable = ({search}) => {
+const Ptable = ({setRender, search}) => {
   const [products, setProducts] = useState([]);
-  const [render, setRender] = useState(false);
+  const [render1, setRender1] = useState(false);
 
   useEffect(() => {
     axios
@@ -15,7 +15,7 @@ const Ptable = ({search}) => {
         setProducts(res.data);
       })
       .catch((err) => console.log(err));
-  }, [render]);
+  }, [render1]);
 
   const valider = (_id) => {
     axios
@@ -35,7 +35,8 @@ const Ptable = ({search}) => {
       .catch((err) => {
         console.log(err);
       });
-      setRender(!render)
+      setRender(p => !p)
+      setRender1(!render1)
   };
   return (
     <div className="ptable">

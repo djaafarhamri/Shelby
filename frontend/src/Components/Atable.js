@@ -7,7 +7,7 @@ import Bon from "./Bon";
 
 const ENDPOINT = "https://shelbyboutique.herokuapp.com";
 
-const Atable = ({ search }) => {
+const Atable = ({ setRender, search }) => {
   const [products, setProducts] = useState([]);
   const [clients, setClients] = useState([]);
   const [code, setCode] = useState("");
@@ -15,7 +15,7 @@ const Atable = ({ search }) => {
   const [showAdd, setShowAdd] = useState(false);
   const [showBon, setShowBon] = useState(false);
   const [showPending, setShowPending] = useState(false);
-  const [render, setRender] = useState(false);
+  const [render1, setRender1] = useState(false);
   const [prixPay, setPrixPay] = useState("");
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const Atable = ({ search }) => {
       .catch((err) => {
         console.log(err);
       });
-  }, [showAdd, render]);
+  }, [showAdd, render1]);
 
   const valider = () => {
     for (let client of clients) {
@@ -57,20 +57,19 @@ const Atable = ({ search }) => {
         .catch((err) => {
           console.log(err);
         });
-
-      axios
+        axios
         .post(
           `${ENDPOINT}/api/addToLaCaisse`,
           {
             montant: products[clients.indexOf(client)].price,
           },
           { withCredentials: true }
-        )
-        .then((res) => console.log(res.data))
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+          )
+          .then((res) => console.log(res.data))
+          .catch((err) => {
+            console.log(err);
+          });
+        }
     setShowBon(true);
   };
   const pending = () => {
@@ -91,7 +90,8 @@ const Atable = ({ search }) => {
         .catch((err) => console.log(err));
     }
     setShowBon(true);
-    setRender(!render);
+    setRender1(!render1);
+    setRender(p => !p);
   };
   const returne = (product, client) => {
     axios
@@ -125,7 +125,8 @@ const Atable = ({ search }) => {
         { withCredentials: true }
       )
       .catch((err) => console.log(err));
-    setRender(!render);
+    setRender1(!render1);
+    setRender(p => !p);
   };
 
   return (
@@ -164,7 +165,7 @@ const Atable = ({ search }) => {
           <AddVP code={code} setCode={setCode} setShowAdd={setShowAdd} />
         )}
         {showDeliver && (
-          <Ddata setShowDeliver={setShowDeliver} clients={clients} />
+          <Ddata setRender1={setRender1} setShowDeliver={setShowDeliver} clients={clients} />
         )}
         <h3 className="atable-name">Name</h3>
         <h3 className="atable-code">Ref</h3>

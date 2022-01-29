@@ -132,31 +132,31 @@ const Vendre = () => {
         {selected === "a" && (
           <div className="scroll">
             <h2>Vendre</h2>
-            <Atable search={search} />
+            <Atable setRender={setRender} search={search} />
           </div>
         )}
         {selected === "p" && (
           <div className="scroll">
             <h2>Pending</h2>
-            <Ptable search={search} />
+            <Ptable setRender={setRender} search={search} />
           </div>
         )}
         {selected === "o" && (
           <div className="scroll">
             <h2>On Deleviry</h2>
-            <Otable search={search} />
+            <Otable setRender={setRender} search={search} />
           </div>
         )}
         {selected === "i" && (
           <>
             <h2>In Progress</h2>
-            <Progress search={search} />
+            <Progress setRender={setRender} search={search} />
           </>
         )}
         {selected === "24" && (
           <div className="scroll">
             <h2>24 heurs</h2>
-            <Htable search={search} />
+            <Htable setRender={setRender} search={search} />
           </div>
         )}
       </div>

@@ -5,11 +5,11 @@ import ShowProducts from "./ShowProducts";
 
 const ENDPOINT = "https://shelbyboutique.herokuapp.com";
 
-const Progress = ({search}) => {
+const Progress = ({setRender, search}) => {
   const [products, setProducts] = useState([]);
   const [prod, setProd] = useState([]);
   const [showProducts, setShowProducts] = useState(false);
-  const [render, setRender] = useState(false);
+  const [render1, setRender1] = useState(false);
 
   useEffect(() => {
     axios
@@ -18,7 +18,7 @@ const Progress = ({search}) => {
         setProducts(res.data);
       })
       .catch((err) => console.log(err));
-  }, [render]);
+  }, [render1]);
 
   
   return (

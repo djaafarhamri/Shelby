@@ -6,63 +6,87 @@ import nonValid from "../assets/nonValid.png";
 
 const ENDPOINT = "https://shelbyboutique.herokuapp.com";
 
-const Otable = ({search}) => {
+const Otable = ({ setRender, search }) => {
   const [products, setProducts] = useState([]);
   const [showValid, setShowValid] = useState(false);
   const [client, setClient] = useState();
-  const [render, setRender] = useState(false);
+  const [render1, setRender1] = useState(false);
 
   useEffect(() => {
     axios
-      .get(`${ENDPOINT}/api/getDelivery/?search=${search}`, {withCredentials: true})
+      .get(`${ENDPOINT}/api/getDelivery/?search=${search}`, {
+        withCredentials: true,
+      })
       .then((res) => {
         setProducts(res.data);
       })
       .catch((err) => console.log(err));
-  }, [render, search]);
+  }, [render1, search]);
 
   const valider = (id) => {
     axios
-      .post(`${ENDPOINT}/api/updateTo24`, {
-        _id: id,
-        status: "24",
-      }, {withCredentials:true})
+      .post(
+        `${ENDPOINT}/api/updateTo24`,
+        {
+          _id: id,
+          status: "24",
+        },
+        { withCredentials: true }
+      )
       .then((res) => {
         return res.data;
       })
       .catch((err) => console.log(err));
     axios
-      .post(`${ENDPOINT}/api/addSold`, {
-        customer_id: id,
-      }, {withCredentials:true})
+      .post(
+        `${ENDPOINT}/api/addSold`,
+        {
+          customer_id: id,
+        },
+        { withCredentials: true }
+      )
       .then((res) => console.log(res.data))
       .catch((err) => {
         console.log(err);
       });
+    setRender1(!render1);
+    setRender((p) => !p);
   };
 
   const returne = (product) => {
     axios
-      .post(`${ENDPOINT}/api/returnD`, {
-        product,
-      }, {withCredentials:true})
+      .post(
+        `${ENDPOINT}/api/returnD`,
+        {
+          product,
+        },
+        { withCredentials: true }
+      )
       .then((res) => {
         return res.data;
       })
       .catch((err) => console.log(err));
     axios
-      .delete(`${ENDPOINT}/api/deleteCustomer/${product.client_id}`, {withCredentials:true})
+      .delete(`${ENDPOINT}/api/deleteCustomer/${product.client_id}`, {
+        withCredentials: true,
+      })
       .then((res) => {
         return res.data;
       })
       .catch((err) => console.log(err));
     axios
-      .delete(`${ENDPOINT}/api/deleteSold/${product._id}`, {withCredentials:true})
-      .then((res) => {
-        return res.data;
-      }, {withCredentials:true})
+      .delete(`${ENDPOINT}/api/deleteSold/${product._id}`, {
+        withCredentials: true,
+      })
+      .then(
+        (res) => {
+          return res.data;
+        },
+        { withCredentials: true }
+      )
       .catch((err) => console.log(err));
-    setRender(!render)
+    setRender1(!render1);
+    setRender((p) => !p);
   };
   return (
     <div className="otable">
@@ -75,8 +99,9 @@ const Otable = ({search}) => {
             className="d-data-deliver"
             onClick={() => {
               valider(client.client_id);
-              setRender(!render)
-              setShowValid(false)
+              setRender((p) => !p);
+              setRender1(!render1);
+              setShowValid(false);
             }}
           >
             valider
@@ -103,7 +128,15 @@ const Otable = ({search}) => {
             <p className="otable-name">{product.client}</p>
             <p className="otable-code">{product.ref}</p>
             <p className="otable-taille">{product.taille}</p>
-            <div style={{backgroundColor: product.color, height: '40px', width: '40px', border: '2px solid'}} className="otable-color"></div>
+            <div
+              style={{
+                backgroundColor: product.color,
+                height: "40px",
+                width: "40px",
+                border: "2px solid",
+              }}
+              className="otable-color"
+            ></div>
             <p className="otable-prix">{product.price}</p>
             <div className="otable-option">
               <button

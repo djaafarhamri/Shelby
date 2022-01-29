@@ -11,20 +11,25 @@ const Stock = () => {
   const [render, setRender] = useState(false);
   
   const del = (product) => {
-    axios.post(`${ENDPOINT}/api/deleteProduct/${product._id}`, {withCredentials: true})
-      .then((res) => {console.log(res.data)})
+    axios.get(`${ENDPOINT}/api/deleteProduct/${product._id}`, {withCredentials: true})
+      .then((res) => {
+        console.log(res.data);
+        getStock()
+      })
       .catch((err) => {console.log(err)})
     setRender(!false)
   }
-  
-  useEffect(() => {
+  const getStock = () => {
     axios
       .get(`${ENDPOINT}/api/getAllProducts`, {withCredentials:true})
       .then((res) => {
         setProducts(res.data);
       })
       .catch((err) => console.log(err));
-  }, [render]);
+  }
+  useEffect(() => {
+    getStock()
+  }, [selected, setSelected, render]);
   return (
     <>
       {selected === "m" && (
